@@ -7,10 +7,10 @@ SRC    := $(shell find . -name '*.c') $(RSRC)
 OBJ    = $(SRC:.c=.o)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ ../MLX42/build/libmlx42.a -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c -Imlx $< -o $@
 
 all : $(NAME)
 

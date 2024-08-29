@@ -4,7 +4,7 @@
 #define cube_width 60
 
 
-// #include "../MLX42/include/MLX42/MLX42.h"
+#include "../MLX42/include/MLX42/MLX42.h"
 #include <math.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -29,6 +29,7 @@ typedef struct the_rays
     int     y_inter;
     double  ray_dis;
     int     ray_dir; // 1: hor | 2: ver
+    struct the_rays    *next;
 }	the_rays;
 // void render_map(mlx_image_t *img, char **s);
 // void	rendering(the_data *data);
@@ -64,7 +65,7 @@ typedef struct s_player
 
 typedef struct s_map {
     void *mlx;
-	// mlx_image_t *img;
+	mlx_image_t *img;
     t_player *player;
     the_rays    *rays;
     int line_width;
@@ -98,8 +99,8 @@ typedef struct s_list
 
 // raycasting ***********************
 void    raycasting(t_map *map);
-void	rendering(t_map *map);
-// void    handle_key(mlx_key_data_t keydata, void *p);
+void    handle_key(mlx_key_data_t keydata, void *p);
+void init_player(t_map *map);
 // raycasting ***********************
 
 

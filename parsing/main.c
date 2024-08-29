@@ -68,12 +68,12 @@ int check_map(char *file, t_list **list)
     return (0);
 }
 
-// void    open_win(t_map *map)
-// {
-//     map->mlx = mlx_init(ft_strlen(map->arr[0]) * cube_width, map->height * cube_width, "cub3d", 0);
-// 	map->img = mlx_new_image(map->mlx, ft_strlen(map->arr[0]) * cube_width, map->height * cube_width);
-// 	mlx_image_to_window(map->mlx, map->img, 0, 0);
-// }
+void    open_win(t_map *map)
+{
+    map->mlx = mlx_init(ft_strlen(map->arr[0]) * cube_width, map->height * cube_width, "cub3d", 0);
+	map->img = mlx_new_image(map->mlx, ft_strlen(map->arr[0]) * cube_width, map->height * cube_width);
+	mlx_image_to_window(map->mlx, map->img, 0, 0);
+}
 
 int main (int ac, char **av)
 {
@@ -99,11 +99,12 @@ int main (int ac, char **av)
         return (0);
     }
     // print_list(list);
-    print_info(map);
-    // open_win(map);
-    // raycasting(map);
-    // mlx_key_hook(map->mlx, &handle_key, map);
-	// mlx_loop(map->mlx);
-	// mlx_terminate(map->mlx);
+    // print_info(map);
+    open_win(map);
+    init_player(map);
+    raycasting(map);
+	mlx_key_hook(map->mlx, &handle_key, map);
+    mlx_loop(map->mlx);
+	mlx_terminate(map->mlx);
     return (0);
 }
