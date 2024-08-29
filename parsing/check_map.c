@@ -9,8 +9,6 @@ int allowed_char(char c)
 }
 
 
-
-
 int	check_arr(t_map *map)
 {
 	int	i;
