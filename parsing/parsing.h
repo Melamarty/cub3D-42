@@ -121,5 +121,7 @@ int check_arr(t_map *map);
 int check_textures (t_list *list);
 int empty_line(char *line);
 int check_walls(char **map, int height, int width);
+void render(t_map *map);
+unsigned int create_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 
 #endif
