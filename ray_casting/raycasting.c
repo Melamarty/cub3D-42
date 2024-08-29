@@ -67,7 +67,7 @@ void cast_rays(t_map *map)
 		new_ray->yinc = new_ray->dy / (double)new_ray->steps;
 		for (int i = 0; i < new_ray->steps; i++)
 		{
-			mlx_put_pixel(map->img, round(x), round(y), create_color(255, 255, 0, 255));
+			//mlx_put_pixel(map->img, round(x), round(y), create_color(255, 255, 0, 255));
 			new_ray->x_inter = round(x);
 			new_ray->y_inter = round(y);
 			x += new_ray->xinc;
@@ -152,7 +152,7 @@ void render_cube(int x, int y, t_map *map)
 	{
 		for (int j = 0; j < cube_width; j++)
 		{
-			mlx_put_pixel(map->img, x + j, y + i, color);
+			//mlx_put_pixel(map->img, x + j, y + i, color);
 		}
 	}
 }
@@ -180,18 +180,18 @@ void render_map(t_map *map)
 
 void render_player(t_map *map)
 {
-	for (int i = 0; i < 20; i++)
-	{
-		for (int j = 0; j < 20; j++)
-		{
-			mlx_put_pixel(map->img, map->player->pos.x * cube_width + j, map->player->pos.y * cube_width + i, create_color(255, 0, 0, 255));
-		}
-	}
+	//for (int i = 0; i < 20; i++)
+	//{
+	//	for (int j = 0; j < 20; j++)
+	//	{
+	//		mlx_put_pixel(map->img, map->player->pos.x * cube_width + j, map->player->pos.y * cube_width + i, create_color(255, 0, 0, 255));
+	//	}
+	//}
 	cast_rays(map);
 }
 
 void	raycasting(t_map *map)
 {
-	render_map(map);
+	//render_map(map);
 	render_player(map);
 }
