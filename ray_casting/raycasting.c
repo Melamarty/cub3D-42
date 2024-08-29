@@ -1,5 +1,7 @@
 #include "../parsing/parsing.h"
 
+#define m_cube 30
+
 the_rays *last_ray(the_rays *rays)
 {
 	while (rays->next)
@@ -29,6 +31,40 @@ double normAngle(double angle)
     return (angle);
 }
 
+void	draw_rays(t_map *map)
+{
+	map->m_rays = malloc(sizeof(the_rays));
+	double x, y;
+	x = map->player->pos.x * m_cube + 5;
+	y = map->player->pos.y * m_cube + 5;
+	map->m_rays->x1 = x;
+	map->m_rays->y1 = y;
+	map->m_rays->ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
+	for (int i = 0; i < map->width * m_cube; i++)
+	{
+		x = map->m_rays->x1;
+		y = map->m_rays->y1;
+		map->m_rays->x2 = (map->m_rays->x1 + 30 * cos(map->m_rays->ray_angle));
+		map->m_rays->y2 = (map->m_rays->y1 + 30 * sin(map->m_rays->ray_angle));
+		map->m_rays->dx = map->m_rays->x2 - map->m_rays->x1;
+		map->m_rays->dy = map->m_rays->y2 - map->m_rays->y1;
+		if (abs(map->m_rays->dx) > abs(map->m_rays->dy))
+			map->m_rays->steps = abs(map->m_rays->dx);
+		else
+			map->m_rays->steps = abs(map->m_rays->dy);
+		map->m_rays->xinc = map->m_rays->dx / (double)map->m_rays->steps;
+		map->m_rays->yinc = map->m_rays->dy / (double)map->m_rays->steps;
+		for (int i = 0; i < map->m_rays->steps; i++)
+		{
+			mlx_put_pixel(map->img, round(x), round(y), create_color(255, 255, 0, 255));
+			x += map->m_rays->xinc;
+			y += map->m_rays->yinc;
+		}
+		// printf("x: %d y: %d inter: %d dis: %f\n", map->ray_x, map->ray_y, map->ray_dir, map->ray_dis);
+		map->m_rays->ray_angle = normAngle(map->player->fov / (map->width * m_cube) + map->m_rays->ray_angle);
+	}
+}
+
 double	calc_dis(t_map map, the_rays ray)
 {
 	int	dx;
@@ -50,7 +86,7 @@ void cast_rays(t_map *map)
 	new_ray->next = NULL;
 	double x, y;
 	ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < map->width * cube_width; i++)
 	{
 		x = map->player->pos.x * cube_width + 10;
 		y = map->player->pos.y * cube_width + 10;
@@ -66,7 +102,6 @@ void cast_rays(t_map *map)
 		new_ray->yinc = new_ray->dy / (double)new_ray->steps;
 		for (int i = 0; i < new_ray->steps; i++)
 		{
-			// mlx_put_pixel(map->img, round(x), round(y), create_color(255, 255, 0, 255));
 			new_ray->x_inter = round(x);
 			new_ray->y_inter = round(y);
 			x += new_ray->xinc;
@@ -143,15 +178,15 @@ void handle_key(mlx_key_data_t keydata, void *p)
 void render_cube(int x, int y, t_map *map)
 {
 	unsigned int color;
-	if (map->arr[y / cube_width][x / cube_width] == '1')
+	if (map->arr[y / m_cube][x / m_cube] == '1')
 		color = create_color(0, 0, 255, 255);
 	else
 		color = create_color(108, 180, 238, 255);
-	for (int i = 0; i < cube_width; i++)
+	for (int i = 0; i < m_cube; i++)
 	{
-		for (int j = 0; j < cube_width; j++)
+		for (int j = 0; j < m_cube; j++)
 		{
-			// mlx_put_pixel(map->img, x + j, y + i, color);
+			mlx_put_pixel(map->img, x + j, y + i, color);
 		}
 	}
 }
@@ -172,25 +207,26 @@ void render_map(t_map *map)
 	{
 		for (int j = 0; j < map->height; j++)
 		{
-			render_cube(i * cube_width, j * cube_width, map);
+			render_cube(i * m_cube, j * m_cube, map);
 		}
 	}
 }
 
 void render_player(t_map *map)
 {
-	// for (int i = 0; i < 20; i++)
-	// {
-	// 	for (int j = 0; j < 20; j++)
-	// 	{
-	// 		mlx_put_pixel(map->img, map->player->pos.x * cube_width + j, map->player->pos.y * cube_width + i, create_color(255, 0, 0, 255));
-	// 	}
-	// }
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			mlx_put_pixel(map->img, map->player->pos.x * m_cube + j, map->player->pos.y * m_cube + i, create_color(255, 0, 0, 255));
+		}
+	}
 	cast_rays(map);
+	draw_rays(map);
 }
 
 void	raycasting(t_map *map)
 {
-	// render_map(map);
+	render_map(map);
 	render_player(map);
 }
