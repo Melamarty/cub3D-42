@@ -103,6 +103,7 @@ int main (int ac, char **av)
     open_win(map);
     init_player(map);
     raycasting(map);
+    render(map);
 	mlx_key_hook(map->mlx, &handle_key, map);
     mlx_loop(map->mlx);
 	mlx_terminate(map->mlx);
