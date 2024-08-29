@@ -8,7 +8,7 @@ int allowed_char(char c)
 	return (0);
 }
 
-
+//s
 int	check_arr(t_map *map)
 {
 	int	i;
