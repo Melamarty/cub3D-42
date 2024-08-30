@@ -70,8 +70,9 @@ int check_map(char *file, t_list **list)
 
 void    open_win(t_map *map)
 {
-    map->mlx = mlx_init(ft_strlen(map->arr[0]) * cube_width, map->height * cube_width, "cub3d", 0);
-	map->img = mlx_new_image(map->mlx, ft_strlen(map->arr[0]) * cube_width, map->height * cube_width);
+    printf("%d %d\n", map->width, map->height);
+    map->mlx = mlx_init(map->width * cube_width, map->height * cube_width, "cub3d", 0);
+	map->img = mlx_new_image(map->mlx, map->width * cube_width, map->height * cube_width);
 	mlx_image_to_window(map->mlx, map->img, 0, 0);
 }
 
@@ -98,17 +99,17 @@ int main (int ac, char **av)
         ft_putstr("map  error\n", 2);
         return (0);
     }
-    // print_list(list);
     // print_info(map);
+    // print_list(list);
     open_win(map);
     init_player(map);
     raycasting(map);
     while (map->rays)
     {
-        printf("%f\n", map->rays->ray_dis);
+        printf ("djdgdvd\n");
         map->rays = map->rays->next;
     }
-    //render(map);
+    render(map);
 	mlx_key_hook(map->mlx, &handle_key, map);
     mlx_loop(map->mlx);
 	mlx_terminate(map->mlx);

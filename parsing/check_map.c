@@ -75,6 +75,7 @@ int check_line(char *line)
 		return (printf ("here\n"),1);
 	return (0);
 }
+
 int check_textures (t_list *list)
 {
 	while (list)
