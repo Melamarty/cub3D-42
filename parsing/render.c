@@ -102,8 +102,8 @@ void render(t_map *map)
 		ray = map->rays;
 		float epsilon = 1e-6;
 		float raydis = ray->ray_dis * cos(ray->ray_angle - map->player->rotAngle);
-        printf ("%.2f,  ", ray->ray_angle - map->player->rotAngle);
-        int corrected_raydis = ray->ray_dis;
+        //printf ("%.2f,  ", ray->ray_angle - map->player->rotAngle);
+        int corrected_raydis = (int)raydis;
         //if (raydis < 0.2)
         //    corrected_raydis = ray->ray_dis;
         //else
