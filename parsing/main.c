@@ -104,11 +104,6 @@ int main (int ac, char **av)
     open_win(map);
     init_player(map);
     raycasting(map);
-    while (map->rays)
-    {
-        printf ("djdgdvd\n");
-        map->rays = map->rays->next;
-    }
     render(map);
 	mlx_key_hook(map->mlx, &handle_key, map);
     mlx_loop(map->mlx);
