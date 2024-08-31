@@ -102,7 +102,6 @@ int main (int ac, char **av)
     // print_list(list);
     open_win(map);
     init_player(map);
-    raycasting(map);
     // while (map->rays)
     // {
     //     printf ("djdgdvd\n");
