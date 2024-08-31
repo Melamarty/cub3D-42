@@ -100,7 +100,7 @@ typedef struct s_list
 
 // raycasting ***********************
 void    raycasting(t_map *map);
-void    handle_key(mlx_key_data_t keydata, void *p);
+void    handle_key(void *p);
 void init_player(t_map *map);
 // raycasting ***********************
 

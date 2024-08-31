@@ -70,7 +70,6 @@ int check_map(char *file, t_list **list)
 
 void    open_win(t_map *map)
 {
-    printf("%d %d\n", map->width, map->height);
     map->mlx = mlx_init(map->width * cube_width, map->height * cube_width, "cub3d", 0);
 	map->img = mlx_new_image(map->mlx, map->width * cube_width, map->height * cube_width);
 	mlx_image_to_window(map->mlx, map->img, 0, 0);
@@ -104,13 +103,13 @@ int main (int ac, char **av)
     open_win(map);
     init_player(map);
     raycasting(map);
-    while (map->rays)
-    {
-        printf ("djdgdvd\n");
-        map->rays = map->rays->next;
-    }
+    // while (map->rays)
+    // {
+    //     printf ("djdgdvd\n");
+    //     map->rays = map->rays->next;
+    // }
     render(map);
-	mlx_key_hook(map->mlx, &handle_key, map);
+	mlx_loop_hook(map->mlx, &handle_key, map);
     mlx_loop(map->mlx);
 	mlx_terminate(map->mlx);
     return (0);

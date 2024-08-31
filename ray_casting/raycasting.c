@@ -35,8 +35,8 @@ void	draw_rays(t_map *map)
 {
 	map->m_rays = malloc(sizeof(the_rays));
 	double x, y;
-	x = map->player->pos.x * m_cube + 5;
-	y = map->player->pos.y * m_cube + 5;
+	x = map->player->pos.x + 5;
+	y = map->player->pos.y + 5;
 	map->m_rays->x1 = x;
 	map->m_rays->y1 = y;
 	map->m_rays->ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
@@ -71,8 +71,8 @@ double	calc_dis(t_map map, the_rays ray)
 	int	dy;
 	double dis;
 
-	dx = abs(ray.x_inter - map.player->pos.x * cube_width + 10);
-	dy = abs(ray.y_inter - map.player->pos.y * cube_width + 10);
+	dx = abs(ray.x_inter - map.player->pos.x + 10);
+	dy = abs(ray.y_inter - map.player->pos.y + 10);
 	dis = sqrt(dx * dx + dy * dy);
 	return (dis);
 }
@@ -88,12 +88,12 @@ void cast_rays(t_map *map)
 	ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
 	for (int i = 0; i < map->width * cube_width; i++)
 	{
-		x = map->player->pos.x * cube_width + 10;
-		y = map->player->pos.y * cube_width + 10;
-		new_ray->x2 = ((map->player->pos.x * cube_width + 10) + 10000 * cos(ray_angle));
-		new_ray->y2 = ((map->player->pos.y * cube_width + 10) + 10000 * sin(ray_angle));
-		new_ray->dx = new_ray->x2 - (map->player->pos.x * cube_width + 10);
-		new_ray->dy = new_ray->y2 - (map->player->pos.y * cube_width + 10);
+		x = map->player->pos.x + 10;
+		y = map->player->pos.y + 10;
+		new_ray->x2 = ((map->player->pos.x + 10) + 10000 * cos(ray_angle));
+		new_ray->y2 = ((map->player->pos.y + 10) + 10000 * sin(ray_angle));
+		new_ray->dx = new_ray->x2 - (map->player->pos.x + 10);
+		new_ray->dy = new_ray->y2 - (map->player->pos.y + 10);
 		if (abs(new_ray->dx) > abs(new_ray->dy))
 			new_ray->steps = abs(new_ray->dx);
 		else
@@ -134,45 +134,72 @@ int	is_wall(int new_x, int new_y, t_map map)
 	return (0);
 }
 
-void handle_key(mlx_key_data_t keydata, void *p)
+int	key_pressed(t_map *map)
 {
-	int	move_step;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_W) || mlx_is_key_down(map->mlx, MLX_KEY_A) || mlx_is_key_down(map->mlx, MLX_KEY_S)
+		|| mlx_is_key_down(map->mlx, MLX_KEY_D) || mlx_is_key_down(map->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
+			return (1);
+	return (0);
+}
+
+void handle_key(void *p)
+{
+	int		move_step;
 	t_map 	*map;
-	int	new_x;
-	int	new_y;
+	double	new_x;
+	double	new_y;
 	map = (t_map *)p;
-	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+	if (!key_pressed(map))
+		return ;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
+		map->player->rotAngle = normAngle(map->player->rotSpeed + map->player->rotAngle);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
+		map->player->rotAngle = normAngle(map->player->rotAngle - map->player->rotSpeed);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_W))
 	{
-		if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
-			map->player->xDir = 1;
-		else if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
-			map->player->xDir = -1;
-		else if (mlx_is_key_down(map->mlx, MLX_KEY_UP))
-			map->player->yDir = 1;
-		else if (mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
-			map->player->yDir = -1;
-		map->player->rotAngle = normAngle(map->player->xDir * map->player->rotSpeed + map->player->rotAngle);
-		move_step = map->player->moveSpeed * map->player->yDir;
-		new_x = map->player->pos.x +  move_step * cos(map->player->rotAngle);
-		new_y = map->player->pos.y +  move_step * sin(map->player->rotAngle);
-		if (!is_wall(new_x, new_y, *map))
+		move_step = map->player->moveSpeed;
+		new_x = move_step * cos(map->player->rotAngle);
+		new_y = move_step * sin(map->player->rotAngle);
+		if (!is_wall((map->player->pos.x + round(new_x) ) / m_cube,( map->player->pos.y + round(new_y)) / m_cube, *map))
 		{
-			map->player->pos.x = new_x;
-			map->player->pos.y = new_y;
+			map->player->pos.x += round(new_x);
+			map->player->pos.y += round(new_y);
 		}
-		raycasting(map);
 	}
-	else if (keydata.action == MLX_RELEASE)
+	if (mlx_is_key_down(map->mlx, MLX_KEY_S))
 	{
-		if (keydata.key == MLX_KEY_RIGHT)
-			map->player->xDir = 0;
-		else if (keydata.key == MLX_KEY_LEFT)
-			map->player->xDir = 0;
-		else if (keydata.key == MLX_KEY_UP)
-			map->player->yDir = 0;
-		else if (keydata.key == MLX_KEY_DOWN)
-			map->player->yDir = 0;
+		move_step = map->player->moveSpeed * -1;
+		new_x = move_step * cos(map->player->rotAngle);
+		new_y = move_step * sin(map->player->rotAngle);
+		if (!is_wall((map->player->pos.x + round(new_x)) / m_cube, (map->player->pos.y + round(new_y)) / m_cube, *map))
+		{
+			map->player->pos.x += round(new_x);
+			map->player->pos.y += round(new_y);
+		}
 	}
+	if (mlx_is_key_down(map->mlx, MLX_KEY_A)) // Strafe left
+    {
+		move_step = map->player->moveSpeed * -1;
+        new_x = cos(map->player->rotAngle + M_PI_2) * move_step;
+        new_y = sin(map->player->rotAngle + M_PI_2) * move_step;
+		if (!is_wall((map->player->pos.x + round(new_x)) / m_cube, (map->player->pos.y + round(new_y)) / m_cube, *map))
+		{
+			map->player->pos.x += round(new_x);
+			map->player->pos.y += round(new_y);
+		}
+    }
+    if (mlx_is_key_down(map->mlx, MLX_KEY_D)) // Strafe right
+    {
+		move_step = map->player->moveSpeed;
+        new_x = cos(map->player->rotAngle + M_PI_2) * move_step;
+        new_y = sin(map->player->rotAngle + M_PI_2) * move_step;
+		if (!is_wall((map->player->pos.x + round(new_x)) / m_cube, (map->player->pos.y + round(new_y)) / m_cube, *map))
+		{
+			map->player->pos.x += round(new_x);
+			map->player->pos.y += round(new_y);
+		}
+    }
+	raycasting(map);
 }
 
 void render_cube(int x, int y, t_map *map)
@@ -193,11 +220,13 @@ void render_cube(int x, int y, t_map *map)
 
 void init_player(t_map *map)
 {
+	map->player->pos.x *= cube_width;
+	map->player->pos.y *= cube_width;
 	map->player->xDir = 0;
 	map->player->yDir = 0;
-	map->player->moveSpeed = 1;
+	map->player->moveSpeed = 5;
 	map->player->rotAngle = M_PI / 2;
-	map->player->rotSpeed = 10 * (M_PI / 180);
+	map->player->rotSpeed = 5 * (M_PI / 180);
 	map->player->fov = 60 * M_PI / 180;
 }
 
@@ -214,19 +243,19 @@ void render_map(t_map *map)
 
 void render_player(t_map *map)
 {
-	for (int i = 0; i < 10; i++)
-	{
-		for (int j = 0; j < 10; j++)
-		{
-			mlx_put_pixel(map->img, map->player->pos.x * m_cube + j, map->player->pos.y * m_cube + i, create_color(255, 0, 0, 255));
-		}
-	}
+	// for (int i = 0; i < 10; i++)
+	// {
+	// 	for (int j = 0; j < 10; j++)
+	// 	{
+	// 		mlx_put_pixel(map->img, map->player->pos.x + j, map->player->pos.y + i, create_color(255, 0, 0, 255));
+	// 	}
+	// }
 	cast_rays(map);
-	draw_rays(map);
+	// draw_rays(map);
 }
 
 void	raycasting(t_map *map)
 {
-	render_map(map);
+	// render_map(map);
 	render_player(map);
 }
