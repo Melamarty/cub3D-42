@@ -160,7 +160,7 @@ void handle_key(void *p)
 		move_step = map->player->moveSpeed;
 		new_x = move_step * cos(map->player->rotAngle);
 		new_y = move_step * sin(map->player->rotAngle);
-		if (!is_wall((map->player->pos.x + round(new_x) ) / m_cube,( map->player->pos.y + round(new_y)) / m_cube, *map))
+		if (!is_wall((map->player->pos.x + round(new_x) ) / cube_width,( map->player->pos.y + round(new_y)) / cube_width, *map))
 		{
 			map->player->pos.x += round(new_x);
 			map->player->pos.y += round(new_y);
@@ -171,35 +171,36 @@ void handle_key(void *p)
 		move_step = map->player->moveSpeed * -1;
 		new_x = move_step * cos(map->player->rotAngle);
 		new_y = move_step * sin(map->player->rotAngle);
-		if (!is_wall((map->player->pos.x + round(new_x)) / m_cube, (map->player->pos.y + round(new_y)) / m_cube, *map))
+		if (!is_wall((map->player->pos.x + round(new_x)) / cube_width, (map->player->pos.y + round(new_y)) / cube_width, *map))
 		{
 			map->player->pos.x += round(new_x);
 			map->player->pos.y += round(new_y);
 		}
 	}
-	if (mlx_is_key_down(map->mlx, MLX_KEY_A)) // Strafe left
-    {
+	if (mlx_is_key_down(map->mlx, MLX_KEY_A))
+	{
 		move_step = map->player->moveSpeed * -1;
-        new_x = cos(map->player->rotAngle + M_PI_2) * move_step;
-        new_y = sin(map->player->rotAngle + M_PI_2) * move_step;
-		if (!is_wall((map->player->pos.x + round(new_x)) / m_cube, (map->player->pos.y + round(new_y)) / m_cube, *map))
+		new_x = cos(map->player->rotAngle + M_PI_2) * move_step;
+		new_y = sin(map->player->rotAngle + M_PI_2) * move_step;
+		if (!is_wall((map->player->pos.x + round(new_x)) / cube_width, (map->player->pos.y + round(new_y)) / cube_width, *map))
 		{
 			map->player->pos.x += round(new_x);
 			map->player->pos.y += round(new_y);
 		}
-    }
-    if (mlx_is_key_down(map->mlx, MLX_KEY_D)) // Strafe right
-    {
+	}
+	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
+	{
 		move_step = map->player->moveSpeed;
-        new_x = cos(map->player->rotAngle + M_PI_2) * move_step;
-        new_y = sin(map->player->rotAngle + M_PI_2) * move_step;
-		if (!is_wall((map->player->pos.x + round(new_x)) / m_cube, (map->player->pos.y + round(new_y)) / m_cube, *map))
+		new_x = cos(map->player->rotAngle + M_PI_2) * move_step;
+		new_y = sin(map->player->rotAngle + M_PI_2) * move_step;
+		if (!is_wall((map->player->pos.x + round(new_x)) / cube_width, (map->player->pos.y + round(new_y)) / cube_width, *map))
 		{
 			map->player->pos.x += round(new_x);
 			map->player->pos.y += round(new_y);
 		}
-    }
+	}
 	raycasting(map);
+	render(map);
 }
 
 void render_cube(int x, int y, t_map *map)
