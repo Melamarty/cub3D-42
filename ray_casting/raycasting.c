@@ -67,8 +67,8 @@ double	calc_dis(t_map map, the_rays ray)
 	int	dy;
 	double dis;
 
-	dx = abs(ray.x_inter - map.player->pos.x + 10);
-	dy = abs(ray.y_inter - map.player->pos.y + 10);
+	dx = abs(ray.x_inter - map.player->pos.x);
+	dy = abs(ray.y_inter - map.player->pos.y);
 	dis = sqrt(dx * dx + dy * dy);
 	return (dis);
 }
