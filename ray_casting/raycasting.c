@@ -197,7 +197,7 @@ void handle_key(void *p)
 	}
 	cast_rays(map);
 	render(map);
-	mini_map(map);
+	// mini_map(map);
 }
 
 void init_player(t_map *map)
