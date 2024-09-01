@@ -102,13 +102,14 @@ int main (int ac, char **av)
     // print_list(list);
     open_win(map);
     init_player(map);
-    raycasting(map);
+    cast_rays(map);
     // while (map->rays)
     // {
     //     printf ("djdgdvd\n");
     //     map->rays = map->rays->next;
     // }
     render(map);
+    // mini_map(map);
 	mlx_loop_hook(map->mlx, &handle_key, map);
     mlx_loop(map->mlx);
 	mlx_terminate(map->mlx);

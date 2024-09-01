@@ -2,7 +2,7 @@
 #define PARSING_H
 
 #define cube_width 60
-
+#define m_cube 30
 
 #include "../MLX42/include/MLX42/MLX42.h"
 #include <math.h>
@@ -99,9 +99,10 @@ typedef struct s_list
 
 
 // raycasting ***********************
-void    raycasting(t_map *map);
 void    handle_key(void *p);
-void init_player(t_map *map);
+void    init_player(t_map *map);
+void	mini_map(t_map *map);
+void    cast_rays(t_map *map);
 // raycasting ***********************
 
 

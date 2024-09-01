@@ -1,7 +1,5 @@
 #include "../parsing/parsing.h"
 
-#define m_cube 30
-
 the_rays *last_ray(the_rays *rays)
 {
 	while (rays->next)
@@ -34,13 +32,11 @@ double normAngle(double angle)
 void	draw_rays(t_map *map)
 {
 	map->m_rays = malloc(sizeof(the_rays));
-	double x, y;
-	x = map->player->pos.x + 5;
-	y = map->player->pos.y + 5;
-	map->m_rays->x1 = x;
-	map->m_rays->y1 = y;
+	double	x, y;
+	map->m_rays->x1 = 5 * m_cube + 5;
+	map->m_rays->y1 = 3 * m_cube + 5;
 	map->m_rays->ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
-	for (int i = 0; i < map->width * m_cube; i++)
+	for (int i = 0; i < 30 * m_cube; i++)
 	{
 		x = map->m_rays->x1;
 		y = map->m_rays->y1;
@@ -199,24 +195,9 @@ void handle_key(void *p)
 			map->player->pos.y += round(new_y);
 		}
 	}
-	raycasting(map);
+	cast_rays(map);
 	render(map);
-}
-
-void render_cube(int x, int y, t_map *map)
-{
-	unsigned int color;
-	if (map->arr[y / m_cube][x / m_cube] == '1')
-		color = create_color(0, 0, 255, 255);
-	else
-		color = create_color(108, 180, 238, 255);
-	for (int i = 0; i < m_cube; i++)
-	{
-		for (int j = 0; j < m_cube; j++)
-		{
-			mlx_put_pixel(map->img, x + j, y + i, color);
-		}
-	}
+	mini_map(map);
 }
 
 void init_player(t_map *map)
@@ -233,30 +214,51 @@ void init_player(t_map *map)
 
 void render_map(t_map *map)
 {
-	for(int i = 0; i < map->width; i++)
+	int	xStart;
+	int	yStart;
+	int	yStartSave;
+	unsigned int	color;
+
+	xStart = (map->player->pos.x - (5 * cube_width)) * m_cube / cube_width;
+    yStart = (map->player->pos.y - (3 * cube_width)) * m_cube / cube_width;
+	yStartSave = yStart;
+	for(int i = 0; i < 10 * m_cube; i ++)
 	{
-		for (int j = 0; j < map->height; j++)
+		yStart = yStartSave;
+		for (int j = 0; j <  6 * m_cube; j++)
 		{
-			render_cube(i * m_cube, j * m_cube, map);
+			if (map->arr[yStart / m_cube][xStart / m_cube] == '1')
+				color = create_color(0, 100, 0, 255);
+			else
+				color = create_color(144, 238, 144, 255);
+			mlx_put_pixel(map->img, i, j, color);
+			yStart ++;
 		}
+		xStart ++;
 	}
 }
 
 void render_player(t_map *map)
 {
-	// for (int i = 0; i < 10; i++)
-	// {
-	// 	for (int j = 0; j < 10; j++)
-	// 	{
-	// 		mlx_put_pixel(map->img, map->player->pos.x + j, map->player->pos.y + i, create_color(255, 0, 0, 255));
-	// 	}
-	// }
-	cast_rays(map);
-	// draw_rays(map);
+	int	x;
+	int	y;
+	unsigned int	color;
+
+	x = 5 * m_cube;
+	y = 3 * m_cube;
+	color = create_color(255, 0, 0, 255);
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			mlx_put_pixel(map->img, x + j, y + i, color);
+		}
+	}
+	draw_rays(map);
 }
 
-void	raycasting(t_map *map)
+void	mini_map(t_map *map)
 {
-	// render_map(map);
+	render_map(map);
 	render_player(map);
 }
