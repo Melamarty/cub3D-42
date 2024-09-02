@@ -67,7 +67,8 @@ void put_img(t_map *map, int top, int botm, int x, int img_x)
     static mlx_image_t *img = NULL;
 
     if (!txt) {
-        txt = mlx_load_png("./text.png");
+        //printf("%s\n", map->texture);
+        txt = mlx_load_png(map->texture);
         img = mlx_texture_to_image(map->mlx, txt);
     }
 
@@ -91,13 +92,20 @@ void put_img(t_map *map, int top, int botm, int x, int img_x)
 
 void set_texture(t_map *map, t_ray *ray)
 {
+    if (ray->ray_dir == 2)
+    {
+        map->texture = map->no;
+    }
+    else
+    {
 
+        map->texture = map->so;
+    }
 }
 
-void rendeer(t_map *map)
+void render(t_map *map)
 {
 	t_ray *ray;
-    printf ("%d\n", TILE_SIZE);
 	unsigned int *texture = gen_texture();
 	int i = 0;
 	float distoplan = (WIDTH / 2) / tan((float)(map->player->fov / 2));
@@ -120,12 +128,19 @@ void rendeer(t_map *map)
 		int ofsx, ofsy;
         //printf ("%d, %ld\n", topPixel, bottomPixel);
 		if (ray->ray_dir == 2)
+        {
+            map->texture = map->no;
 			ofsx = ray->y_inter % 60;
+        }
 		else
+        {
+            map->texture = map->so;
 			ofsx = ray->x_inter % 60;
+        }
 		for (int y = 0; y < topPixel; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 255, 255));
-        set_texture(map, ray);
+        //set_texture(map, ray);
+        //printf ("%s\n", map->texture);
 		put_img(map, topPixel, bottomPixel, i, ofsx);
 		for (int y = bottomPixel; y < HEIGHT; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 40));
@@ -135,7 +150,7 @@ void rendeer(t_map *map)
 }
 
 
-void render(t_map *map)
+void reneder(t_map *map)
 {
     t_ray *current_ray = map->rays;
     int wallWidth = 1;
@@ -166,4 +181,5 @@ void render(t_map *map)
         i++;
         current_ray = current_ray->next;
     }
+    //mlx_delete_image(map->mlx, map->img);
 }

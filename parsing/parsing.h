@@ -81,7 +81,8 @@ typedef struct s_map {
     char *no;
     char *so;
     char *we;
-    char *ea ;
+    char *ea;
+    char *texture;
     int is_error;
 } t_map;
 
