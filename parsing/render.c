@@ -32,7 +32,7 @@ void put_texture(t_map *map)
 
     for (int i = 0; i < map->width * cube_width; i++)
     {
-        for (int j = 0; j < map->height * cube_width; j++)
+        for (int j = 0; j < HEIGHT; j++)
 		{
 			int x = i %64, y = j % 64;
             mlx_put_pixel(map->img, i, j, texture[x * 64 + y]);
@@ -89,75 +89,81 @@ void put_img(t_map *map, int top, int botm, int x, int img_x)
     }
 }
 
-
-void render(t_map *map)
+void set_texture(t_map *map, t_ray *ray)
 {
-	the_rays *ray;
-	double walHight = 200;
+
+}
+
+void rendeer(t_map *map)
+{
+	t_ray *ray;
+    printf ("%d\n", TILE_SIZE);
 	unsigned int *texture = gen_texture();
 	int i = 0;
-	float distoplan = (map->width * cube_width / 2) / tan((float)(map->player->fov / 2));
+	float distoplan = (WIDTH / 2) / tan((float)(map->player->fov / 2));
 	while (map->rays)
 	{
 		ray = map->rays;
 		float epsilon = 1e-6;
 		float raydis = ray->ray_dis * cos(ray->ray_angle - map->player->rotAngle);
+        if (raydis <= 0)
+            raydis = 1;
+        //printf ("%f,   %.2f\n", ray->ray_dis, ray->ray_angle - map->player->rotAngle);
         //printf ("%.2f,  ", ray->ray_angle - map->player->rotAngle);
         int corrected_raydis = (int)raydis;
-		float wallStripHight = ((float)cube_width / corrected_raydis) * distoplan;
-
-        int topPixel = (map->height * cube_width / 2) - (wallStripHight / 2);
+		float wallStripHight = ((float)TILE_SIZE / corrected_raydis) * distoplan;
+        int topPixel = (HEIGHT / 2) - (wallStripHight / 2);
         if (topPixel < 0) topPixel = 0;
-        long bottomPixel = (map->height * cube_width / 2) + (wallStripHight / 2);
-        if (bottomPixel > map->height * cube_width) bottomPixel = map->height * cube_width;
+        long bottomPixel = (HEIGHT / 2) + (wallStripHight / 2);
+        if (bottomPixel > HEIGHT) bottomPixel = HEIGHT;
 
 		int ofsx, ofsy;
-        printf ("%d, %ld\n", topPixel, bottomPixel);
+        //printf ("%d, %ld\n", topPixel, bottomPixel);
 		if (ray->ray_dir == 2)
-			ofsx = ray->y_inter % cube_width;
+			ofsx = ray->y_inter % 60;
 		else
-			ofsx = ray->x_inter % cube_width;
+			ofsx = ray->x_inter % 60;
 		for (int y = 0; y < topPixel; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 255, 255));
+        set_texture(map, ray);
 		put_img(map, topPixel, bottomPixel, i, ofsx);
-		for (int y = bottomPixel; y < map->height * cube_width; y++)
+		for (int y = bottomPixel; y < HEIGHT; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 40));
 		i++;
 		map->rays = map->rays->next;
-		//exit (0);
 	}
 }
 
 
-//void rendeer(t_map *map)
-//{
-//    the_rays *current_ray = map->rays;
-//    int wallWidth = 1;
-//    float distoplan = (map->width * cube_width / 2) / tan((float)(map->player->fov / 2));
+void render(t_map *map)
+{
+    t_ray *current_ray = map->rays;
+    int wallWidth = 1;
+    float distoplan = (WIDTH / 2) / tan((float)(map->player->fov / 2));
 
-//    int i = 0;
-//    while (current_ray)
-//    {
-//        the_rays *ray = current_ray;
-//        int raydis = ray->ray_dis;
-//        float wallStripHight = ((float)cube_width / raydis) * distoplan;
+    int i = 0;
+    while (current_ray)
+    {
+        t_ray *ray = current_ray;
+        int raydis = ray->ray_dis;
+        float wallStripHight = ((float)TILE_SIZE / raydis) * distoplan;
 
-//        int topPixel = (map->height * cube_width / 2) - (wallStripHight / 2);
-//        if (topPixel < 0) topPixel = 0;
+        int topPixel = (HEIGHT / 2) - (wallStripHight / 2);
+        if (topPixel < 0) topPixel = 0;
 
-//        int bottomPixel = (map->height * cube_width / 2) + (wallStripHight / 2);
-//        if (bottomPixel > map->height * cube_width) bottomPixel = map->height * cube_width;
+        int bottomPixel = (HEIGHT / 2) + (wallStripHight / 2);
+        if (bottomPixel > HEIGHT) bottomPixel = HEIGHT;
 
-//        for (int y = 0; y < topPixel; y++)
-//            mlx_put_pixel(map->img, i, y, create_color(0, 0, 255, 255));
+        for (int y = 0; y < topPixel; y++)
+            mlx_put_pixel(map->img, i, y, create_color(0, 0, 255, 255));
 
-//        for (int y = topPixel; y < bottomPixel; y++)
-//            mlx_put_pixel(map->img, i, y, create_color(255, 0, 0, 255));
+        for (int y = topPixel; y < bottomPixel; y++)
+            mlx_put_pixel(map->img, i, y, create_color(255, 0, 0, 255));
 
-//        for (int y = bottomPixel; y < map->height * cube_width; y++)
-//            mlx_put_pixel(map->img, i, y, create_color(0, 255, 0, 255));
+        for (int y = bottomPixel; y < HEIGHT; y++)
+            mlx_put_pixel(map->img, i, y, create_color(0, 255, 0, 255));
 
-//        i++;
-//        current_ray = current_ray->next;
-//    }
-//}
+        i++;
+        current_ray = current_ray->next;
+    }
+}

@@ -3,6 +3,9 @@
 
 #define cube_width 60
 #define m_cube 30
+#define WIDTH 1080
+#define HEIGHT 660
+#define TILE_SIZE 60
 
 #include "../MLX42/include/MLX42/MLX42.h"
 #include <math.h>
@@ -13,7 +16,7 @@
 #include <limits.h>
 
 // raycasting ************************************
-typedef struct the_rays
+typedef struct s_ray
 {
 	int	x1;
 	int	y1;
@@ -29,8 +32,8 @@ typedef struct the_rays
     int     y_inter;
     double  ray_dis;
     int     ray_dir; // 1: hor | 2: ver
-    struct the_rays    *next;
-}	the_rays;
+    struct s_ray    *next;
+}	t_ray;
 // void render_map(mlx_image_t *img, char **s);
 // void	rendering(the_data *data);
 
@@ -67,8 +70,8 @@ typedef struct s_map {
     void *mlx;
 	mlx_image_t *img;
     t_player *player;
-    the_rays    *rays;
-    the_rays    *m_rays;
+    t_ray    *rays;
+    t_ray    *m_rays;
     int line_width;
     int width;
     int height;

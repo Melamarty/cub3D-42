@@ -70,7 +70,7 @@ int check_map(char *file, t_list **list)
 
 void    open_win(t_map *map)
 {
-    map->mlx = mlx_init(map->width * cube_width, map->height * cube_width, "cub3d", 0);
+    map->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", 0);
 	map->img = mlx_new_image(map->mlx, map->width * cube_width, map->height * cube_width);
 	mlx_image_to_window(map->mlx, map->img, 0, 0);
 }
