@@ -67,8 +67,8 @@ double	calc_dis(t_map map, the_rays ray)
 	int	dy;
 	double dis;
 
-	dx = abs(ray.x_inter - map.player->pos.x + 10);
-	dy = abs(ray.y_inter - map.player->pos.y + 10);
+	dx = abs(ray.x_inter - map.player->pos.x);
+	dy = abs(ray.y_inter - map.player->pos.y);
 	dis = sqrt(dx * dx + dy * dy);
 	return (dis);
 }
@@ -227,7 +227,9 @@ void render_map(t_map *map)
 		yStart = yStartSave;
 		for (int j = 0; j <  6 * m_cube; j++)
 		{
-			if (map->arr[yStart / m_cube][xStart / m_cube] == '1')
+			if (yStart < 0 || xStart < 0)
+				color = create_color(0, 0, 0, 255);
+			else if (map->arr[yStart / m_cube][xStart / m_cube] == '1')
 				color = create_color(0, 100, 0, 255);
 			else
 				color = create_color(144, 238, 144, 255);
