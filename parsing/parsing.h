@@ -84,6 +84,7 @@ typedef struct s_map {
     char *ea;
     char *texture;
     int is_error;
+    int is_rot;
 } t_map;
 
 typedef struct s_adress
@@ -107,6 +108,9 @@ void    handle_key(void *p);
 void    init_player(t_map *map);
 void	mini_map(t_map *map);
 void    cast_rays(t_map *map);
+void	mouse_handler(double x, double y, void *p);
+double  normAngle(double angle);
+void	mouse_rot(void *p);
 // raycasting ***********************
 
 

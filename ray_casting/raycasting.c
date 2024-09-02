@@ -1,5 +1,44 @@
 #include "../parsing/parsing.h"
 
+void	mouse_rot(void *p)
+{
+	t_map *map = (t_map *)p;
+	if (map->is_rot == 1)
+	{
+		cast_rays(map);
+		render(map);
+		map->is_rot = 0;
+	}
+}
+
+void mouse_handler(double x, double y, void *p)
+{
+	t_map *map;
+	int	half_width;
+	int	half_height;
+
+	map = (t_map *)p;
+	if (map->is_rot == 2)
+	{
+		mlx_set_cursor_mode(map->mlx, MLX_MOUSE_NORMAL);
+		return ;
+	}
+	half_width = map->width * cube_width / 2;
+	half_height = map->height * cube_width / 2;
+	if (x > half_width)
+	{
+		map->player->rotAngle = normAngle(map->player->rotAngle + map->player->rotSpeed);
+		map->is_rot = 1;
+	}
+	else
+	{
+		map->player->rotAngle = normAngle(map->player->rotAngle - map->player->rotSpeed);
+		map->is_rot = 1;
+	}
+	mlx_set_mouse_pos(map->mlx, half_width, half_height);
+	mlx_set_cursor_mode(map->mlx, MLX_MOUSE_HIDDEN);
+}
+
 the_rays *last_ray(the_rays *rays)
 {
 	while (rays->next)
@@ -133,7 +172,8 @@ int	is_wall(int new_x, int new_y, t_map map)
 int	key_pressed(t_map *map)
 {
 	if (mlx_is_key_down(map->mlx, MLX_KEY_W) || mlx_is_key_down(map->mlx, MLX_KEY_A) || mlx_is_key_down(map->mlx, MLX_KEY_S)
-		|| mlx_is_key_down(map->mlx, MLX_KEY_D) || mlx_is_key_down(map->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
+		|| mlx_is_key_down(map->mlx, MLX_KEY_D) || mlx_is_key_down(map->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(map->mlx, MLX_KEY_LEFT)
+		|| mlx_is_key_down(map->mlx, MLX_KEY_UP) || mlx_is_key_down(map->mlx, MLX_KEY_DOWN) || mlx_is_key_down(map->mlx, MLX_KEY_Q) || mlx_is_key_down(map->mlx, MLX_KEY_B))
 			return (1);
 	return (0);
 }
@@ -147,11 +187,15 @@ void handle_key(void *p)
 	map = (t_map *)p;
 	if (!key_pressed(map))
 		return ;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_Q))
+		map->is_rot = 2;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_B))
+		map->is_rot = 0;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 		map->player->rotAngle = normAngle(map->player->rotSpeed + map->player->rotAngle);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 		map->player->rotAngle = normAngle(map->player->rotAngle - map->player->rotSpeed);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(map->mlx, MLX_KEY_W) || mlx_is_key_down(map->mlx, MLX_KEY_UP))
 	{
 		move_step = map->player->moveSpeed;
 		new_x = move_step * cos(map->player->rotAngle);
@@ -162,7 +206,7 @@ void handle_key(void *p)
 			map->player->pos.y += round(new_y);
 		}
 	}
-	if (mlx_is_key_down(map->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(map->mlx, MLX_KEY_S) || mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
 	{
 		move_step = map->player->moveSpeed * -1;
 		new_x = move_step * cos(map->player->rotAngle);
