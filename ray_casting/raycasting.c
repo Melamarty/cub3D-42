@@ -39,14 +39,14 @@ void mouse_handler(double x, double y, void *p)
 	mlx_set_cursor_mode(map->mlx, MLX_MOUSE_HIDDEN);
 }
 
-the_rays *last_ray(the_rays *rays)
+t_ray *last_ray(t_ray *rays)
 {
 	while (rays->next)
 		rays = rays->next;
 	return (rays);
 }
 
-void	add_back_ray(the_rays **rays, the_rays *new_ray)
+void	add_back_ray(t_ray **rays, t_ray *new_ray)
 {
 	if (!*rays)
 		*rays = new_ray;
@@ -70,7 +70,7 @@ double normAngle(double angle)
 
 void	draw_rays(t_map *map)
 {
-	map->m_rays = malloc(sizeof(the_rays));
+	map->m_rays = malloc(sizeof(t_ray));
 	double	x, y;
 	map->m_rays->x1 = 5 * m_cube + 5;
 	map->m_rays->y1 = 3 * m_cube + 5;
@@ -100,7 +100,7 @@ void	draw_rays(t_map *map)
 	}
 }
 
-double	calc_dis(t_map map, the_rays ray)
+double	calc_dis(t_map map, t_ray ray)
 {
 	int	dx;
 	int	dy;
@@ -116,8 +116,8 @@ void cast_rays(t_map *map)
 {
 	double	ray_angle;
 	map->rays = NULL;
-	the_rays	*new_ray;
-	new_ray = malloc(sizeof(the_rays));
+	t_ray	*new_ray;
+	new_ray = malloc(sizeof(t_ray));
 	new_ray->next = NULL;
 	double x, y;
 	ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
@@ -156,7 +156,7 @@ void cast_rays(t_map *map)
 		new_ray->ray_dis = calc_dis(*map, *new_ray);
 		add_back_ray(&map->rays, new_ray);
 		// printf("x: %d y: %d inter: %d dis: %f\n", map->ray_x, map->ray_y, map->ray_dir, map->ray_dis);
-		new_ray = malloc(sizeof(the_rays));
+		new_ray = malloc(sizeof(t_ray));
 		new_ray->next = NULL;
 		ray_angle = normAngle(map->player->fov / (map->width * cube_width) + ray_angle);
 	}

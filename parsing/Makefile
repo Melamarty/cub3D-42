@@ -9,7 +9,7 @@ OBJ    = $(SRC:.c=.o)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@ ../MLX42/build/libmlx42.a -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
-%.o: %.c
+%.o: %.c parsing.h
 	$(CC) $(CFLAGS) -c -Imlx $< -o $@
 
 all : $(NAME)
