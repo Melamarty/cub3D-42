@@ -104,19 +104,15 @@ void render(t_map *map)
 		float raydis = ray->ray_dis * cos(ray->ray_angle - map->player->rotAngle);
         //printf ("%.2f,  ", ray->ray_angle - map->player->rotAngle);
         int corrected_raydis = (int)raydis;
-        //if (raydis < 0.2)
-        //    corrected_raydis = ray->ray_dis;
-        //else
-        //    corrected_raydis = (int)raydis;
-
 		float wallStripHight = ((float)cube_width / corrected_raydis) * distoplan;
 
         int topPixel = (map->height * cube_width / 2) - (wallStripHight / 2);
         if (topPixel < 0) topPixel = 0;
-        int bottomPixel = (map->height * cube_width / 2) + (wallStripHight / 2);
+        long bottomPixel = (map->height * cube_width / 2) + (wallStripHight / 2);
         if (bottomPixel > map->height * cube_width) bottomPixel = map->height * cube_width;
 
 		int ofsx, ofsy;
+        printf ("%d, %ld\n", topPixel, bottomPixel);
 		if (ray->ray_dir == 2)
 			ofsx = ray->y_inter % cube_width;
 		else
