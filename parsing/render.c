@@ -93,6 +93,47 @@ void put_img(t_map *map, int top, int botm, int x, int img_x)
     //mlx_delete_texture(txt);
 }
 
+
+void load_textures(t_map *map)
+{
+    mlx_texture_t *texture;
+    if (!map->texture->no)
+    {
+        texture = mlx_load_png(map->no);
+        map->texture->no = mlx_texture_to_image(map->mlx, texture);
+    }
+    if (!map->texture->so)
+    {
+        texture = mlx_load_png(map->so);
+        map->texture->so = mlx_texture_to_image(map->mlx, texture);
+    }
+    if (!map->texture->we)
+    {
+        texture = mlx_load_png(map->we);
+        map->texture->we = mlx_texture_to_image(map->mlx, texture);
+    }
+    if (!map->texture->ea)
+    {
+        texture = mlx_load_png(map->ea);
+        map->texture->ea = mlx_texture_to_image(map->mlx, texture);
+    }
+}
+
+//if (ray->hit_vertical)
+//    {
+//        if (ray->ray_angle < 0.5 * M_PI || ray->ray_angle > 1.5 * M_PI)
+//            return (wall->e_texture);
+//        else
+//            return (wall->w_texture);
+//    }
+//    else
+//    {
+//        if (ray->ray_angle > 0 && ray->ray_angle < M_PI)
+//            return (wall->s_texture);
+//        else
+//            return (wall->n_texture);
+//    }
+
 void set_texture(t_map *map, t_ray *ray)
 {
     mlx_texture_t *texture = NULL;
@@ -102,23 +143,21 @@ void set_texture(t_map *map, t_ray *ray)
         txt = map->no ;
     else
        txt = map->so;
-    if (!map->texture->no || !map->texture->so)
+    load_textures(map);
+    if (ray->ray_dir == HIT_VIRT)
     {
-        if (ray->ray_dir == 2)
-        {
-            texture = mlx_load_png(map->no);
-            map->texture->no = mlx_texture_to_image(map->mlx, texture);
-        }
+        if (ray->ray_angle < 0.5 * M_PI || ray->ray_angle > 1.5 * M_PI)
+            map->texture->curr = map->texture->ea;
         else
-        {
-            texture = mlx_load_png(map->so);
-            map->texture->so = mlx_texture_to_image(map->mlx, texture);
-        }
+            map->texture->curr = map->texture->we;
     }
-    if (ray->ray_dir == 2)
-        map->texture->curr = map->texture->no;
     else
-        map->texture->curr = map->texture->so;
+    {
+        if (ray->ray_angle > 0 && ray->ray_angle < M_PI)
+            map->texture->curr = map->texture->so;
+        else
+            map->texture->curr = map->texture->no;
+    }
 }
 
 void render(t_map *map)

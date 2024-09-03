@@ -111,6 +111,8 @@ int main (int ac, char **av)
     map->texture = my_malloc(sizeof (t_texture), 0);
     map->texture->no = NULL;
     map->texture->so = NULL;
+    map->texture->ea = NULL;
+    map->texture->we = NULL;
     render(map);
     mini_map(map);
 	mlx_loop_hook(map->mlx, &handle_key, map);

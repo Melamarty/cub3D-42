@@ -6,6 +6,8 @@
 #define WIDTH 1080
 #define HEIGHT 660
 #define TILE_SIZE 60
+#define HIT_HORZ 1
+#define HIT_VIRT 2
 
 #include "../MLX42/include/MLX42/MLX42.h"
 #include <math.h>
@@ -70,6 +72,8 @@ typedef struct s_texture
 {
     mlx_image_t *no;
     mlx_image_t *so;
+    mlx_image_t *ea;
+    mlx_image_t *we;
     mlx_image_t *curr;
 } t_texture;
 typedef struct s_map {
