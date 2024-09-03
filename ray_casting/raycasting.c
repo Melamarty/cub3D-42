@@ -73,8 +73,8 @@ void	draw_rays(t_map *map)
 {
 	map->m_rays = malloc(sizeof(t_ray));
 	double	x, y;
-	map->m_rays->x1 = 5 * m_cube + 5;
-	map->m_rays->y1 = 3 * m_cube + 5;
+	map->m_rays->x1 = 5 * m_cube;
+	map->m_rays->y1 = 3 * m_cube;
 	map->m_rays->ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
 	for (int i = 0; i < 30 * m_cube; i++)
 	{
@@ -165,10 +165,32 @@ void cast_rays(t_map *map)
 
 int	is_wall(int new_x, int new_y, t_map map)
 {
-	if (new_x < 0 || new_x > map.width || new_y < 0 || new_y > map.height ||  map.arr[new_y][new_x] == '1')
-		return (1);
+	double	ang;
+	// int	temp1;
+	// int	temp2;
+	int	px;
+	int	py;
+	ang = map.player->rotAngle;
+	for (int i = 0; i < 360; i++)
+	{
+		// temp1 = 10 * cos(ang) + 150;
+		// temp2 = 10 * sin(ang) + 90;
+		px = (new_x) + 10 * cos(ang);
+		py = (new_y) + 10 * sin(ang);
+		// mlx_put_pixel(map.img, temp1, temp2, create_color(0, 0, 0, 255));
+		ang += 180 / M_PI;
+		if (px < 0 || px / cube_width >= map.width || py < 0 || py / cube_width >= map.height ||  map.arr[py / cube_width][px / cube_width] == '1')
+			return (1);
+	}
 	return (0);
 }
+
+// int	is_wall(int new_x, int new_y, t_map map)
+// {
+// 	if (new_x < 0 || new_x / cube_width > map.width || new_y < 0 || new_y / cube_width > map.height ||  map.arr[new_y / cube_width][new_x / cube_width] == '1')
+// 		return (1);
+// 	return (0);
+// }
 
 int	key_pressed(t_map *map)
 {
@@ -201,7 +223,7 @@ void handle_key(void *p)
 		move_step = map->player->moveSpeed;
 		new_x = move_step * cos(map->player->rotAngle);
 		new_y = move_step * sin(map->player->rotAngle);
-		if (!is_wall((map->player->pos.x + round(new_x) ) / cube_width,( map->player->pos.y + round(new_y)) / cube_width, *map))
+		if (!is_wall((map->player->pos.x + round(new_x) ), (map->player->pos.y + round(new_y)), *map))
 		{
 			map->player->pos.x += round(new_x);
 			map->player->pos.y += round(new_y);
@@ -212,7 +234,7 @@ void handle_key(void *p)
 		move_step = map->player->moveSpeed * -1;
 		new_x = move_step * cos(map->player->rotAngle);
 		new_y = move_step * sin(map->player->rotAngle);
-		if (!is_wall((map->player->pos.x + round(new_x)) / cube_width, (map->player->pos.y + round(new_y)) / cube_width, *map))
+		if (!is_wall((map->player->pos.x + round(new_x)), (map->player->pos.y + round(new_y)), *map))
 		{
 			map->player->pos.x += round(new_x);
 			map->player->pos.y += round(new_y);
@@ -223,7 +245,7 @@ void handle_key(void *p)
 		move_step = map->player->moveSpeed * -1;
 		new_x = cos(map->player->rotAngle + M_PI_2) * move_step;
 		new_y = sin(map->player->rotAngle + M_PI_2) * move_step;
-		if (!is_wall((map->player->pos.x + round(new_x)) / cube_width, (map->player->pos.y + round(new_y)) / cube_width, *map))
+		if (!is_wall((map->player->pos.x + round(new_x)), (map->player->pos.y + round(new_y)), *map))
 		{
 			map->player->pos.x += round(new_x);
 			map->player->pos.y += round(new_y);
@@ -234,7 +256,7 @@ void handle_key(void *p)
 		move_step = map->player->moveSpeed;
 		new_x = cos(map->player->rotAngle + M_PI_2) * move_step;
 		new_y = sin(map->player->rotAngle + M_PI_2) * move_step;
-		if (!is_wall((map->player->pos.x + round(new_x)) / cube_width, (map->player->pos.y + round(new_y)) / cube_width, *map))
+		if (!is_wall((map->player->pos.x + round(new_x)), (map->player->pos.y + round(new_y)), *map))
 		{
 			map->player->pos.x += round(new_x);
 			map->player->pos.y += round(new_y);
@@ -247,8 +269,8 @@ void handle_key(void *p)
 
 void init_player(t_map *map)
 {
-	map->player->pos.x *= cube_width;
-	map->player->pos.y *= cube_width;
+	map->player->pos.x = map->player->pos.x * cube_width + 30;
+	map->player->pos.y = map->player->pos.y * cube_width + 30;
 	map->player->xDir = 0;
 	map->player->yDir = 0;
 	map->player->moveSpeed = 15;
@@ -291,8 +313,8 @@ void render_player(t_map *map)
 	int	y;
 	unsigned int	color;
 
-	x = 5 * m_cube;
-	y = 3 * m_cube;
+	x = 5 * m_cube - 5;
+	y = 3 * m_cube - 5;
 	color = create_color(255, 0, 0, 255);
 	for (int i = 0; i < 10; i++)
 	{
@@ -304,8 +326,29 @@ void render_player(t_map *map)
 	draw_rays(map);
 }
 
+void	draw_cercle(t_map *map)
+{
+	int	x;
+	int	y;
+	int	px;
+	int	py;
+	double	ang;
+
+	x = 5 * m_cube;
+	y = 3 * m_cube;
+	ang = map->player->rotAngle;
+	for (int i = 0; i < 360; i++)
+	{
+		px = x + 10 * cos(ang);
+		py = y + 10 * sin(ang);
+		ang += 180 / M_PI;
+		mlx_put_pixel(map->img, px, py, create_color(0, 0, 0, 255));
+	}
+}
+
 void	mini_map(t_map *map)
 {
 	render_map(map);
 	render_player(map);
+	draw_cercle(map);
 }
