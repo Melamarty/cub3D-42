@@ -109,7 +109,7 @@ int main (int ac, char **av)
     //     map->rays = map->rays->next;
     // }
     render(map);
-    // mini_map(map);
+    mini_map(map);
 	mlx_loop_hook(map->mlx, &handle_key, map);
     mlx_cursor_hook(map->mlx, &mouse_handler, map);
     mlx_loop_hook(map->mlx, &mouse_rot, map);
