@@ -7,6 +7,7 @@ void	mouse_rot(void *p)
 	{
 		cast_rays(map);
 		render(map);
+		mini_map(map);
 		map->is_rot = 0;
 	}
 }
@@ -241,7 +242,7 @@ void handle_key(void *p)
 	}
 	cast_rays(map);
 	render(map);
-	// mini_map(map);
+	mini_map(map);
 }
 
 void init_player(t_map *map)
@@ -250,7 +251,7 @@ void init_player(t_map *map)
 	map->player->pos.y *= cube_width;
 	map->player->xDir = 0;
 	map->player->yDir = 0;
-	map->player->moveSpeed = 5;
+	map->player->moveSpeed = 15;
 	map->player->rotAngle = M_PI / 2;
 	map->player->rotSpeed = 5 * (M_PI / 180);
 	map->player->fov = 60 * M_PI / 180;
@@ -271,9 +272,9 @@ void render_map(t_map *map)
 		yStart = yStartSave;
 		for (int j = 0; j <  6 * m_cube; j++)
 		{
-			if (yStart < 0 || xStart < 0)
+			if (yStart < 0 || xStart < 0 || yStart / m_cube >= map->height || xStart / m_cube >= map->width)
 				color = create_color(0, 0, 0, 255);
-			else if (map->arr[yStart / m_cube][xStart / m_cube] == '1')
+			else if ( map->arr[yStart / m_cube][xStart / m_cube] == '1')
 				color = create_color(0, 100, 0, 255);
 			else
 				color = create_color(144, 238, 144, 255);
