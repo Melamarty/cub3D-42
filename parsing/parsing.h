@@ -66,6 +66,12 @@ typedef struct s_player
 	double	fov;
 } t_player;
 
+typedef struct s_texture
+{
+    mlx_image_t *no;
+    mlx_image_t *so;
+    mlx_image_t *curr;
+} t_texture;
 typedef struct s_map {
     void *mlx;
 	mlx_image_t *img;
@@ -82,9 +88,10 @@ typedef struct s_map {
     char *so;
     char *we;
     char *ea;
-    char *texture;
+    //char *texture;
     int is_error;
     int is_rot;
+    t_texture *texture;
 } t_map;
 
 typedef struct s_adress

@@ -108,6 +108,9 @@ int main (int ac, char **av)
     //     printf ("djdgdvd\n");
     //     map->rays = map->rays->next;
     // }
+    map->texture = my_malloc(sizeof (t_texture), 0);
+    map->texture->no = NULL;
+    map->texture->so = NULL;
     render(map);
     mini_map(map);
 	mlx_loop_hook(map->mlx, &handle_key, map);
