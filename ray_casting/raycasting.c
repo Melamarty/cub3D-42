@@ -175,8 +175,8 @@ int	is_wall(int new_x, int new_y, t_map map)
 	{
 		// temp1 = 10 * cos(ang) + 150;
 		// temp2 = 10 * sin(ang) + 90;
-		px = (new_x) + 10 * cos(ang);
-		py = (new_y) + 10 * sin(ang);
+		px = (new_x) + 15 * cos(ang);
+		py = (new_y) + 15 * sin(ang);
 		// mlx_put_pixel(map.img, temp1, temp2, create_color(0, 0, 0, 255));
 		ang += 180 / M_PI;
 		if (px < 0 || px / cube_width >= map.width || py < 0 || py / cube_width >= map.height ||  map.arr[py / cube_width][px / cube_width] == '1')
