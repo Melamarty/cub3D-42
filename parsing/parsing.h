@@ -122,6 +122,17 @@ void    cast_rays(t_map *map);
 void	mouse_handler(double x, double y, void *p);
 double  normAngle(double angle);
 void	mouse_rot(void *p);
+void	add_back_ray(t_ray **rays, t_ray *new_ray);
+unsigned int create_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
+void	mini_map(t_map *map);
+void mouse_handler(double x, double y, void *p);
+void	mouse_rot(void *p);
+double normAngle(double angle);
+void	up(t_map *map);
+void	down(t_map *map);
+void	left(t_map *map);
+void	right(t_map *map);
+int	    is_wall(int new_x, int new_y, t_map map);
 // raycasting ***********************
 
 
