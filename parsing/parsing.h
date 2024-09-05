@@ -1,11 +1,11 @@
 #ifndef PARSING_H
 #define PARSING_H
 
-#define cube_width 60
+#define cube_width 300
 #define m_cube 30
-#define WIDTH 1080
+#define WIDTH 1580
 #define HEIGHT 660
-#define TILE_SIZE 60
+#define TILE_SIZE 300
 #define HIT_HORZ 1
 #define HIT_VIRT 2
 
