@@ -2,7 +2,8 @@ NAME   = cub3D
 CC     = cc
 CFLAGS = #-Wall -Wextra -Werror
 RM     = rm -rf
-RSRC := ../ray_casting/raycasting.c
+RF     = ../ray_casting
+RSRC := $(RF)/raycasting.c $(RF)/minimap_bonus.c $(RF)/mouse_bonus.c $(RF)/utils1.c $(RF)/movement.c
 SRC    := $(shell find . -name '*.c') $(RSRC)
 OBJ    = $(SRC:.c=.o)
 
