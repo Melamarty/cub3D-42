@@ -21,7 +21,7 @@ void cast_rays(t_map *map)
 	new_ray->next = NULL;
 	double x, y;
 	ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
-	for (int i = 0; i < map->width * cube_width; i++)
+	for (int i = 0; i < WIDTH; i++)
 	{
 		new_ray->ray_angle = ray_angle;
 		x = map->player->pos.x;
@@ -58,7 +58,7 @@ void cast_rays(t_map *map)
 		// printf("x: %d y: %d inter: %d dis: %f\n", map->ray_x, map->ray_y, map->ray_dir, map->ray_dis);
 		new_ray = malloc(sizeof(t_ray));
 		new_ray->next = NULL;
-		ray_angle = normAngle(map->player->fov / (map->width * cube_width) + ray_angle);
+		ray_angle = normAngle(map->player->fov / (WIDTH) + ray_angle);
 	}
 }
 
@@ -136,7 +136,7 @@ void init_player(t_map *map)
 	map->player->pos.y = map->player->pos.y * cube_width + 30;
 	map->player->xDir = 0;
 	map->player->yDir = 0;
-	map->player->moveSpeed = 8;
+	map->player->moveSpeed = 100;
 	map->player->rotAngle = M_PI / 2;
 	map->player->rotSpeed = 5 * (M_PI / 180);
 	map->player->fov = 60 * M_PI / 180;
