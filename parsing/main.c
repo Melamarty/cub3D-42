@@ -115,9 +115,11 @@ int main (int ac, char **av)
     map->texture->we = NULL;
     render(map);
     mini_map(map);
+    create_textures(map);
 	mlx_loop_hook(map->mlx, &handle_key, map);
     mlx_cursor_hook(map->mlx, &mouse_handler, map);
     mlx_loop_hook(map->mlx, &mouse_rot, map);
+    mlx_loop_hook(map->mlx, &animation, map);
     mlx_loop(map->mlx);
 	mlx_terminate(map->mlx);
     return (0);
