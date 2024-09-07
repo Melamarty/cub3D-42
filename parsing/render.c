@@ -94,8 +94,6 @@ void render(t_map *map)
 		float raydis = ray->ray_dis * cos(ray->ray_angle - map->player->rotAngle);
         if (raydis <= 0)
             raydis = 1;
-        //printf ("%f,   %.2f\n", ray->ray_dis, ray->ray_angle - map->player->rotAngle);
-        //printf ("%.2f,  ", ray->ray_angle - map->player->rotAngle);
         int corrected_raydis = (int)raydis;
 		float wallStripHight = ((float)TILE_SIZE / corrected_raydis) * distoplan;
         int topPixel = (HEIGHT / 2) - (wallStripHight / 2);
@@ -104,11 +102,9 @@ void render(t_map *map)
         if (bottomPixel > HEIGHT) bottomPixel = HEIGHT;
 
 		int ofsx, ofsy;
-        printf ("%d, %ld\n", topPixel, bottomPixel);
 		for (int y = 0; y < topPixel; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 255, 255));
         set_texture(map, ray);
-        //printf ("%s\n", map->texture);
 		put_img(map, topPixel, bottomPixel, i, ray);
 		for (int y = bottomPixel; y < HEIGHT; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 40));
@@ -116,38 +112,3 @@ void render(t_map *map)
 		map->rays = map->rays->next;
 	}
 }
-
-
-//void reneder(t_map *map)
-//{
-//    t_ray *current_ray = map->rays;
-//    int wallWidth = 1;
-//    float distoplan = (WIDTH / 2) / tan((float)(map->player->fov / 2));
-
-//    int i = 0;
-//    while (current_ray)
-//    {
-//        t_ray *ray = current_ray;
-//        int raydis = ray->ray_dis;
-//        float wallStripHight = ((float)TILE_SIZE / raydis) * distoplan;
-
-//        int topPixel = (HEIGHT / 2) - (wallStripHight / 2);
-//        if (topPixel < 0) topPixel = 0;
-
-//        int bottomPixel = (HEIGHT / 2) + (wallStripHight / 2);
-//        if (bottomPixel > HEIGHT) bottomPixel = HEIGHT;
-
-//        for (int y = 0; y < topPixel; y++)
-//            mlx_put_pixel(map->img, i, y, create_color(0, 0, 255, 255));
-
-//        for (int y = topPixel; y < bottomPixel; y++)
-//            mlx_put_pixel(map->img, i, y, create_color(255, 0, 0, 255));
-
-//        for (int y = bottomPixel; y < HEIGHT; y++)
-//            mlx_put_pixel(map->img, i, y, create_color(0, 255, 0, 255));
-
-//        i++;
-//        current_ray = current_ray->next;
-//    }
-//    //mlx_delete_image(map->mlx, map->img);
-//}
