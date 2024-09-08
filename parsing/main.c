@@ -113,11 +113,11 @@ int main (int ac, char **av)
     map->texture->so = NULL;
     map->texture->ea = NULL;
     map->texture->we = NULL;
-    render(map);
-    mini_map(map);
     create_textures(map);
     map->sprite_img = mlx_texture_to_image(map->mlx, map->sprite[0]);
+    render(map);
 	mlx_image_to_window(map->mlx, map->sprite_img, WIDTH - 666 - ((WIDTH - 666) / 2), HEIGHT - 375);
+    mini_map(map);
 	mlx_loop_hook(map->mlx, &handle_key, map);
     mlx_loop_hook(map->mlx, &animation, map);
     mlx_cursor_hook(map->mlx, &mouse_handler, map);

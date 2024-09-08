@@ -1,7 +1,6 @@
 #ifndef PARSING_H
 #define PARSING_H
 
-#define cube_width 300
 #define m_cube 30
 #define WIDTH 1580
 #define HEIGHT 660
