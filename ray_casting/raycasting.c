@@ -41,13 +41,13 @@ void cast_rays(t_map *map)
 			new_ray->x_inter = round(x);
 			new_ray->y_inter = round(y);
 			x += new_ray->xinc;
-			if (map->arr[(int)round(y) / cube_width][(int)round(x) / cube_width] == '1')
+			if (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == '1')
 			{
 				new_ray->ray_dir = 2;
 				break ;
 			}
 			y += new_ray->yinc;
-			if (map->arr[(int)round(y) / cube_width][(int)round(x) / cube_width] == '1')
+			if (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == '1')
 			{
 				new_ray->ray_dir = 1;
 				break ;
@@ -78,7 +78,7 @@ int	is_wall(int new_x, int new_y, t_map map)
 		py = (new_y) + 15 * sin(ang);
 		// mlx_put_pixel(map.img, temp1, temp2, create_color(0, 0, 0, 255));
 		ang += 180 / M_PI;
-		if (px < 0 || px / cube_width >= map.width || py < 0 || py / cube_width >= map.height ||  map.arr[py / cube_width][px / cube_width] == '1')
+		if (px < 0 || px / TILE_SIZE >= map.width || py < 0 || py / TILE_SIZE >= map.height ||  map.arr[py / TILE_SIZE][px / TILE_SIZE] == '1')
 			return (1);
 	}
 	return (0);
@@ -86,7 +86,7 @@ int	is_wall(int new_x, int new_y, t_map map)
 
 // int	is_wall(int new_x, int new_y, t_map map)
 // {
-// 	if (new_x < 0 || new_x / cube_width > map.width || new_y < 0 || new_y / cube_width > map.height ||  map.arr[new_y / cube_width][new_x / cube_width] == '1')
+// 	if (new_x < 0 || new_x / TILE_SIZE > map.width || new_y < 0 || new_y / TILE_SIZE > map.height ||  map.arr[new_y / TILE_SIZE][new_x / TILE_SIZE] == '1')
 // 		return (1);
 // 	return (0);
 // }
@@ -111,9 +111,15 @@ void handle_key(void *p)
 	if (!key_pressed(map))
 		return ;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_Q))
+	{
 		map->is_rot = 2;
+		return ;
+	}
 	if (mlx_is_key_down(map->mlx, MLX_KEY_B))
+	{
 		map->is_rot = 0;
+		return ;
+	}
 	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 		map->player->rotAngle = normAngle(map->player->rotSpeed + map->player->rotAngle);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
@@ -185,8 +191,8 @@ void handle_key(void *p)
 
 void init_player(t_map *map)
 {
-	map->player->pos.x = map->player->pos.x * cube_width + 30;
-	map->player->pos.y = map->player->pos.y * cube_width + 30;
+	map->player->pos.x = map->player->pos.x * TILE_SIZE + 150;
+	map->player->pos.y = map->player->pos.y * TILE_SIZE + 150;
 	map->player->xDir = 0;
 	map->player->yDir = 0;
 	map->player->moveSpeed = 100;
