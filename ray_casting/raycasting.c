@@ -95,7 +95,8 @@ int	key_pressed(t_map *map)
 {
 	if (mlx_is_key_down(map->mlx, MLX_KEY_W) || mlx_is_key_down(map->mlx, MLX_KEY_A) || mlx_is_key_down(map->mlx, MLX_KEY_S)
 		|| mlx_is_key_down(map->mlx, MLX_KEY_D) || mlx_is_key_down(map->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(map->mlx, MLX_KEY_LEFT)
-		|| mlx_is_key_down(map->mlx, MLX_KEY_UP) || mlx_is_key_down(map->mlx, MLX_KEY_DOWN) || mlx_is_key_down(map->mlx, MLX_KEY_Q) || mlx_is_key_down(map->mlx, MLX_KEY_B))
+		|| mlx_is_key_down(map->mlx, MLX_KEY_UP) || mlx_is_key_down(map->mlx, MLX_KEY_DOWN) || mlx_is_key_down(map->mlx, MLX_KEY_Q) || mlx_is_key_down(map->mlx, MLX_KEY_B)
+		|| mlx_is_key_down(map->mlx, MLX_KEY_K) || mlx_is_key_down(map->mlx, MLX_KEY_R))
 			return (1);
 	return (0);
 }
@@ -125,10 +126,62 @@ void handle_key(void *p)
 		left(map);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
 		right(map);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_K) && !map->is_shot)
+	{
+		map->is_shot = 1;
+		map->frame = 0;
+		return ;
+	}
+	else if (mlx_is_key_down(map->mlx, MLX_KEY_R) && !map->is_reload)
+	{
+		map->is_reload = 1;
+        map->frame = 7;
+		return ;
+	}
 	cast_rays(map);
 	render(map);
 	mini_map(map);
 }
+
+// void handle_key(void *p)
+// {
+// 	int		move_step;
+// 	t_map 	*map;
+// 	double	new_x;
+// 	double	new_y;
+// 	map = (t_map *)p;
+// 	if (!key_pressed(map))
+// 		return ;
+// 	if (mlx_is_key_down(map->mlx, MLX_KEY_Q))
+// 		map->is_rot = 2;
+// 	if (mlx_is_key_down(map->mlx, MLX_KEY_B))
+// 		map->is_rot = 0;
+// 	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
+// 		map->player->rotAngle = normAngle(map->player->rotSpeed + map->player->rotAngle);
+// 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
+// 		map->player->rotAngle = normAngle(map->player->rotAngle - map->player->rotSpeed);
+// 	if (mlx_is_key_down(map->mlx, MLX_KEY_W) || mlx_is_key_down(map->mlx, MLX_KEY_UP))
+// 		up(map);
+// 	if (mlx_is_key_down(map->mlx, MLX_KEY_S) || mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
+// 		down(map);
+// 	if (mlx_is_key_down(map->mlx, MLX_KEY_A))
+// 		left(map);
+// 	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
+// 		right(map);
+// 	if (mlx_is_key_down(map->mlx, MLX_KEY_K))
+// 	{
+// 		shot(map);
+// 		return ;
+// 	}
+// 	else if (mlx_is_key_down(map->mlx, MLX_KEY_R))
+// 	{
+// 		reload(map);
+// 		return ;
+// 	}
+// 	cast_rays(map);
+// 	render(map);
+// 	mini_map(map);
+// }
 
 void init_player(t_map *map)
 {
