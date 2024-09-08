@@ -50,9 +50,9 @@ void render_map(t_map *map)
 			if (yStart < 0 || xStart < 0 || yStart / m_cube >= map->height || xStart / m_cube >= map->width)
 				color = create_color(0, 0, 0, 255);
 			else if ( map->arr[yStart / m_cube][xStart / m_cube] == '1')
-				color = create_color(0, 100, 0, 255);
+				color = create_color(50, 50, 50, 255);
 			else
-				color = create_color(144, 238, 144, 255);
+				color = create_color(211, 211, 211, 255);
 			mlx_put_pixel(map->img, i, j, color);
 			yStart ++;
 		}
@@ -95,7 +95,7 @@ void	draw_cercle(t_map *map)
 		px = x + 10 * cos(ang);
 		py = y + 10 * sin(ang);
 		ang += 180 / M_PI;
-		mlx_put_pixel(map->img, px, py, create_color(0, 0, 0, 255));
+		mlx_put_pixel(map->img, px, py, create_color(255, 255, 255, 51));
 	}
 }
 
