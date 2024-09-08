@@ -96,10 +96,12 @@ typedef struct s_map {
     int is_error;
     int is_rot;
     t_texture *texture;
-    mlx_texture_t   *sprite[6];
+    mlx_texture_t   *sprite[31];
     mlx_image_t     *sprite_img;
     int timing;
     int frame;
+    int is_reload;
+    int is_shot;
 } t_map;
 
 typedef struct s_adress
@@ -139,7 +141,10 @@ void	right(t_map *map);
 int	    is_wall(int new_x, int new_y, t_map map);
 char	*ft_itoa(int n);
 void	create_textures(t_map *map);
-void	animation(void	*p);
+void	shot(t_map *map);
+void	reload(t_map *map);
+int	key_pressed(t_map *map);
+void    animation(void *p);
 // raycasting ***********************
 
 

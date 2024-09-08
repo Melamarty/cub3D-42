@@ -24,8 +24,8 @@ void mouse_handler(double x, double y, void *p)
 		mlx_set_cursor_mode(map->mlx, MLX_MOUSE_NORMAL);
 		return ;
 	}
-	half_width = map->width * cube_width / 2;
-	half_height = map->height * cube_width / 2;
+	half_width = WIDTH / 2;
+	half_height = HEIGHT / 2;
 	if (x > half_width)
 	{
 		map->player->rotAngle = normAngle(map->player->rotAngle + map->player->rotSpeed);
