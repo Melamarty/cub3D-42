@@ -2,13 +2,11 @@
 
 void	up(t_map *map)
 {
-	int	move_step;
 	double	new_x;
 	double	new_y;
 
-	move_step = map->player->moveSpeed;
-	new_x = move_step * cos(map->player->rotAngle);
-	new_y = move_step * sin(map->player->rotAngle);
+	new_x = map->player->moveSpeed * cos(map->player->rotAngle);
+	new_y = map->player->moveSpeed * sin(map->player->rotAngle);
 	if (!is_wall((map->player->pos.x + round(new_x) ), (map->player->pos.y + round(new_y)), *map))
 	{
 		map->player->pos.x += round(new_x);
@@ -18,13 +16,11 @@ void	up(t_map *map)
 
 void	down(t_map *map)
 {
-	int	move_step;
 	double	new_x;
 	double	new_y;
 
-	move_step = map->player->moveSpeed * -1;
-	new_x = move_step * cos(map->player->rotAngle);
-	new_y = move_step * sin(map->player->rotAngle);
+	new_x = map->player->moveSpeed * cos(normAngle(map->player->rotAngle + M_PI));
+	new_y = map->player->moveSpeed * sin(normAngle(map->player->rotAngle + M_PI));
 	if (!is_wall((map->player->pos.x + round(new_x)), (map->player->pos.y + round(new_y)), *map))
 	{
 		map->player->pos.x += round(new_x);
@@ -34,13 +30,11 @@ void	down(t_map *map)
 
 void	left(t_map *map)
 {
-	int	move_step;
 	double	new_x;
 	double	new_y;
 
-	move_step = map->player->moveSpeed * -1;
-	new_x = cos(map->player->rotAngle + M_PI_2) * move_step;
-	new_y = sin(map->player->rotAngle + M_PI_2) * move_step;
+	new_x = cos(normAngle(map->player->rotAngle - M_PI_2)) * map->player->moveSpeed;
+	new_y = sin(normAngle(map->player->rotAngle - M_PI_2)) * map->player->moveSpeed;
 	if (!is_wall((map->player->pos.x + round(new_x)), (map->player->pos.y + round(new_y)), *map))
 	{
 		map->player->pos.x += round(new_x);
@@ -50,13 +44,11 @@ void	left(t_map *map)
 
 void	right(t_map *map)
 {
-	int	move_step;
 	double	new_x;
 	double	new_y;
 
-	move_step = map->player->moveSpeed;
-	new_x = cos(map->player->rotAngle + M_PI_2) * move_step;
-	new_y = sin(map->player->rotAngle + M_PI_2) * move_step;
+	new_x = cos(normAngle(map->player->rotAngle + M_PI_2)) * map->player->moveSpeed;
+	new_y = sin(normAngle(map->player->rotAngle + M_PI_2)) * map->player->moveSpeed;
 	if (!is_wall((map->player->pos.x + round(new_x)), (map->player->pos.y + round(new_y)), *map))
 	{
 		map->player->pos.x += round(new_x);
