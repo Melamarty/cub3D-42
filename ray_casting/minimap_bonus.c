@@ -51,6 +51,8 @@ void render_map(t_map *map)
 				color = create_color(0, 0, 0, 255);
 			else if ( map->arr[yStart / m_cube][xStart / m_cube] == '1')
 				color = create_color(50, 50, 50, 255);
+			else if ( map->arr[yStart / m_cube][xStart / m_cube] == 'D')
+				color = create_color(0, 255, 0, 255);
 			else
 				color = create_color(211, 211, 211, 255);
 			mlx_put_pixel(map->img, i, j, color);

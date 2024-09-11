@@ -33,6 +33,7 @@ typedef struct s_ray
     int     y_inter;
     double  ray_dis;
     int     ray_dir; // 1: hor | 2: ver
+    int     is_door;
     struct s_ray    *next;
 }	t_ray;
 // void render_map(mlx_image_t *img, char **s);

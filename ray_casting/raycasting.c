@@ -19,6 +19,7 @@ void cast_rays(t_map *map)
 	t_ray	*new_ray;
 	new_ray = malloc(sizeof(t_ray));
 	new_ray->next = NULL;
+	new_ray->is_door = 0;
 	double x, y;
 	ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
 	for (int i = 0; i < WIDTH; i++)
@@ -41,14 +42,18 @@ void cast_rays(t_map *map)
 			new_ray->x_inter = round(x);
 			new_ray->y_inter = round(y);
 			x += new_ray->xinc;
-			if (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == '1')
+			if ((map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == '1') || (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D'))
 			{
+				if (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D')
+					new_ray->is_door = 1;
 				new_ray->ray_dir = 2;
 				break ;
 			}
 			y += new_ray->yinc;
-			if (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == '1')
+			if ((map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == '1') || (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D'))
 			{
+				if (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D')
+					new_ray->is_door = 1;
 				new_ray->ray_dir = 1;
 				break ;
 			}
@@ -78,7 +83,7 @@ int	is_wall(int new_x, int new_y, t_map map)
 		py = (new_y) + 15 * sin(ang);
 		// mlx_put_pixel(map.img, temp1, temp2, create_color(0, 0, 0, 255));
 		ang += 180 / M_PI;
-		if (px < 0 || px / TILE_SIZE >= map.width || py < 0 || py / TILE_SIZE >= map.height ||  map.arr[py / TILE_SIZE][px / TILE_SIZE] == '1')
+		if (px < 0 || px / TILE_SIZE >= map.width || py < 0 || py / TILE_SIZE >= map.height ||  map.arr[py / TILE_SIZE][px / TILE_SIZE] == '1' || map.arr[py / TILE_SIZE][px / TILE_SIZE] == 'D')
 			return (1);
 	}
 	return (0);
