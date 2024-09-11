@@ -17,6 +17,27 @@ int check_row(char *row)
 	return (0);
 }
 
+int check_door (char **map, int i, int j, int height)
+{
+	int c1;
+	int c2;
+
+	c1 = 0;
+	c2 = 0;
+	if (i > 0 && map[i - 1][j] == '1')
+		c1++;
+	if (i < height - 1 && map[i + 1][j] == '1')
+		c1++;
+	if (j > 0 && map[i][j - 1] == '1')
+		c2++;
+	if (j < ft_strlen(map[i]) - 1 && map[i][j + 1] == '1')
+		c2++;
+	if (c1 == 2 && !c2)
+		return (0);
+	if (c2 == 2 && !c1)
+		return (0);
+	return (1);
+}
 int check_inside(char **map, int height)
 {
 	int	i;
@@ -39,6 +60,8 @@ int check_inside(char **map, int height)
 				if (j < ft_strlen(map[i]) - 1 && map[i][j + 1] == '0')
 					return (1);
 			}
+			if (map[i][j] == 'D' && check_door(map, i, j, height))
+				return (1);
 		}
 	}
 	return (0);
@@ -62,13 +85,13 @@ int check_walls(char **map, int height, int width)
 			i++;
 		// printf ("%c %d %d\n", map[i][j], i, j);
 		if (i >= height || map[i][j] != '1')
-			return (printf("here %d %d \n", i, j), 1);
+			return (1);
 		i = height - 1;
 		while (i >= 0 && map[i][j] == '*')
 			i--;
 
 		if (i < 0 || map[i][j] != '1')
-			return (printf("here1\n"), 1);
+			return (1);
 	}
 	if (check_inside(map, height))
 		return (1);

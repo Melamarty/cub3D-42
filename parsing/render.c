@@ -103,7 +103,6 @@ void render(t_map *map)
 	{
 		ray = map->rays;
 		float raydis = ray->ray_dis * cos(ray->ray_angle - map->player->rotAngle);
-        printf ("raydis: %f\n", ray->ray_dis);
         if (raydis <= 0)
             raydis = 1;
         int corrected_raydis = (int)raydis;

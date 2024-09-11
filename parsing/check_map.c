@@ -2,7 +2,7 @@
 
 int allowed_char(char c)
 {
-	if (c == '1' || c == '0' || c == 'N' || c == ' ' || c == '*' || c == '\n' || c == 'W' || c == 'E' || c == 'D' || c == 'C'
+	if (c == '1' || c == '0' || c == 'N' || c == ' ' || c == '*' || c == '\n' || c == 'W' || c == 'E' || c == 'D' || c == 'O'
 		|| c == 'S')
 		return (1);
 	return (0);
@@ -26,7 +26,7 @@ int	check_arr(t_map *map)
 		{
 			c = map->arr[i][j];
 			if (!allowed_char(c))
-				return (printf("c = %d,  %d %d\n", c, i, j), 1);
+				return (1);
 			if (c == 'S' || c == 'N' || c == 'W' || c == 'E')
 			{
 				map->player->pos.x = j;
@@ -68,11 +68,11 @@ int check_line(char *line)
 		return (1);
 	while (spl[i++]);
 	if (i != 3)
-		return (printf ("here0 %d\n", i),1);
+		return (1);
 	if (ft_strcmp(spl[0], "NO") && ft_strcmp(spl[0], "SO")
 		&& ft_strcmp(spl[0], "WE") && ft_strcmp(spl[0], "EA")
 		&& ft_strcmp(spl[0], "F") && ft_strcmp(spl[0], "C"))
-		return (printf ("here\n"),1);
+		return (1);
 	return (0);
 }
 
