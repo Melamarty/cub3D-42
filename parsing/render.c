@@ -1,6 +1,6 @@
 #include "parsing.h"
 
-void put_img(t_map *map, int top, int botm, int x, t_ray *ray)
+void put_img(t_map *map, int top, int botm, int x, t_ray *ray, int a, int b)
 {
     mlx_image_t *img = NULL;
 
@@ -17,8 +17,8 @@ void put_img(t_map *map, int top, int botm, int x, t_ray *ray)
 
     for (int y = top; y < botm; y++) {
 
-        float ratio = (float)(y - top) / (float)(botm - top);
-        int img_y = (int)(ratio * height);
+        float ratio = (float)(y - a) / (float)(b - a);
+        int img_y = (int)(ratio * height) % height;
 
         int of = (img_y * width + (img_x)) * 4;
         int r = img->pixels[of];
@@ -93,6 +93,7 @@ void render(t_map *map)
 
 	t_ray *ray;
 	int i = 0;
+    int a, b;
 	float distoplan = (WIDTH / 2) / tan((float)(map->player->fov / 2));
 	while (map->rays)
 	{
@@ -104,8 +105,10 @@ void render(t_map *map)
         int corrected_raydis = (int)raydis;
 		float wallStripHight = ((float)TILE_SIZE / corrected_raydis) * distoplan;
         int topPixel = (HEIGHT / 2) - (wallStripHight / 2);
+        a = topPixel;
         if (topPixel < 0) topPixel = 0;
         long bottomPixel = (HEIGHT / 2) + (wallStripHight / 2);
+        b = bottomPixel;
         if (bottomPixel > HEIGHT) bottomPixel = HEIGHT;
 
 		int ofsx, ofsy;
@@ -118,7 +121,7 @@ void render(t_map *map)
         //        mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 255));
         //}
         //else
-		    put_img(map, topPixel, bottomPixel, i, ray);
+		    put_img(map, topPixel, bottomPixel, i, ray, a, b);
 		for (int y = bottomPixel; y < HEIGHT; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 40));
 		i++;
