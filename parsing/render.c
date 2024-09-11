@@ -17,10 +17,10 @@ void put_img(t_map *map, int top, int botm, int x, t_ray *ray)
 	else
 		img_x = ray->x_inter % width;
 
-    if (top < 0)  a = 0;
-    else a = top;
-    if (botm > HEIGHT) b = HEIGHT;
-    else b = botm;
+    a = top;
+    b = botm;
+    if (top < 0)  top = 0;
+    if (botm > HEIGHT) botm = HEIGHT;
     for (int y = top; y < botm; y++) {
 
         float ratio = (float)(y - a) / (float)(b - a);
@@ -96,38 +96,26 @@ void set_texture(t_map *map, t_ray *ray)
 
 void render(t_map *map)
 {
-
+    int i = 0;
 	t_ray *ray;
-	int i = 0;
-    int a, b;
 	float distoplan = (WIDTH / 2) / tan((float)(map->player->fov / 2));
 	while (map->rays)
 	{
 		ray = map->rays;
-		float epsilon = 1e-6;
 		float raydis = ray->ray_dis * cos(ray->ray_angle - map->player->rotAngle);
+        printf ("raydis: %f\n", ray->ray_dis);
         if (raydis <= 0)
             raydis = 1;
         int corrected_raydis = (int)raydis;
 		float wallStripHight = ((float)TILE_SIZE / corrected_raydis) * distoplan;
         int topPixel = (HEIGHT / 2) - (wallStripHight / 2);
-        a = topPixel;
-        if (topPixel < 0) topPixel = 0;
         long bottomPixel = (HEIGHT / 2) + (wallStripHight / 2);
-        b = bottomPixel;
-        if (bottomPixel > HEIGHT) bottomPixel = HEIGHT;
 
 		int ofsx, ofsy;
 		for (int y = 0; y < topPixel; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 255, 255));
         set_texture(map, ray);
-        //if (ray->is_door)
-        //{
-        //    for (int y = topPixel; y < bottomPixel; y++)
-        //        mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 255));
-        //}
-        //else
-		    put_img(map, topPixel, bottomPixel, i, ray);
+		put_img(map, topPixel, bottomPixel, i, ray);
 		for (int y = bottomPixel; y < HEIGHT; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 40));
 		i++;
