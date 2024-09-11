@@ -1,6 +1,6 @@
 #include "parsing.h"
 
-void put_img(t_map *map, int top, int botm, int x, t_ray *ray, int a, int b)
+void put_img(t_map *map, int top, int botm, int x, t_ray *ray)
 {
     mlx_image_t *img = NULL;
 
@@ -8,6 +8,8 @@ void put_img(t_map *map, int top, int botm, int x, t_ray *ray, int a, int b)
     int width = img->width;
     int height = img->height;
     int img_x;
+    int a;
+    int b;
 
     //printf ("%d %d, ", width, height);
     if (ray->ray_dir == HIT_VIRT)
@@ -15,6 +17,10 @@ void put_img(t_map *map, int top, int botm, int x, t_ray *ray, int a, int b)
 	else
 		img_x = ray->x_inter % width;
 
+    if (top < 0)  a = 0;
+    else a = top;
+    if (botm > HEIGHT) b = HEIGHT;
+    else b = botm;
     for (int y = top; y < botm; y++) {
 
         float ratio = (float)(y - a) / (float)(b - a);
@@ -121,7 +127,7 @@ void render(t_map *map)
         //        mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 255));
         //}
         //else
-		    put_img(map, topPixel, bottomPixel, i, ray, a, b);
+		    put_img(map, topPixel, bottomPixel, i, ray);
 		for (int y = bottomPixel; y < HEIGHT; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 40));
 		i++;
