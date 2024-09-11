@@ -62,6 +62,7 @@ void cast_rays(t_map *map)
 		add_back_ray(&map->rays, new_ray);
 		// printf("x: %d y: %d inter: %d dis: %f\n", map->ray_x, map->ray_y, map->ray_dir, map->ray_dis);
 		new_ray = malloc(sizeof(t_ray));
+		new_ray->is_door = 0;
 		new_ray->next = NULL;
 		ray_angle = normAngle(map->player->fov / (WIDTH) + ray_angle);
 	}
