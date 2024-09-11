@@ -113,6 +113,7 @@ int main (int ac, char **av)
     map->texture->so = NULL;
     map->texture->ea = NULL;
     map->texture->we = NULL;
+    map->texture->door = NULL;
     create_textures(map);
     map->sprite_img = mlx_texture_to_image(map->mlx, map->sprite[0]);
     render(map);
