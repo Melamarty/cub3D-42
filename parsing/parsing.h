@@ -2,9 +2,9 @@
 #define PARSING_H
 
 #define m_cube 30
-#define WIDTH 1580
-#define HEIGHT 660
-#define TILE_SIZE 300
+#define WIDTH 1200
+#define HEIGHT 700
+#define TILE_SIZE 30
 #define HIT_HORZ 1
 #define HIT_VIRT 2
 
@@ -34,6 +34,9 @@ typedef struct s_ray
     double  ray_dis;
     int     ray_dir; // 1: hor | 2: ver
     int     is_door;
+    int     is_close_door;
+    int     x_door;
+    int     y_door;
     struct s_ray    *next;
 }	t_ray;
 // void render_map(mlx_image_t *img, char **s);
@@ -103,6 +106,9 @@ typedef struct s_map {
     int frame;
     int is_reload;
     int is_shot;
+    t_ray   *door_ray;
+    int     can_open;
+    int     can_close;
 } t_map;
 
 typedef struct s_adress
