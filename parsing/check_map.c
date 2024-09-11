@@ -2,7 +2,7 @@
 
 int allowed_char(char c)
 {
-	if (c == '1' || c == '0' || c == 'N' || c == ' ' || c == '*' || c == '\n' || c == 'W' || c == 'E' || c == 'D'
+	if (c == '1' || c == '0' || c == 'N' || c == ' ' || c == '*' || c == '\n' || c == 'W' || c == 'E' || c == 'D' || c == 'C'
 		|| c == 'S')
 		return (1);
 	return (0);

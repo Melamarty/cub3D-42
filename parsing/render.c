@@ -53,6 +53,11 @@ void load_textures(t_map *map)
         texture = mlx_load_png(map->ea);
         map->texture->ea = mlx_texture_to_image(map->mlx, texture);
     }
+    if (!map->texture->door)
+    {
+        texture = mlx_load_png("textures/door.png");
+        map->texture->door = mlx_texture_to_image(map->mlx, texture);
+    }
 }
 
 void set_texture(t_map *map, t_ray *ray)
@@ -65,7 +70,9 @@ void set_texture(t_map *map, t_ray *ray)
     else
        txt = map->so;
     load_textures(map);
-    if (ray->ray_dir == HIT_VIRT)
+    if (ray->is_door)
+        map->texture->curr = map->texture->door;
+    else if (ray->ray_dir == HIT_VIRT)
     {
         if (ray->ray_angle < 0.5 * M_PI || ray->ray_angle > 1.5 * M_PI)
             map->texture->curr = map->texture->ea;
@@ -105,12 +112,12 @@ void render(t_map *map)
 		for (int y = 0; y < topPixel; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 255, 255));
         set_texture(map, ray);
-        if (ray->is_door)
-        {
-            for (int y = topPixel; y < bottomPixel; y++)
-                mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 255));
-        }
-        else
+        //if (ray->is_door)
+        //{
+        //    for (int y = topPixel; y < bottomPixel; y++)
+        //        mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 255));
+        //}
+        //else
 		    put_img(map, topPixel, bottomPixel, i, ray);
 		for (int y = bottomPixel; y < HEIGHT; y++)
 			mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 40));

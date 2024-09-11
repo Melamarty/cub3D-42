@@ -74,6 +74,7 @@ typedef struct s_texture
     mlx_image_t *so;
     mlx_image_t *ea;
     mlx_image_t *we;
+    mlx_image_t *door;
     mlx_image_t *curr;
 } t_texture;
 typedef struct s_map {
