@@ -39,8 +39,8 @@ void render_map(t_map *map)
 	int	yStartSave;
 	unsigned int	color;
 
-	xStart = (map->player->pos.x - (5 * m_cube));
-    yStart = (map->player->pos.y - (3 * TILE_SIZE));
+	xStart = (map->player->pos.x - (5 * TILE_SIZE)) * m_cube / TILE_SIZE;
+    yStart = (map->player->pos.y - (3 * TILE_SIZE)) * m_cube / TILE_SIZE;
 	yStartSave = yStart;
 	for(int i = 0; i < 10 * m_cube; i ++)
 	{

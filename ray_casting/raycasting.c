@@ -123,7 +123,7 @@ int	is_wall(int new_x, int new_y, t_map map)
 		// py = (new_y) + 15 * sin(ang);
 		// mlx_put_pixel(map.img, temp1, temp2, create_color(0, 0, 0, 255));
 		// ang += 180 / M_PI;
-		if (new_x < 0 || new_x / m_cube >= map.width || new_y < 0 || new_y / m_cube >= map.height ||  map.arr[new_y / m_cube][new_x / m_cube] == '1' || map.arr[new_y / m_cube][new_x / m_cube] == 'D')
+		if (new_x < 0 || new_x / TILE_SIZE >= map.width || new_y < 0 || new_y / TILE_SIZE >= map.height ||  map.arr[new_y / TILE_SIZE][new_x / TILE_SIZE] == '1' || map.arr[new_y / TILE_SIZE][new_x / TILE_SIZE] == 'D')
 			return (1);
 	// }
 	return (0);
