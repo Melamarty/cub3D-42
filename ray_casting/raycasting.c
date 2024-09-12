@@ -49,41 +49,41 @@ void cast_rays(t_map *map)
 			new_ray->x_inter = round(x);
 			new_ray->y_inter = round(y);
 			x += new_ray->xinc;
-			if ((map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == '1') || (map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'D') || (map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'O'))
+			if ((map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == '1') || (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D') || (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'O'))
 			{
-				if (map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'D' || map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'O')
+				if (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D' || map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'O')
 				{
-					if (map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'D')
+					if (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D')
 						new_ray->is_door = 1;
 					else
 						new_ray->is_close_door = 1;
 					if (z == WIDTH / 2)
 					{
-						map->door_ray->x_door = (int)round(x) / m_cube;
-						map->door_ray->y_door = (int)round(y) / m_cube;
+						map->door_ray->x_door = (int)round(x) / TILE_SIZE;
+						map->door_ray->y_door = (int)round(y) / TILE_SIZE;
 					}
 				}
 				new_ray->ray_dir = 2;
-				if ((map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == '1') || (map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'D'))
+				if ((map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == '1') || (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D'))
 					break ;
 			}
 			y += new_ray->yinc;
-			if ((map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == '1') || (map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'D') || (map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'O'))
+			if ((map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == '1') || (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D') || (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'O'))
 			{
-				if (map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'D' || map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'O')
+				if (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D' || map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'O')
 				{
-					if (map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'D')
+					if (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D')
 						new_ray->is_door = 1;
 					else
 						new_ray->is_close_door = 1;
 					if (z == WIDTH / 2)
 					{
-						map->door_ray->x_door = (int)round(x) / m_cube;
-						map->door_ray->y_door = (int)round(y) / m_cube;
+						map->door_ray->x_door = (int)round(x) / TILE_SIZE;
+						map->door_ray->y_door = (int)round(y) / TILE_SIZE;
 					}
 				}
 				new_ray->ray_dir = 1;
-				if ((map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == '1') || (map->arr[(int)round(y) / m_cube][(int)round(x) / m_cube] == 'D'))
+				if ((map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == '1') || (map->arr[(int)round(y) / TILE_SIZE][(int)round(x) / TILE_SIZE] == 'D'))
 					break ;
 			}
 		}
@@ -104,7 +104,7 @@ void cast_rays(t_map *map)
 		ray_angle = normAngle(map->player->fov / (WIDTH) + ray_angle);
 		z++;
 	}
-	// printf("%c\n", map->arr[map->door_ray->y_inter / m_cube][map->door_ray->x_inter / m_cube]);
+	// printf("%c\n", map->arr[map->door_ray->y_inter / TILE_SIZE][map->door_ray->x_inter / m_cube]);
 }
 
 int	is_wall(int new_x, int new_y, t_map map)
@@ -258,11 +258,11 @@ void handle_key(void *p)
 
 void init_player(t_map *map)
 {
-	map->player->pos.x = map->player->pos.x * m_cube + 15;
-	map->player->pos.y = map->player->pos.y * m_cube + 15;
+	map->player->pos.x = map->player->pos.x * TILE_SIZE + 150;
+	map->player->pos.y = map->player->pos.y * TILE_SIZE  + 150;
 	map->player->xDir = 0;
 	map->player->yDir = 0;
-	map->player->moveSpeed = 5;
+	map->player->moveSpeed = 100;
 	if (map->player->dir == 'E')
 		map->player->rotAngle = 0;
 	else if (map->player->dir == 'S')

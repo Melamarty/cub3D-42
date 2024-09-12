@@ -4,7 +4,7 @@
 #define m_cube 30
 #define WIDTH 1200
 #define HEIGHT 700
-#define TILE_SIZE 30
+#define TILE_SIZE 300
 #define HIT_HORZ 1
 #define HIT_VIRT 2
 
