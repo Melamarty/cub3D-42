@@ -116,7 +116,9 @@ typedef struct s_map {
     int is_rot;
     t_texture *texture;
     mlx_texture_t   *sprite[31];
+    mlx_texture_t   *bullet[10];
     mlx_image_t     *sprite_img;
+    mlx_image_t     *bullet_img;
     int timing;
     int frame;
     int is_reload;
@@ -124,6 +126,7 @@ typedef struct s_map {
     t_ray   *door_ray;
     int     can_open;
     int     can_close;
+    int     bullet_nb;
 } t_map;
 
 typedef struct s_adress

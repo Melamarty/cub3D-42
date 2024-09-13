@@ -70,9 +70,12 @@ int check_map(char *file, t_list **list)
 
 void    open_win(t_map *map)
 {
+    map->bullet_nb = 9;
     map->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", 0);
 	map->img = mlx_new_image(map->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(map->mlx, map->img, 0, 0);
+    map->bullet_img = mlx_texture_to_image(map->mlx, map->bullet[map->bullet_nb]);
+	mlx_image_to_window(map->mlx, map->bullet_img, WIDTH - 100, HEIGHT - 100);
 }
 
 int main (int ac, char **av)
@@ -100,6 +103,7 @@ int main (int ac, char **av)
     }
     // print_info(map);
     // print_list(list);
+    create_textures(map);
     open_win(map);
     init_player(map);
     cast_rays(map);
@@ -114,7 +118,6 @@ int main (int ac, char **av)
     map->texture->ea = NULL;
     map->texture->we = NULL;
     map->texture->door = NULL;
-    create_textures(map);
     map->sprite_img = mlx_texture_to_image(map->mlx, map->sprite[0]);
     render(map);
 	mlx_image_to_window(map->mlx, map->sprite_img, WIDTH - 666 - ((WIDTH - 666) / 2), HEIGHT - 375);
