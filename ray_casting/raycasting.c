@@ -151,7 +151,7 @@ void	cast_rays(t_map *map)
 		new_ray->v_dis = calc_v_dis(*map, *new_ray);
 
 
-		if (new_ray->h_dis < new_ray->v_dis)
+		if (new_ray->h_dis <= new_ray->v_dis)
 			its_horz(new_ray, map);
 		else
 			its_vert(new_ray, map);
