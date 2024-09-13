@@ -3,20 +3,13 @@
 int	is_wall(int new_x, int new_y, t_map map)
 {
 	double	ang;
-	// int	temp1;
-	// int	temp2;
 	int	px;
 	int	py;
 	ang = map.player->rotAngle;
 	for (int i = 0; i < 360; i++)
 	{
-	// 	temp1 = 10 * cos(ang) + 150;
-	// 	temp2 = 10 * sin(ang) + 90;
 		px = (new_x) + 100 * cos(ang);
 		py = (new_y) + 100 * sin(ang);
-		// px = new_x;
-		// py = new_y;
-		// mlx_put_pixel(map.img, temp1, temp2, create_color(0, 0, 0, 255));
 		ang += 180 / M_PI;
 		if (px < 0 || px / TILE_SIZE >= map.width || py < 0 || py / TILE_SIZE >= map.height ||  map.arr[py / TILE_SIZE][px / TILE_SIZE] == '1' || map.arr[py / TILE_SIZE][px / TILE_SIZE] == 'D')
 			return (1);

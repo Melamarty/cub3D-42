@@ -35,7 +35,7 @@ void init_player(t_map *map)
 	map->player->pos.y = map->player->pos.y * TILE_SIZE  + 150;
 	map->player->xDir = 0;
 	map->player->yDir = 0;
-	map->player->moveSpeed = 25;
+	map->player->moveSpeed = 20;
 	if (map->player->dir == 'E')
 		map->player->rotAngle = 0;
 	else if (map->player->dir == 'S')
