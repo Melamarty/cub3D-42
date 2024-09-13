@@ -113,7 +113,6 @@ int main (int ac, char **av)
     //     map->rays = map->rays->next;
     // }
     map->sprite_img = mlx_texture_to_image(map->mlx, map->sprite[0]);
-    exit (0);
     render(map);
 	mlx_image_to_window(map->mlx, map->sprite_img, WIDTH - 666 - ((WIDTH - 666) / 2), HEIGHT - 375);
     mini_map(map);
