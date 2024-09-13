@@ -112,11 +112,11 @@ void render(t_map *map)
 
 		int ofsx, ofsy;
 		for (int y = 0; y < topPixel; y++)
-			mlx_put_pixel(map->img, i, y, create_color(0, 0, 255, 255));
+			mlx_put_pixel(map->img, i, y, create_color(0, 0, 139, 255));
         set_texture(map, ray);
 		put_img(map, topPixel, bottomPixel, i, ray);
 		for (int y = bottomPixel; y < HEIGHT; y++)
-			mlx_put_pixel(map->img, i, y, create_color(0, 0, 0, 40));
+			mlx_put_pixel(map->img, i, y, create_color(211, 211, 211, 255));
 		i++;
 		map->rays = map->rays->next;
 	}
