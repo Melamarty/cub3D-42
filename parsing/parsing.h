@@ -189,6 +189,7 @@ char **ft_split(const char *s, char c);
 int    ft_atoi(const char *str);
 void	*my_malloc(size_t size, int mode);
 int	ft_strcmp(char *str1, char *str2);
+int empty_line(char *line);
 
 t_map *parse_map(t_list *list);
 int check_arr(t_map *map);

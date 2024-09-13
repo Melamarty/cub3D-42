@@ -67,7 +67,7 @@ int check_line(char *line)
 	if (!spl)
 		return (1);
 	while (spl[i++]);
-	if (i != 3)
+	if (i != 3 && (ft_strcmp(spl[0], "F") && ft_strcmp(spl[0], "C")))
 		return (1);
 	if (ft_strcmp(spl[0], "NO") && ft_strcmp(spl[0], "SO")
 		&& ft_strcmp(spl[0], "WE") && ft_strcmp(spl[0], "EA")
@@ -88,7 +88,7 @@ int check_textures (t_map *map, t_list *list)
 		if (!list->checked && !empty_line(list->line))
 		{
 			if (check_line(list->line))
-				return ( 1);
+				return (1);
 			i++;
 		}
 		list = list->next;

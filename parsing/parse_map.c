@@ -22,6 +22,19 @@ int spl_len(char **spl)
 	return (i);
 }
 
+int is_digits(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (empty_line(str))
+		return ( 0);
+	while (str[++i])
+		if ((str[i] > '9' || str[i] < '0') && (str[i] != ' '))
+			return (0);
+	return (1);
+}
+
 t_color *parse_color(char *line)
 {
 	char **colors;
@@ -30,6 +43,8 @@ t_color *parse_color(char *line)
 	color = my_malloc(sizeof (t_color), 0);
 	colors = ft_split(line, ',');
 	if (spl_len(colors) != 3)
+		return (NULL);
+	if (!is_digits(colors[0]) || !is_digits(colors[1]) || !is_digits(colors[2]))
 		return (NULL);
 	color->r = ft_atoi(colors[0]);
 	color->g = ft_atoi(colors[1]);
