@@ -37,6 +37,20 @@ typedef struct s_ray
     int     is_close_door;
     int     x_door;
     int     y_door;
+    double  f_x_inter;
+    double  f_y_inter;
+    int is_right;
+    int is_up;
+    double x_steps;
+    double y_steps;
+    int found_x_inter;
+    int found_y_inter;
+    double h_x_inter;
+    double v_x_inter;
+    double h_y_inter;
+    double v_y_inter;
+    double  h_dis;
+    double  v_dis;
     struct s_ray    *next;
 }	t_ray;
 // void render_map(mlx_image_t *img, char **s);
@@ -152,6 +166,8 @@ void	shot(t_map *map);
 void	reload(t_map *map);
 int	key_pressed(t_map *map);
 void    animation(void *p);
+double	calc_h_dis(t_map map, t_ray ray);
+double	calc_v_dis(t_map map, t_ray ray);
 // raycasting ***********************
 
 
