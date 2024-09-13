@@ -45,5 +45,5 @@ void init_player(t_map *map)
 	else if (map->player->dir == 'N')
 		map->player->rotAngle = 3 * M_PI / 2;
 	map->player->rotSpeed = 5 * (M_PI / 180);
-	map->player->fov = 80 * M_PI / 180;
+	map->player->fov = 60 * M_PI / 180;
 }
