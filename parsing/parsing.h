@@ -51,6 +51,7 @@ typedef struct s_ray
     double v_y_inter;
     double  h_dis;
     double  v_dis;
+    double  c_door_dis;
     struct s_ray    *next;
 }	t_ray;
 // void render_map(mlx_image_t *img, char **s);
