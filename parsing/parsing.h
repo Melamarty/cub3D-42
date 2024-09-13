@@ -169,6 +169,9 @@ int	key_pressed(t_map *map);
 void    animation(void *p);
 double	calc_h_dis(t_map map, t_ray ray);
 double	calc_v_dis(t_map map, t_ray ray);
+double	calc_d_dis(t_map map, t_ray ray, int i);
+void	open_door(t_map *map);
+void	close_door(t_map *map);
 // raycasting ***********************
 
 

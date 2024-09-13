@@ -1,5 +1,89 @@
 #include "../parsing/parsing.h"
 
+int	is_wall(int new_x, int new_y, t_map map)
+{
+	double	ang;
+	// int	temp1;
+	// int	temp2;
+	int	px;
+	int	py;
+	ang = map.player->rotAngle;
+	// for (int i = 0; i < 360; i++)
+	// {
+		// temp1 = 10 * cos(ang) + 150;
+		// temp2 = 10 * sin(ang) + 90;
+		// px = (new_x) + 15 * cos(ang);
+		// py = (new_y) + 15 * sin(ang);
+		// mlx_put_pixel(map.img, temp1, temp2, create_color(0, 0, 0, 255));
+		// ang += 180 / M_PI;
+		if (new_x < 0 || new_x / TILE_SIZE >= map.width || new_y < 0 || new_y / TILE_SIZE >= map.height ||  map.arr[new_y / TILE_SIZE][new_x / TILE_SIZE] == '1' || map.arr[new_y / TILE_SIZE][new_x / TILE_SIZE] == 'D')
+			return (1);
+	// }
+	return (0);
+}
+
+void handle_key(void *p)
+{
+	int		move_step;
+	t_map 	*map;
+	double	new_x;
+	double	new_y;
+	map = (t_map *)p;
+	if (!key_pressed(map))
+		return ;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_Q))
+	{
+		map->is_rot = 2;
+		return ;
+	}
+	if (mlx_is_key_down(map->mlx, MLX_KEY_B))
+	{
+		map->is_rot = 0;
+		return ;
+	}
+	if (mlx_is_key_down(map->mlx, MLX_KEY_O))
+		open_door(map);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_C))
+		close_door(map);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
+		map->player->rotAngle = normAngle(map->player->rotSpeed + map->player->rotAngle);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
+		map->player->rotAngle = normAngle(map->player->rotAngle - map->player->rotSpeed);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_W) || mlx_is_key_down(map->mlx, MLX_KEY_UP))
+		up(map);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_S) || mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
+		down(map);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_A))
+		left(map);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
+		right(map);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_K) && !map->is_shot)
+	{
+		map->is_shot = 1;
+		map->frame = 0;
+		return ;
+	}
+	else if (mlx_is_key_down(map->mlx, MLX_KEY_R) && !map->is_reload)
+	{
+		map->is_reload = 1;
+        map->frame = 7;
+		return ;
+	}
+	cast_rays(map);
+	render(map);
+	mini_map(map);
+}
+
+int	key_pressed(t_map *map)
+{
+	if (mlx_is_key_down(map->mlx, MLX_KEY_W) || mlx_is_key_down(map->mlx, MLX_KEY_A) || mlx_is_key_down(map->mlx, MLX_KEY_S)
+		|| mlx_is_key_down(map->mlx, MLX_KEY_D) || mlx_is_key_down(map->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(map->mlx, MLX_KEY_LEFT)
+		|| mlx_is_key_down(map->mlx, MLX_KEY_UP) || mlx_is_key_down(map->mlx, MLX_KEY_DOWN) || mlx_is_key_down(map->mlx, MLX_KEY_Q) || mlx_is_key_down(map->mlx, MLX_KEY_B)
+		|| mlx_is_key_down(map->mlx, MLX_KEY_K) || mlx_is_key_down(map->mlx, MLX_KEY_R) || mlx_is_key_down(map->mlx, MLX_KEY_O) || mlx_is_key_down(map->mlx, MLX_KEY_C))
+			return (1);
+	return (0);
+}
+
 void	up(t_map *map)
 {
 	double	new_x;

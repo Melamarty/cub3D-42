@@ -28,3 +28,22 @@ double normAngle(double angle)
     }
     return (angle);
 }
+
+void init_player(t_map *map)
+{
+	map->player->pos.x = map->player->pos.x * TILE_SIZE + 150;
+	map->player->pos.y = map->player->pos.y * TILE_SIZE  + 150;
+	map->player->xDir = 0;
+	map->player->yDir = 0;
+	map->player->moveSpeed = 20;
+	if (map->player->dir == 'E')
+		map->player->rotAngle = 0;
+	else if (map->player->dir == 'S')
+		map->player->rotAngle = M_PI / 2;
+	else if (map->player->dir == 'W')
+		map->player->rotAngle = M_PI;
+	else if (map->player->dir == 'N')
+		map->player->rotAngle = 3 * M_PI / 2;
+	map->player->rotSpeed = 5 * (M_PI / 180);
+	map->player->fov = 60 * M_PI / 180;
+}
