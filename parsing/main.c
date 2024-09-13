@@ -2,15 +2,15 @@
 
 void print_info(t_map *map)
 {
-    printf ("map width : %d\n", map->width);
-    printf ("map height: %d\n", map->height);
-    // printf("----- map info -----\n");
-    // printf("NO : %s\n", map->no);
-    // printf("SO : %s\n", map->so);
-    // printf("WE : %s\n", map->we);
-    // printf("EA : %s\n", map->ea);
-    // printf("floor color : %d, %d, %d\n", map->floor.r, map->floor.g, map->floor.b);
-    // printf("ceiling color : %d, %d, %d\n", map->ceiling.r, map->ceiling.g, map->ceiling.b);
+    //printf ("map width : %d\n", map->width);
+    //printf ("map height: %d\n", map->height);
+     printf("----- map info -----\n");
+     printf("NO : %s\n", map->no);
+     printf("SO : %s\n", map->so);
+     printf("WE : %s\n", map->we);
+     printf("EA : %s\n", map->ea);
+     printf("floor color : %d, %d, %d\n", map->floor->r, map->floor->g, map->floor->b);
+     printf("ceiling color : %d, %d, %d\n", map->ceiling->r, map->ceiling->g, map->ceiling->b);
     // printf("=========map==========\n");
     // int i = 0;
     // while (i < map->height)
@@ -18,7 +18,7 @@ void print_info(t_map *map)
     //     printf ("-%s-\n", map->arr[i]);
     //     i++;
     // }
-    printf ("player position : (x: %d, y: %d)\n", map->player->pos.x, map->player->pos.y);
+    //printf ("player position : (x: %d, y: %d)\n", map->player->pos.x, map->player->pos.y);
 }
 
 char *remove_chars(char *line)
@@ -96,7 +96,7 @@ int main (int ac, char **av)
     }
     map = parse_map(list);
     map->player = my_malloc(sizeof(t_player), 0);
-    if (check_arr(map) || check_textures(list))
+    if (check_arr(map) || check_textures(map, list))
     {
         ft_putstr("map  error\n", 2);
         return (0);
@@ -112,13 +112,8 @@ int main (int ac, char **av)
     //     printf ("djdgdvd\n");
     //     map->rays = map->rays->next;
     // }
-    map->texture = my_malloc(sizeof (t_texture), 0);
-    map->texture->no = NULL;
-    map->texture->so = NULL;
-    map->texture->ea = NULL;
-    map->texture->we = NULL;
-    map->texture->door = NULL;
     map->sprite_img = mlx_texture_to_image(map->mlx, map->sprite[0]);
+    exit (0);
     render(map);
 	mlx_image_to_window(map->mlx, map->sprite_img, WIDTH - 666 - ((WIDTH - 666) / 2), HEIGHT - 375);
     mini_map(map);

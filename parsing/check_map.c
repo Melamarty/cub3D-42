@@ -76,16 +76,24 @@ int check_line(char *line)
 	return (0);
 }
 
-int check_textures (t_list *list)
+int check_textures (t_map *map, t_list *list)
 {
+	int	i;
+
+	i = 0;
+	if (!map->ea || !map->no || !map->so || !map->we || !map->floor || !map->ceiling)
+		return (1);
 	while (list)
 	{
 		if (!list->checked && !empty_line(list->line))
 		{
 			if (check_line(list->line))
-				return (1);
+				return ( 1);
+			i++;
 		}
 		list = list->next;
 	}
+	if (i != 6)
+		return (1);
 	return (0);
 }

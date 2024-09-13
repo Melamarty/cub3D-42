@@ -105,8 +105,8 @@ typedef struct s_map {
     int width;
     int height;
     char **arr;
-    t_color floor;
-    t_color ceiling;
+    t_color *floor;
+    t_color *ceiling;
     char *no;
     char *so;
     char *we;
@@ -192,7 +192,7 @@ int	ft_strcmp(char *str1, char *str2);
 
 t_map *parse_map(t_list *list);
 int check_arr(t_map *map);
-int check_textures (t_list *list);
+int check_textures (t_map *map, t_list *list);
 int empty_line(char *line);
 int check_walls(char **map, int height, int width);
 void render(t_map *map);

@@ -13,15 +13,27 @@ char *get_texture(char *line)
 	return spl[1];
 }
 
-t_color parse_color(char *line)
+int spl_len(char **spl)
+{
+	int	i;
+
+	i = -1;
+	while (spl[++i]);
+	return (i);
+}
+
+t_color *parse_color(char *line)
 {
 	char **colors;
-	t_color color;
+	t_color *color;
 
+	color = my_malloc(sizeof (t_color), 0);
 	colors = ft_split(line, ',');
-	color.r = ft_atoi(colors[0]);
-	color.g = ft_atoi(colors[1]);
-	color.b = ft_atoi(colors[2]);
+	if (spl_len(colors) != 3)
+		return (NULL);
+	color->r = ft_atoi(colors[0]);
+	color->g = ft_atoi(colors[1]);
+	color->b = ft_atoi(colors[2]);
 	return (color);
 }
 
@@ -94,12 +106,29 @@ char *rm_spaces(char *line)
 	return line;
 }
 
+void set_null(t_map *map)
+{
+	map->so = NULL;
+	map->no = NULL;
+	map->we = NULL;
+	map->ea = NULL;
+	map->floor = NULL;
+	map->ceiling = NULL;
+	map->texture = my_malloc(sizeof (t_texture), 0);
+    map->texture->no = NULL;
+    map->texture->so = NULL;
+    map->texture->ea = NULL;
+    map->texture->we = NULL;
+    map->texture->door = NULL;
+}
 
 t_map *parse_map(t_list *list)
 {
 	t_map *map;
 
+
 	map = my_malloc(sizeof(t_map), 0);
+	set_null(map);
 	while (list)
 	{
 		//printf ("%s",rm_spaces(list->line));
