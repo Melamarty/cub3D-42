@@ -17,25 +17,8 @@ int	is_wall(int new_x, int new_y, t_map map)
 	return (0);
 }
 
-void handle_key(void *p)
+void	press_keys(t_map *map)
 {
-	int		move_step;
-	t_map 	*map;
-	double	new_x;
-	double	new_y;
-	map = (t_map *)p;
-	if (!key_pressed(map))
-		return ;
-	if (mlx_is_key_down(map->mlx, MLX_KEY_Q))
-	{
-		map->is_rot = 2;
-		return ;
-	}
-	if (mlx_is_key_down(map->mlx, MLX_KEY_B))
-	{
-		map->is_rot = 0;
-		return ;
-	}
 	if (mlx_is_key_down(map->mlx, MLX_KEY_O))
 		open_door(map);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_C))
@@ -52,21 +35,35 @@ void handle_key(void *p)
 		left(map);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
 		right(map);
+}
+
+int	check_keys(t_map *map)
+{
+	int		move_step;
+	double	new_x;
+	double	new_y;
+	if (!key_pressed(map))
+		return (0);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_K) && !map->is_shot && !map->is_reload)
-	{
-		map->is_shot = 1;
-		map->frame = 0;
-		return ;
-	}
+		return (map->is_shot = 1, map->frame = 0, 1);
 	else if (mlx_is_key_down(map->mlx, MLX_KEY_R) && !map->is_reload && !map->is_shot)
-	{
-		map->is_reload = 1;
-        map->frame = 7;
-		return ;
-	}
+		return (map->is_reload = 1, map->frame = 7, 1);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_Q))
+		return (map->is_rot = 2, 1);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_B))
+		return (map->is_rot = 0, 1);
+	press_keys(map);
 	cast_rays(map);
 	render(map);
 	mini_map(map);
+	return (0);
+}
+
+void handle_key(void *p)
+{
+	t_map 	*map;
+	map = (t_map *)p;
+	check_keys(map);
 }
 
 int	key_pressed(t_map *map)
