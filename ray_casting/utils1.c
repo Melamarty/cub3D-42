@@ -6,11 +6,11 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:16 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/15 18:30:58 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:37:59 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing/parsing.h"
+#include "../cub3d.h"
 
 t_ray	*last_ray(t_ray *rays)
 {

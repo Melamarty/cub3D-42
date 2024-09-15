@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reder_utils.c                                      :+:      :+:    :+:   */
+/*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 14:49:02 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/15 15:11:27 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:59:06 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../cub3d.h"
 
 void	draw_ceill(t_map *map, int topPixel, int i)
 {
@@ -28,7 +28,7 @@ void	draw_floor(t_map *map, int bottomPixel, int i)
 
 	y = bottomPixel - 1;
 	while (++y < HEIGHT)
-		mlx_put_pixel(map->img, i, y, create_color(map->ceiling->r,
+		mlx_put_pixel(map->img, i, y, create_color(map->floor->r,
 				map->floor->g, map->floor->b, 255));
 }
 

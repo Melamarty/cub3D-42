@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 13:48:20 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/15 15:11:23 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:39:59 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../cub3d.h"
 
-/// @brief 
+/// @brief
 //(int)(ratio * img->height) % img->height is the img_y
 
 void	put_img(t_map *map, t_wall *wall, t_ray *ray)

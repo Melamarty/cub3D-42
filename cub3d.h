@@ -8,11 +8,11 @@
 #define HIT_HORZ 1
 #define HIT_VIRT 2
 
-#include "../MLX42/MLX42.h"
+#include "MLX42/MLX42.h"
 #include <math.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include "./gnl/get_next_line.h"
+#include "parsing/gnl/get_next_line.h"
 #include <stdio.h>
 #include <limits.h>
 

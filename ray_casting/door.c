@@ -6,11 +6,11 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:14 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/15 18:29:16 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:37:59 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing/parsing.h"
+#include "../cub3d.h"
 
 void	open_door(t_map *map)
 {

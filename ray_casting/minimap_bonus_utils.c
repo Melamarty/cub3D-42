@@ -6,11 +6,11 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:36 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/15 18:29:38 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:37:59 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing/parsing.h"
+#include "../cub3d.h"
 
 void	dda_calc(t_map *map)
 {
