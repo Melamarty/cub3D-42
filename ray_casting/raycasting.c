@@ -30,7 +30,7 @@ void	check_horz(t_ray *new_ray, t_map *map)
 		new_ray->x_steps *= -1;
 	if (new_ray->is_right && new_ray->x_steps < 0)
 		new_ray->x_steps *= -1;
-	while (1 && new_ray->f_y_inter <= map->height * TILE_SIZE && new_ray->f_x_inter <= map->width * TILE_SIZE && new_ray->f_y_inter >= 0 && new_ray->f_x_inter >= 0)
+	while (1 && new_ray->f_y_inter < map->height * TILE_SIZE && new_ray->f_x_inter < map->width * TILE_SIZE && new_ray->f_y_inter >= 0 && new_ray->f_x_inter >= 0)
 	{
 		new_ray->h_x_inter = (int)floor(new_ray->f_x_inter);
 		new_ray->h_y_inter = (int)floor(new_ray->f_y_inter);
@@ -71,7 +71,7 @@ void	check_vert(t_ray *new_ray, t_map *map)
 		new_ray->y_steps *= -1;
 	if (!new_ray->is_up && new_ray->y_steps < 0)
 		new_ray->y_steps *= -1;
-	while (1 && new_ray->f_y_inter <= map->height * TILE_SIZE && new_ray->f_x_inter <= map->width * TILE_SIZE && new_ray->f_y_inter >= 0 && new_ray->f_x_inter >= 0)
+	while (1 && new_ray->f_y_inter < map->height * TILE_SIZE && new_ray->f_x_inter < map->width * TILE_SIZE && new_ray->f_y_inter >= 0 && new_ray->f_x_inter >= 0)
 	{
 		new_ray->v_x_inter = (int)floor(new_ray->f_x_inter);
 		new_ray->v_y_inter = (int)floor(new_ray->f_y_inter);

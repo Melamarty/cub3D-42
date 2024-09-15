@@ -26,6 +26,18 @@ void handle_key(void *p)
 	map = (t_map *)p;
 	if (!key_pressed(map))
 		return ;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_K) && !map->is_shot && !map->is_reload)
+	{
+		map->is_shot = 1;
+		map->frame = 0;
+		return ;
+	}
+	else if (mlx_is_key_down(map->mlx, MLX_KEY_R) && !map->is_reload && !map->is_shot)
+	{
+		map->is_reload = 1;
+        map->frame = 7;
+		return ;
+	}
 	if (mlx_is_key_down(map->mlx, MLX_KEY_Q))
 	{
 		map->is_rot = 2;
@@ -52,18 +64,6 @@ void handle_key(void *p)
 		left(map);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
 		right(map);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_K) && !map->is_shot && !map->is_reload)
-	{
-		map->is_shot = 1;
-		map->frame = 0;
-		return ;
-	}
-	else if (mlx_is_key_down(map->mlx, MLX_KEY_R) && !map->is_reload && !map->is_shot)
-	{
-		map->is_reload = 1;
-        map->frame = 7;
-		return ;
-	}
 	cast_rays(map);
 	render(map);
 	mini_map(map);
