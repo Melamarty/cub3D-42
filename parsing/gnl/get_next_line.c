@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/15 15:29:13 by mel-amar          #+#    #+#             */
+/*   Updated: 2024/09/15 15:29:13 by mel-amar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*read_line(int fd, char *buffer, char *remainder)
 {
 	ssize_t	r;
-	char *tmp;
+	char	*tmp;
 
 	r = 1;
 	while (r > 0)
@@ -14,17 +26,17 @@ char	*read_line(int fd, char *buffer, char *remainder)
 			free(remainder);
 			return (NULL);
 		}
-		if(r == 0)
-			break;
+		if (r == 0)
+			break ;
 		buffer[r] = '\0';
-		if(remainder == NULL)
+		if (remainder == NULL)
 			remainder = ft_strdup("");
 		tmp = remainder;
 		remainder = ft_strjoin(tmp, buffer);
 		free(tmp);
 		tmp = NULL;
-		if(strrchr(buffer, '\n'))
-			break;
+		if (strrchr(buffer, '\n'))
+			break ;
 	}
 	return (remainder);
 }
@@ -37,10 +49,10 @@ char	*update_remainder(char *line)
 	i = 0;
 	while (line[i] && line[i] != '\n')
 		i++;
-	if(!line[1] || !line[i])
+	if (!line[1] || !line[i])
 		return (NULL);
 	tmp = ft_substr(line, i + 1, ft_strlen(line) - i);
-	if(!tmp[0])
+	if (!tmp[0])
 	{
 		free(tmp);
 		tmp = NULL;
@@ -56,7 +68,7 @@ char	*get_next_line(int fd)
 	static char	*remainder;
 
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if(fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) || !buffer)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) || !buffer)
 	{
 		free(remainder);
 		free(buffer);
@@ -67,11 +79,8 @@ char	*get_next_line(int fd)
 	line = read_line(fd, buffer, remainder);
 	free(buffer);
 	buffer = NULL;
-	if(!line)
+	if (!line)
 		return (NULL);
 	remainder = update_remainder(line);
 	return (line);
 }
-
-
-// cd /mnt/c/Users/simo/Desktop/cursus/get_next_line
