@@ -2,8 +2,8 @@
 
 double	calc_d_dis(t_map map, t_ray ray, int i)
 {
-	int	dx;
-	int	dy;
+	double	dx;
+	double	dy;
 	double dis;
 
 	if (i == 1)
@@ -22,8 +22,8 @@ double	calc_d_dis(t_map map, t_ray ray, int i)
 
 double	calc_h_dis(t_map map, t_ray ray)
 {
-	int	dx;
-	int	dy;
+	double	dx;
+	double	dy;
 	double dis;
 
 	if (!ray.found_x_inter)
@@ -36,8 +36,8 @@ double	calc_h_dis(t_map map, t_ray ray)
 
 double	calc_v_dis(t_map map, t_ray ray)
 {
-	int	dx;
-	int	dy;
+	double	dx;
+	double	dy;
 	double dis;
 	if (!ray.found_y_inter)
 		return (INT_MAX);
