@@ -200,6 +200,12 @@ void	open_door(t_map *map);
 void	close_door(t_map *map);
 void	check_horz(t_ray *new_ray, t_map *map);
 void	check_vert(t_ray *new_ray, t_map *map);
+void	get_color(t_mmap *mmap, t_map *map);
+void	draw_rays(t_map *map);
+void	up(t_map *map);
+void	down(t_map *map);
+void	left(t_map *map);
+void	right(t_map *map);
 // raycasting ***********************
 
 
