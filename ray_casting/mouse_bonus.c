@@ -28,13 +28,13 @@ void	mouse_handler(double x, double y, void *p)
 	half_width = WIDTH / 2;
 	if (x > half_width)
 	{
-		map->player->rotAngle = normAngle(map->player->rotAngle
+		map->player->rotAngle = normangle(map->player->rotAngle
 				+ map->player->rotSpeed);
 		map->is_rot = 1;
 	}
 	else
 	{
-		map->player->rotAngle = normAngle(map->player->rotAngle
+		map->player->rotAngle = normangle(map->player->rotAngle
 				- map->player->rotSpeed);
 		map->is_rot = 1;
 	}

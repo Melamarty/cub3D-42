@@ -68,7 +68,7 @@ void	cast_rays(t_map *map)
 
 	42 && (map->can_close = 0, map->can_open = 0,
 		map->rays = NULL, map->door_ray = NULL, z = -1);
-	ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
+	ray_angle = normangle(map->player->rotAngle - map->player->fov / 2);
 	while (++z < WIDTH)
 	{
 		new_ray = malloc(sizeof(t_ray));
@@ -85,6 +85,6 @@ void	cast_rays(t_map *map)
 			its_vert(new_ray, map);
 		door_check(map, z);
 		add_back_ray(&map->rays, new_ray);
-		ray_angle = normAngle(map->player->fov / (WIDTH) + ray_angle);
+		ray_angle = normangle(map->player->fov / (WIDTH) + ray_angle);
 	}
 }

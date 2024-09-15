@@ -54,40 +54,47 @@ int	dda_y(t_map *map, double *x, double *y)
 
 void	draw_rays(t_map *map)
 {
-	double	x;
-	double	y;
-	int		i;
-	int		j;
+	t_mmap	mmap;
 
-	i = 0;
-	j = 0;
-	map->m_rays = malloc(sizeof(t_ray));
-	map->m_rays->x1 = 5 * m_cube;
-	map->m_rays->y1 = 3 * m_cube;
-	map->m_rays->ray_angle = normAngle(map->player->rotAngle
+	42 && (map->m_rays = malloc(sizeof(t_ray)), map->m_rays->y1 = 3 * m_cube);
+	42 && (mmap.i = -1, mmap.j = 0, map->m_rays->x1 = 5 * m_cube);
+	map->m_rays->ray_angle = normangle(map->player->rotAngle
 			- map->player->fov / 2);
-	while (i < m_cube * 30)
+	while (++mmap.i < m_cube * 30)
 	{
-		x = map->m_rays->x1;
-		y = map->m_rays->y1;
-		j = 0;
+		42 && (mmap.x = map->m_rays->x1, mmap.y = map->m_rays->y1, mmap.j = 0);
 		dda_calc(map);
-		while (j < map->m_rays->steps)
+		while (mmap.j < map->m_rays->steps)
 		{
-			if (dda_x(map, &x, &y))
+			if (dda_x(map, &mmap.x, &mmap.y))
 				break ;
-			if (dda_y(map, &x, &y))
+			if (dda_y(map, &mmap.x, &mmap.y))
 				break ;
-			if (round(x) >= 0 && round(x) < 300
-				&& round(y) >= 0 && round(y) < 180)
-				mlx_put_pixel(map->img, round(x), round(y),
+			if (round(mmap.x) >= 0 && round(mmap.x) < 300
+				&& round(mmap.y) >= 0 && round(mmap.y) < 180)
+				mlx_put_pixel(map->img, round(mmap.x), round(mmap.y),
 					create_color(255, 255, 0, 255));
-			j++;
+			mmap.j++;
 		}
-		map->m_rays->ray_angle = normAngle(map->player->fov
+		map->m_rays->ray_angle = normangle(map->player->fov
 				/ (30 * m_cube) + map->m_rays->ray_angle);
-		i++;
 	}
+}
+
+void	get_color(t_mmap *mmap, t_map *map)
+{
+	if (mmap->y_start < 0 || mmap->x_start < 0
+		|| mmap->y_start / m_cube >= map->height
+		|| mmap->x_start / m_cube >= map->width)
+		mmap->color = create_color(0, 0, 0, 255);
+	else if (map->arr[mmap->y_start
+			/ m_cube][mmap->x_start / m_cube] == '1')
+		mmap->color = create_color(50, 50, 50, 255);
+	else if (map->arr[mmap->y_start
+			/ m_cube][mmap->x_start / m_cube] == 'D')
+		mmap->color = create_color(0, 255, 0, 255);
+	else
+		mmap->color = create_color(211, 211, 211, 255);
 }
 
 void 	render_map(t_map *map)
@@ -96,33 +103,19 @@ void 	render_map(t_map *map)
 
 	mmap.x_start = (map->player->pos.x - (5 * TILE_SIZE)) * m_cube / TILE_SIZE;
 	mmap.y_start = (map->player->pos.y - (3 * TILE_SIZE)) * m_cube / TILE_SIZE;
-	mmap.y_start_save = mmap.y_start;
-	mmap.i = 0;
-	mmap.j = 0;
-	while (mmap.i < 10 * m_cube)
+	42 && (mmap.y_start_save = mmap.y_start, mmap.i = -1);
+	while (++mmap.i < 10 * m_cube)
 	{
 		mmap.y_start = mmap.y_start_save;
 		mmap.j = 0;
 		while (mmap.j <  6 * m_cube)
 		{
-			if (mmap.y_start < 0 || mmap.x_start < 0
-				|| mmap.y_start / m_cube >= map->height
-				|| mmap.x_start / m_cube >= map->width)
-				mmap.color = create_color(0, 0, 0, 255);
-			else if (map->arr[mmap.y_start
-					/ m_cube][mmap.x_start / m_cube] == '1')
-				mmap.color = create_color(50, 50, 50, 255);
-			else if (map->arr[mmap.y_start
-					/ m_cube][mmap.x_start / m_cube] == 'D')
-				mmap.color = create_color(0, 255, 0, 255);
-			else
-				mmap.color = create_color(211, 211, 211, 255);
+			get_color(&mmap, map);
 			mlx_put_pixel(map->img, mmap.i, mmap.j, mmap.color);
 			mmap.y_start ++;
 			mmap.j++;
 		}
 		mmap.x_start ++;
-		mmap.i ++;
 	}
 }
 

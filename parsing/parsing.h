@@ -74,6 +74,8 @@ typedef struct s_color {
 
 typedef struct s_mmpam
 {
+    double          x;
+    double          y;
     int				x_start;
 	int				y_start;
 	int				y_start_save;
@@ -172,14 +174,14 @@ void    init_player(t_map *map);
 void	mini_map(t_map *map);
 void    cast_rays(t_map *map);
 void	mouse_handler(double x, double y, void *p);
-double  normAngle(double angle);
+double  normangle(double angle);
 void	mouse_rot(void *p);
 void	add_back_ray(t_ray **rays, t_ray *new_ray);
 unsigned int create_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 void	mini_map(t_map *map);
 void mouse_handler(double x, double y, void *p);
 void	mouse_rot(void *p);
-double normAngle(double angle);
+double normangle(double angle);
 void	up(t_map *map);
 void	down(t_map *map);
 void	left(t_map *map);

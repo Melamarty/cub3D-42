@@ -21,7 +21,7 @@ unsigned int	create_color(unsigned char r, unsigned char g,
 	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
-double	normAngle(double angle)
+double	normangle(double angle)
 {
 	angle = fmod(angle, 2 * M_PI);
 	if (angle < 0)

@@ -27,10 +27,10 @@ int	is_wall(int new_x, int new_y, t_map map)
 void	key_move(t_map *map)
 {
 	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
-		map->player->rotAngle = normAngle(map->player->rotSpeed
+		map->player->rotAngle = normangle(map->player->rotSpeed
 				+ map->player->rotAngle);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
-		map->player->rotAngle = normAngle(map->player->rotAngle
+		map->player->rotAngle = normangle(map->player->rotAngle
 				- map->player->rotSpeed);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_W)
 		|| mlx_is_key_down(map->mlx, MLX_KEY_UP))
@@ -122,9 +122,9 @@ void	down(t_map *map)
 	double	new_y;
 
 	new_x = map->player->moveSpeed
-		* cos(normAngle(map->player->rotAngle + M_PI));
+		* cos(normangle(map->player->rotAngle + M_PI));
 	new_y = map->player->moveSpeed
-		* sin(normAngle(map->player->rotAngle + M_PI));
+		* sin(normangle(map->player->rotAngle + M_PI));
 	if (!is_wall((map->player->pos.x + round(new_x)), (map->player->pos.y
 				+ round(new_y)), *map))
 	{
@@ -138,9 +138,9 @@ void	left(t_map *map)
 	double	new_x;
 	double	new_y;
 
-	new_x = cos(normAngle(map->player->rotAngle - M_PI_2))
+	new_x = cos(normangle(map->player->rotAngle - M_PI_2))
 		* map->player->moveSpeed;
-	new_y = sin(normAngle(map->player->rotAngle - M_PI_2))
+	new_y = sin(normangle(map->player->rotAngle - M_PI_2))
 		* map->player->moveSpeed;
 	if (!is_wall((map->player->pos.x + round(new_x)), (map->player->pos.y
 				+ round(new_y)), *map))
@@ -155,9 +155,9 @@ void	right(t_map *map)
 	double	new_x;
 	double	new_y;
 
-	new_x = cos(normAngle(map->player->rotAngle + M_PI_2))
+	new_x = cos(normangle(map->player->rotAngle + M_PI_2))
 		* map->player->moveSpeed;
-	new_y = sin(normAngle(map->player->rotAngle + M_PI_2))
+	new_y = sin(normangle(map->player->rotAngle + M_PI_2))
 		* map->player->moveSpeed;
 	if (!is_wall((map->player->pos.x + round(new_x)), (map->player->pos.y
 				+ round(new_y)), *map))
