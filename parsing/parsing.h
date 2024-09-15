@@ -72,6 +72,16 @@ typedef struct s_color {
     int b;
 } t_color;
 
+typedef struct s_mmpam
+{
+    int				x_start;
+	int				y_start;
+	int				y_start_save;
+	unsigned int	color;
+    int             i;
+    int             j;
+} t_mmap;
+
 typedef struct s_pos
 {
     int x;

@@ -4,7 +4,7 @@ double	calc_d_dis(t_map map, t_ray ray, int i)
 {
 	double	dx;
 	double	dy;
-	double dis;
+	double	dis;
 
 	if (i == 1)
 	{
@@ -24,7 +24,7 @@ double	calc_h_dis(t_map map, t_ray ray)
 {
 	double	dx;
 	double	dy;
-	double dis;
+	double	dis;
 
 	if (!ray.found_x_inter)
 		return (INT_MAX);
@@ -38,7 +38,8 @@ double	calc_v_dis(t_map map, t_ray ray)
 {
 	double	dx;
 	double	dy;
-	double dis;
+	double	dis;
+
 	if (!ray.found_y_inter)
 		return (INT_MAX);
 	dx = fabs(ray.v_x_inter - map.player->pos.x);

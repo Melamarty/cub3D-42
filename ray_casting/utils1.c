@@ -15,24 +15,26 @@ void	add_back_ray(t_ray **rays, t_ray *new_ray)
 		last_ray(*rays)->next = new_ray;
 }
 
-unsigned int create_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a) {
-    return (r << 24) | (g << 16) | (b << 8) | a;
-}
-
-double normAngle(double angle)
+unsigned int	create_color(unsigned char r, unsigned char g,
+		unsigned char b, unsigned char a)
 {
-    angle = fmod(angle, 2 * M_PI);
-    if (angle < 0)
-	{
-        angle += (2 * M_PI);
-    }
-    return (angle);
+	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
-void init_player(t_map *map)
+double	normAngle(double angle)
+{
+	angle = fmod(angle, 2 * M_PI);
+	if (angle < 0)
+	{
+		angle += (2 * M_PI);
+	}
+	return (angle);
+}
+
+void	init_player(t_map *map)
 {
 	map->player->pos.x = map->player->pos.x * TILE_SIZE + 150;
-	map->player->pos.y = map->player->pos.y * TILE_SIZE  + 150;
+	map->player->pos.y = map->player->pos.y * TILE_SIZE + 150;
 	map->player->xDir = 0;
 	map->player->yDir = 0;
 	map->player->moveSpeed = 20;

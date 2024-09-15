@@ -2,7 +2,9 @@
 
 void	mouse_rot(void *p)
 {
-	t_map *map = (t_map *)p;
+	t_map	*map;
+
+	map = (t_map *)p;
 	if (map->is_rot == 1)
 	{
 		cast_rays(map);
@@ -12,11 +14,10 @@ void	mouse_rot(void *p)
 	}
 }
 
-void mouse_handler(double x, double y, void *p)
+void	mouse_handler(double x, double y, void *p)
 {
-	t_map *map;
-	int	half_width;
-	int	half_height;
+	t_map	*map;
+	int		half_width;
 
 	map = (t_map *)p;
 	if (map->is_rot == 2)
@@ -25,17 +26,18 @@ void mouse_handler(double x, double y, void *p)
 		return ;
 	}
 	half_width = WIDTH / 2;
-	half_height = HEIGHT / 2;
 	if (x > half_width)
 	{
-		map->player->rotAngle = normAngle(map->player->rotAngle + map->player->rotSpeed);
+		map->player->rotAngle = normAngle(map->player->rotAngle
+				+ map->player->rotSpeed);
 		map->is_rot = 1;
 	}
 	else
 	{
-		map->player->rotAngle = normAngle(map->player->rotAngle - map->player->rotSpeed);
+		map->player->rotAngle = normAngle(map->player->rotAngle
+				- map->player->rotSpeed);
 		map->is_rot = 1;
 	}
-	mlx_set_mouse_pos(map->mlx, half_width, half_height);
+	mlx_set_mouse_pos(map->mlx, half_width, HEIGHT / 2);
 	mlx_set_cursor_mode(map->mlx, MLX_MOUSE_HIDDEN);
 }
