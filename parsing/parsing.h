@@ -179,6 +179,8 @@ double	calc_v_dis(t_map map, t_ray ray);
 double	calc_d_dis(t_map map, t_ray ray, int i);
 void	open_door(t_map *map);
 void	close_door(t_map *map);
+void	check_horz(t_ray *new_ray, t_map *map);
+void	check_vert(t_ray *new_ray, t_map *map);
 // raycasting ***********************
 
 
