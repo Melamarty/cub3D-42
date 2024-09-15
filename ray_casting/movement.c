@@ -17,41 +17,8 @@ int	is_wall(int new_x, int new_y, t_map map)
 	return (0);
 }
 
-void handle_key(void *p)
+void	key_move(t_map *map)
 {
-	int		move_step;
-	t_map 	*map;
-	double	new_x;
-	double	new_y;
-	map = (t_map *)p;
-	if (!key_pressed(map))
-		return ;
-	if (mlx_is_key_down(map->mlx, MLX_KEY_K) && !map->is_shot && !map->is_reload)
-	{
-		map->is_shot = 1;
-		map->frame = 0;
-		return ;
-	}
-	else if (mlx_is_key_down(map->mlx, MLX_KEY_R) && !map->is_reload && !map->is_shot)
-	{
-		map->is_reload = 1;
-        map->frame = 7;
-		return ;
-	}
-	if (mlx_is_key_down(map->mlx, MLX_KEY_Q))
-	{
-		map->is_rot = 2;
-		return ;
-	}
-	if (mlx_is_key_down(map->mlx, MLX_KEY_B))
-	{
-		map->is_rot = 0;
-		return ;
-	}
-	if (mlx_is_key_down(map->mlx, MLX_KEY_O))
-		open_door(map);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_C))
-		close_door(map);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 		map->player->rotAngle = normAngle(map->player->rotSpeed + map->player->rotAngle);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
@@ -64,9 +31,39 @@ void handle_key(void *p)
 		left(map);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
 		right(map);
+}
+
+int	key_listenter(t_map *map)
+{
+	int		move_step;
+	double	new_x;
+	double	new_y;
+	if (!key_pressed(map))
+		return (0);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_K) && !map->is_shot && !map->is_reload)
+		return (map->is_shot = 1, map->frame = 0, 0);
+	else if (mlx_is_key_down(map->mlx, MLX_KEY_R) && !map->is_reload && !map->is_shot)
+		return (map->is_reload = 1, map->frame = 7, 0);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_Q))
+		return (map->is_rot = 2, 0);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_B))
+		return (map->is_rot = 0, 0);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_O))
+		open_door(map);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_C))
+		close_door(map);
+	key_move(map);
 	cast_rays(map);
 	render(map);
 	mini_map(map);
+	return (0);
+}
+
+void handle_key(void *p)
+{
+	t_map 	*map;
+	map = (t_map *)p;
+	key_listenter(map);
 }
 
 int	key_pressed(t_map *map)
