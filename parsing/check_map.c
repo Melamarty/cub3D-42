@@ -1,53 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/15 13:17:12 by mel-amar          #+#    #+#             */
+/*   Updated: 2024/09/15 13:17:12 by mel-amar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
-int allowed_char(char c)
+int	allowed_char(char c)
 {
-	if (c == '1' || c == '0' || c == 'N' || c == ' ' || c == '*' || c == '\n' || c == 'W' || c == 'E' || c == 'D' || c == 'O'
+	if (c == '1' || c == '0' || c == 'N' || c == ' ' || c == '*'
+		|| c == '\n' || c == 'W' || c == 'E' || c == 'D' || c == 'O'
 		|| c == 'S')
 		return (1);
 	return (0);
 }
 
-//s
 int	check_arr(t_map *map)
 {
-	int	i;
-	int	j;
-	char	c;
-	int	count;
+	int				i;
+	int				j;
+	char			c;
+	static int		count;
 
-	i = 0;
-	j = 0;
-	count = 0;
-	while (i < map->height)
+	i = -1;
+	while (++i < map->height)
 	{
-		j = 0;
-		while (j < ft_strlen(map->arr[i]))
+		j = -1;
+		while (++j < ft_strlen(map->arr[i]))
 		{
 			c = map->arr[i][j];
 			if (!allowed_char(c))
 				return (1);
-			if (c == 'S' || c == 'N' || c == 'W' || c == 'E')
+			if ((c == 'S' || c == 'N' || c == 'W' || c == 'E') && ++count)
 			{
 				map->player->pos.x = j;
 				map->player->pos.y = i;
 				map->player->dir = c;
-				count++;
 			}
-			j++;
 		}
-		i++;
 	}
 	if (check_walls(map->arr, map->height, map->width) || count != 1)
-		return(1);
+		return (1);
 	return (0);
 }
 
-int empty_line(char *line)
+int	empty_line(char *line)
 {
 	int	i;
 
-	i= 0;
+	i = 0;
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '\n' && line[i] != 13)
@@ -57,16 +64,17 @@ int empty_line(char *line)
 	return (1);
 }
 
-int check_line(char *line)
+int	check_line(char *line)
 {
-	int	i;
-	char **spl;
+	int		i;
+	char	**spl;
 
 	i = 0;
 	spl = ft_split(line, ' ');
 	if (!spl)
 		return (1);
-	while (spl[i++]);
+	while (spl[i++])
+		;
 	if (i != 3 && (ft_strcmp(spl[0], "F") && ft_strcmp(spl[0], "C")))
 		return (1);
 	if (ft_strcmp(spl[0], "NO") && ft_strcmp(spl[0], "SO")
@@ -76,12 +84,13 @@ int check_line(char *line)
 	return (0);
 }
 
-int check_textures (t_map *map, t_list *list)
+int	check_textures(t_map *map, t_list *list)
 {
 	int	i;
 
 	i = 0;
-	if (!map->ea || !map->no || !map->so || !map->we || !map->floor || !map->ceiling)
+	if (!map->ea || !map->no || !map->so || !map->we
+		|| !map->floor || !map->ceiling)
 		return (1);
 	while (list)
 	{

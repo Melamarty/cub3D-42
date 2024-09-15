@@ -10,13 +10,13 @@ void	create_textures(t_map *map)
 	i = 0;
 	while (i < 31)
 	{
-		map->sprite[i] = mlx_load_png(ft_strjoin(ft_strjoin("../parsing/textures/bonus/frame", ft_itoa(i + 1)), ".png"));
+		map->sprite[i] = mlx_load_png(ft_strjoin(ft_strjoin("./textures/bonus/frame", ft_itoa(i + 1)), ".png"));
 		i++;
 	}
 	i = 0;
 	while (i < 10)
 	{
-		map->bullet[i] = mlx_load_png(ft_strjoin(ft_strjoin("../parsing/textures/bonus/bullet", ft_itoa(i + 1)), ".png"));
+		map->bullet[i] = mlx_load_png(ft_strjoin(ft_strjoin("./textures/bonus/bullet", ft_itoa(i + 1)), ".png"));
 		i++;
 	}
 }

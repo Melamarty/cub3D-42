@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_walls.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/15 13:37:39 by mel-amar          #+#    #+#             */
+/*   Updated: 2024/09/15 13:37:39 by mel-amar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
-int check_row(char *row)
+int	check_row(char *row)
 {
 	int	i;
 
@@ -17,10 +29,10 @@ int check_row(char *row)
 	return (0);
 }
 
-int check_door (char **map, int i, int j, int height)
+int	check_door(char **map, int i, int j, int height)
 {
-	int c1;
-	int c2;
+	int	c1;
+	int	c2;
 
 	c1 = 0;
 	c2 = 0;
@@ -38,7 +50,8 @@ int check_door (char **map, int i, int j, int height)
 		return (0);
 	return (1);
 }
-int check_inside(char **map, int height)
+
+int	check_inside(char **map, int height)
 {
 	int	i;
 	int	j;
@@ -66,30 +79,27 @@ int check_inside(char **map, int height)
 	}
 	return (0);
 }
-int check_walls(char **map, int height, int width)
+
+int	check_walls(char **map, int height, int width)
 {
 	int	i;
 	int	j;
 
 	i = -1;
 	while (++i < height)
-	{
 		if (check_row(map[i]))
 			return (1);
-	}
 	j = -1;
 	while (++j < width)
 	{
 		i = 0;
 		while (i < height && map[i][j] == '*')
 			i++;
-		// printf ("%c %d %d\n", map[i][j], i, j);
 		if (i >= height || map[i][j] != '1')
 			return (1);
 		i = height - 1;
 		while (i >= 0 && map[i][j] == '*')
 			i--;
-
 		if (i < 0 || map[i][j] != '1')
 			return (1);
 	}

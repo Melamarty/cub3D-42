@@ -8,7 +8,7 @@
 #define HIT_HORZ 1
 #define HIT_VIRT 2
 
-#include "../MLX42/include/MLX42/MLX42.h"
+#include "../MLX42/MLX42.h"
 #include <math.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -144,6 +144,13 @@ typedef struct s_list
     int             checked;
 } t_list;
 
+typedef struct s_wall
+{
+    int     top;
+    int     botm;
+    int     x;
+}   t_wall;
+
 
 // raycasting ***********************
 void    handle_key(void *p);
@@ -190,6 +197,14 @@ int    ft_atoi(const char *str);
 void	*my_malloc(size_t size, int mode);
 int	ft_strcmp(char *str1, char *str2);
 int empty_line(char *line);
+void get_map(t_list *list, t_map *map);
+void set_null(t_map *map);
+char *rm_spaces(char *line);
+int is_digits(char *str);
+int spl_len(char **spl);
+char *get_texture(char *line);
+int set_checked(t_list *list);
+void clear_map(t_map *map);
 
 t_map *parse_map(t_list *list);
 int check_arr(t_map *map);
@@ -198,5 +213,8 @@ int empty_line(char *line);
 int check_walls(char **map, int height, int width);
 void render(t_map *map);
 unsigned int create_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
+void	draw_ceill(t_map *map, int topPixel, int i);
+void	draw_floor(t_map *map, int bottomPixel, int i);
+t_wall	*get_wall_info(int top, int bottom, int x);
 
 #endif
