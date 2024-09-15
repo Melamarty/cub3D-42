@@ -1,63 +1,70 @@
 #include "../parsing/parsing.h"
 
+void	dda_calc(t_map *map)
+{
+	map->m_rays->x2 = (map->m_rays->x1 + 1000 * cos(map->m_rays->ray_angle));
+	map->m_rays->y2 = (map->m_rays->y1 + 1000 * sin(map->m_rays->ray_angle));
+
+	map->m_rays->dx = map->m_rays->x2 - map->m_rays->x1;
+	map->m_rays->dy = map->m_rays->y2 - map->m_rays->y1;
+
+	if (abs(map->m_rays->dx) > abs(map->m_rays->dy))
+		map->m_rays->steps = abs(map->m_rays->dx);
+	else
+		map->m_rays->steps = abs(map->m_rays->dy);
+
+	map->m_rays->xinc = map->m_rays->dx / (double)map->m_rays->steps;
+	map->m_rays->yinc = map->m_rays->dy / (double)map->m_rays->steps;
+}
+
+int	dda_x(t_map *map, double *x, double *y)
+{
+	*x += map->m_rays->xinc;
+	map->m_rays->rx = (map->player->pos.x + (*x - map->m_rays->x1) * TILE_SIZE / m_cube);
+	map->m_rays->ry = (map->player->pos.y + (*y - map->m_rays->y1) * TILE_SIZE / m_cube);
+	map->m_rays->map_x = (int)round(map->m_rays->rx) / TILE_SIZE;
+	map->m_rays->map_y = (int)round(map->m_rays->ry) / TILE_SIZE;
+	if (map->m_rays->map_x < 0 || map->m_rays->map_y < 0 || map->m_rays->map_x >= map->width || map->m_rays->map_y >= map->height)
+		return (1);
+	if (map->arr[map->m_rays->map_y][map->m_rays->map_x] == '1' || map->arr[map->m_rays->map_y][map->m_rays->map_x] == 'D')
+		return (1);
+	return (0);
+}
+
+int	dda_y(t_map *map, double *x, double *y)
+{
+	*y += map->m_rays->yinc;
+	map->m_rays->rx = (map->player->pos.x + (*x - map->m_rays->x1) * TILE_SIZE / m_cube);
+	map->m_rays->ry = (map->player->pos.y + (*y - map->m_rays->y1) * TILE_SIZE / m_cube);
+	map->m_rays->map_x = (int)round(map->m_rays->rx) / TILE_SIZE;
+	map->m_rays->map_y = (int)round(map->m_rays->ry) / TILE_SIZE;
+	if (map->m_rays->map_x < 0 || map->m_rays->map_y < 0 || map->m_rays->map_x >= map->width || map->m_rays->map_y >= map->height)
+		return (1);
+	if (map->arr[map->m_rays->map_y][map->m_rays->map_x] == '1' || map->arr[map->m_rays->map_y][map->m_rays->map_x] == 'D')
+		return (1);
+	return (0);
+}
+
 void draw_rays(t_map *map)
 {
+    double x;
+	double y;
+
     map->m_rays = malloc(sizeof(t_ray));
-    double x, y;
-    double rx, ry;
-	int	map_rx, map_ry;
     map->m_rays->x1 = 5 * m_cube;
     map->m_rays->y1 = 3 * m_cube;
     map->m_rays->ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
-
     for (int i = 0; i < m_cube * 30; i++)
     {
         x = map->m_rays->x1;
         y = map->m_rays->y1;
-
-        map->m_rays->x2 = (map->m_rays->x1 + 1000 * cos(map->m_rays->ray_angle));
-        map->m_rays->y2 = (map->m_rays->y1 + 1000 * sin(map->m_rays->ray_angle));
-
-        map->m_rays->dx = map->m_rays->x2 - map->m_rays->x1;
-        map->m_rays->dy = map->m_rays->y2 - map->m_rays->y1;
-
-        if (abs(map->m_rays->dx) > abs(map->m_rays->dy))
-            map->m_rays->steps = abs(map->m_rays->dx);
-        else
-            map->m_rays->steps = abs(map->m_rays->dy);
-
-        map->m_rays->xinc = map->m_rays->dx / (double)map->m_rays->steps;
-        map->m_rays->yinc = map->m_rays->dy / (double)map->m_rays->steps;
-
+        dda_calc(map);
         for (int i = 0; i < map->m_rays->steps; i++)
         {
-			x += map->m_rays->xinc;
-            rx = (map->player->pos.x + (x - map->m_rays->x1) * TILE_SIZE / m_cube);
-            ry = (map->player->pos.y + (y - map->m_rays->y1) * TILE_SIZE / m_cube);
-             map_rx = (int)round(rx) / TILE_SIZE;
-             map_ry = (int)round(ry) / TILE_SIZE;
-			if (map_rx < 0 || map_ry < 0 || map_rx >= map->width || map_ry >= map->height) {
-							break;
-						}
-
-            if (map->arr[map_ry][map_rx] == '1' || map->arr[map_ry][map_rx] == 'D') {
-                break;
-            }
-
-            y += map->m_rays->yinc;
-            rx = (map->player->pos.x + (x - map->m_rays->x1) * TILE_SIZE / m_cube);
-            ry = (map->player->pos.y + (y - map->m_rays->y1) * TILE_SIZE / m_cube);
-             map_rx = (int)round(rx) / TILE_SIZE;
-             map_ry = (int)round(ry) / TILE_SIZE;
-
-        	 if (map_rx < 0 || map_ry < 0 || map_rx >= map->width || map_ry >= map->height) {
-							break;
-						}
-
-            if (map->arr[map_ry][map_rx] == '1' || map->arr[map_ry][map_rx] == 'D') {
-                break;
-            }
-
+			if(dda_x(map, &x, &y))
+				break ;
+            if (dda_y(map, &x, &y))
+				break ;
             if (round(x) >= 0 && round(x) < 300 && round(y) >= 0 && round(y) < 180) {
                 mlx_put_pixel(map->img, round(x), round(y), create_color(255, 255, 0, 255));
             }

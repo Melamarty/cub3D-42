@@ -3,8 +3,8 @@ EA textures/txt1.png
 WE textures/txt2.png
 SO textures/txt3.png
 NO textures/txt4.png
-F 139,90,43
-C 	146, 161, 207
+C 0, 0, 139
+F 211, 211, 211
 
 
 11111111111111111111111111111

@@ -25,6 +25,10 @@ typedef struct s_ray
 	int	y2;
 	int	dx;
 	int	dy;
+    double  rx;
+    double  ry;
+    int map_x;
+    int map_y;
 	int	steps;
 	double	xinc;
 	double	yinc;
