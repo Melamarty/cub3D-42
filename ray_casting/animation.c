@@ -23,20 +23,9 @@ void	create_textures(t_map *map)
 
 void	put_frame(t_map *map)
 {
-	// static int	i;
-	// if (i)
-	// {
 		mlx_delete_image(map->mlx, map->sprite_img);
 		map->sprite_img = mlx_texture_to_image(map->mlx, map->sprite[map->frame]);
 		mlx_image_to_window(map->mlx, map->sprite_img, WIDTH - 666 - ((WIDTH - 666) / 2), HEIGHT - 375);
-	// }
-	// else
-	// {
-	// 	map->sprite_img = mlx_texture_to_image(map->mlx, map->sprite[map->frame]);
-	// 	mlx_image_to_window(map->mlx, map->sprite_img,  WIDTH - 666 - ((WIDTH - 666) / 2), HEIGHT - 375);
-	// 	if (!i)
-	// 		i++;
-	// }
 }
 
 void	shot(t_map *map)
@@ -46,8 +35,6 @@ void	shot(t_map *map)
 		map->is_shot = 0;
 		return ;
 	}
-	// if (map->timing == 5)
-	// {
 	put_frame(map);
 	if (map->frame == 6)
 	{
@@ -62,9 +49,6 @@ void	shot(t_map *map)
 	}
 	else
 		map->frame += 1;
-	// 	map->timing = 0;
-	// }
-	// map->timing += 1;
 }
 
 void	reload(t_map *map)
