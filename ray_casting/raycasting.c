@@ -16,7 +16,7 @@ void	init_ray(t_ray *new_ray, double ray_angle)
 	new_ray->found_y_inter = 0;
 }
 
-void	check_horz(t_ray *new_ray, t_map *map)
+void	calc_horz(t_ray *new_ray, t_map *map)
 {
 	new_ray->f_y_inter = floor(map->player->pos.y / TILE_SIZE) * TILE_SIZE;
 	if (!new_ray->is_up)
@@ -30,6 +30,11 @@ void	check_horz(t_ray *new_ray, t_map *map)
 		new_ray->x_steps *= -1;
 	if (new_ray->is_right && new_ray->x_steps < 0)
 		new_ray->x_steps *= -1;
+}
+
+void	check_horz(t_ray *new_ray, t_map *map)
+{
+	calc_horz(new_ray, map);
 	while (1 && new_ray->f_y_inter < map->height * TILE_SIZE && new_ray->f_x_inter < map->width * TILE_SIZE && new_ray->f_y_inter >= 0 && new_ray->f_x_inter >= 0)
 	{
 		new_ray->h_x_inter = (int)floor(new_ray->f_x_inter);
@@ -57,7 +62,7 @@ void	check_horz(t_ray *new_ray, t_map *map)
 	}
 }
 
-void	check_vert(t_ray *new_ray, t_map *map)
+void	calc_vert(t_ray *new_ray, t_map *map)
 {
 	new_ray->f_x_inter = floor(map->player->pos.x / TILE_SIZE) * TILE_SIZE;
 	if (new_ray->is_right)
@@ -71,6 +76,11 @@ void	check_vert(t_ray *new_ray, t_map *map)
 		new_ray->y_steps *= -1;
 	if (!new_ray->is_up && new_ray->y_steps < 0)
 		new_ray->y_steps *= -1;
+}
+
+void	check_vert(t_ray *new_ray, t_map *map)
+{
+	calc_vert(new_ray, map);
 	while (1 && new_ray->f_y_inter < map->height * TILE_SIZE && new_ray->f_x_inter < map->width * TILE_SIZE && new_ray->f_y_inter >= 0 && new_ray->f_x_inter >= 0)
 	{
 		new_ray->v_x_inter = (int)floor(new_ray->f_x_inter);
@@ -126,16 +136,25 @@ void	its_vert(t_ray *new_ray, t_map *map)
 	}
 }
 
+void	door_check(t_map *map, int z)
+{
+	if (z == WIDTH / 2 && (map->door_ray->is_door || map->door_ray->is_close_door))
+	{
+		if (map->door_ray->is_door && map->door_ray->c_door_dis < 200)
+			map->can_open = 1;
+		else if (map->door_ray->is_close_door && map->door_ray->c_door_dis < 200 && map->door_ray->c_door_dis > 100)
+			map->can_close = 1;
+	}
+}
+
 void	cast_rays(t_map *map)
 {
 	t_ray	*new_ray;
-	int z = 0;
+	int z;
 	double	ray_angle;
 
-	map->can_open = 0;
-	map->can_close = 0;
-	map->rays = NULL;
-	map->door_ray = NULL;
+	z = 0;
+	42 && (map->can_close = 0, map->can_open = 0, map->rays = NULL, map->door_ray = NULL);
 	ray_angle = normAngle(map->player->rotAngle - map->player->fov / 2);
 	while (z < WIDTH)
 	{
@@ -145,26 +164,13 @@ void	cast_rays(t_map *map)
 		init_ray(new_ray, ray_angle);
 		check_horz(new_ray, map);
 		check_vert(new_ray, map);
-
-
 		new_ray->h_dis = calc_h_dis(*map, *new_ray);
 		new_ray->v_dis = calc_v_dis(*map, *new_ray);
-
-
 		if (new_ray->h_dis <= new_ray->v_dis)
 			its_horz(new_ray, map);
 		else
 			its_vert(new_ray, map);
-
-
-		if (z == WIDTH / 2 && (map->door_ray->is_door || map->door_ray->is_close_door))
-		{
-			if (map->door_ray->is_door && map->door_ray->c_door_dis < 200)
-				map->can_open = 1;
-			else if (map->door_ray->is_close_door && map->door_ray->c_door_dis < 200 && map->door_ray->c_door_dis > 100)
-				map->can_close = 1;
-		}
-
+		door_check(map, z);
 		add_back_ray(&map->rays, new_ray);
 		ray_angle = normAngle(map->player->fov / (WIDTH) + ray_angle);
 		z++;
