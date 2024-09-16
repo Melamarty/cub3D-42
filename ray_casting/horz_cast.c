@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:30 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/15 19:37:59 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 11:01:51 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	calc_horz(t_ray *new_ray, t_map *map)
 {
-	new_ray->f_y_inter = floor(map->player->pos.y / TILE_SIZE) * TILE_SIZE;
+	new_ray->f_y_inter = (map->player->pos.y / TILE_SIZE) * TILE_SIZE;
 	if (!new_ray->is_up)
 		new_ray->f_y_inter += TILE_SIZE;
 	new_ray->f_x_inter = map->player->pos.x
@@ -31,8 +31,8 @@ void	calc_horz(t_ray *new_ray, t_map *map)
 
 int	horz_hit(t_ray *new_ray, t_map *map)
 {
-	if (map->arr[(int)floor(new_ray->f_y_inter - new_ray->is_up)
-			/ TILE_SIZE][(int)floor(new_ray->f_x_inter)
+	if (map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
+			/ TILE_SIZE][(int)(new_ray->f_x_inter)
 		/ TILE_SIZE] == 'O')
 	{
 		new_ray->is_close_door = 1;
@@ -41,11 +41,11 @@ int	horz_hit(t_ray *new_ray, t_map *map)
 		new_ray->y_door = (new_ray->f_y_inter - new_ray->is_up)
 			/ TILE_SIZE;
 	}
-	if (map->arr[(int)floor(new_ray->f_y_inter - new_ray->is_up)
-			/ TILE_SIZE][(int)floor(new_ray->f_x_inter)
+	if (map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
+			/ TILE_SIZE][(int)(new_ray->f_x_inter)
 		/ TILE_SIZE] == '1'
-	|| map->arr[(int)floor(new_ray->f_y_inter - new_ray->is_up)
-		/ TILE_SIZE][(int)floor(new_ray->f_x_inter) / TILE_SIZE] == 'D')
+	|| map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
+		/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == 'D')
 	{
 		new_ray->found_x_inter = 1;
 		return (1);
@@ -60,14 +60,14 @@ void	check_horz(t_ray *new_ray, t_map *map)
 		&& new_ray->f_x_inter < map->width * TILE_SIZE
 		&& new_ray->f_y_inter >= 0 && new_ray->f_x_inter >= 0)
 	{
-		new_ray->h_x_inter = (int)floor(new_ray->f_x_inter);
-		new_ray->h_y_inter = (int)floor(new_ray->f_y_inter);
-		if (map->arr[(int)floor(new_ray->f_y_inter - new_ray->is_up)
-				/ TILE_SIZE][(int)floor(new_ray->f_x_inter) / TILE_SIZE] == '1'
-		|| map->arr[(int)floor(new_ray->f_y_inter - new_ray->is_up)
-				/ TILE_SIZE][(int)floor(new_ray->f_x_inter) / TILE_SIZE] == 'D'
-		|| map->arr[(int)floor(new_ray->f_y_inter - new_ray->is_up)
-				/ TILE_SIZE][(int)floor(new_ray->f_x_inter) / TILE_SIZE] == 'O')
+		new_ray->h_x_inter = (int)(new_ray->f_x_inter);
+		new_ray->h_y_inter = (int)(new_ray->f_y_inter);
+		if (map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
+				/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == '1'
+		|| map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
+				/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == 'D'
+		|| map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
+				/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == 'O')
 		{
 			if (horz_hit(new_ray, map))
 				break ;
