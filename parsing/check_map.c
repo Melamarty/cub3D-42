@@ -37,12 +37,8 @@ int	check_arr(t_map *map)
 			c = map->arr[i][j];
 			if (!allowed_char(c))
 				return (1);
-			if ((c == 'S' || c == 'N' || c == 'W' || c == 'E') && ++count)
-			{
-				map->player->pos.x = j;
-				map->player->pos.y = i;
-				map->player->dir = c;
-			}
+			if ((c == 'S' || c == 'N' || c == 'W' || c == 'E'))
+				++count;
 		}
 	}
 	if (check_walls(map->arr, map->height, map->width) || count != 1)

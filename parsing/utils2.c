@@ -6,7 +6,7 @@
 /*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:53:10 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/16 11:53:13 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:05:19 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,35 @@ int	is_digits(char *str)
 			return (0);
 	return (1);
 }
+
+void	optimize_map(t_map *map)
+{
+	int	i;
+	int	j;
+
+	j = -1;
+	while (++j < map->width)
+	{
+		i = 0;
+		while (i < map->height && map->arr[i][j] == '*')
+			i++;
+		if (i != map->height)
+			break ;
+		i++;
+	}
+	printf ("j = %d\n", j);
+	if (j > 0)
+	{
+		i = -1;
+		while (++i < map->height)
+			map->arr[i] = map->arr[i] + j;
+	}
+	if (get_player_pos(map))
+	{
+		ft_putstr("map error: no player\n", 2);
+		exit (0);
+	}
+	map->width -= j;
+}
+
+
