@@ -1,24 +1,19 @@
 #include "../cub3d.h"
 
+void print_map(char **map, int height)
+{
+	int	i;
+
+	i = -1;
+	while (++i < height)
+		printf("%s\n", map[i]);
+}
+
 void print_info(t_map *map)
 {
-    //printf ("map width : %d\n", map->width);
-    //printf ("map height: %d\n", map->height);
-     printf("----- map info -----\n");
-     printf("NO : %s\n", map->no);
-     printf("SO : %s\n", map->so);
-     printf("WE : %s\n", map->we);
-     printf("EA : %s\n", map->ea);
-     printf("floor color : %d, %d, %d\n", map->floor->r, map->floor->g, map->floor->b);
-     printf("ceiling color : %d, %d, %d\n", map->ceiling->r, map->ceiling->g, map->ceiling->b);
-    // printf("=========map==========\n");
-    // int i = 0;
-    // while (i < map->height)
-    // {
-    //     printf ("-%s-\n", map->arr[i]);
-    //     i++;
-    // }
-    //printf ("player position : (x: %d, y: %d)\n", map->player->pos.x, map->player->pos.y);
+    printf ("width = %d\n", map->width);
+	printf ("height = %d\n", map->height);
+	print_map(map->arr, map->height);
 }
 
 char *remove_chars(char *line)
@@ -101,6 +96,9 @@ int main (int ac, char **av)
         ft_putstr("map  error\n", 2);
         return (0);
     }
+    //print_info(map);
+    optimize_map(map);
+    //print_info(map);
     // print_info(map);
     // print_list(list);
     create_textures(map);

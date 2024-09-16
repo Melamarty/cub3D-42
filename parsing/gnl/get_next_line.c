@@ -33,7 +33,6 @@ char	*read_line(int fd, char *buffer, char *remainder)
 			remainder = ft_strdup("");
 		tmp = remainder;
 		remainder = ft_strjoin(tmp, buffer);
-		free(tmp);
 		tmp = NULL;
 		if (strrchr(buffer, '\n'))
 			break ;
@@ -67,17 +66,14 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	static char	*remainder;
 
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buffer = (char *)my_malloc((BUFFER_SIZE + 1) * sizeof(char), 0);
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) || !buffer)
 	{
-		free(remainder);
-		free(buffer);
 		remainder = NULL;
 		buffer = NULL;
 		return (NULL);
 	}
 	line = read_line(fd, buffer, remainder);
-	free(buffer);
 	buffer = NULL;
 	if (!line)
 		return (NULL);
