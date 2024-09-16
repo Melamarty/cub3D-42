@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:10 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 12:50:59 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:14:27 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	cast_rays(t_map *map)
 	ray_angle = normangle(map->player->rotAngle - map->player->fov / 2);
 	while (++z < WIDTH)
 	{
-		new_ray = malloc(sizeof(t_ray));
+		new_ray = my_malloc(sizeof(t_ray), 0);
 		if (z == WIDTH / 2)
 			map->door_ray = new_ray;
 		init_ray(new_ray, ray_angle);

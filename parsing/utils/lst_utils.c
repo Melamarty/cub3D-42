@@ -16,7 +16,7 @@ t_list	*create_node(const char *line)
 {
 	t_list	*new_node;
 
-	new_node = (t_list *)malloc(sizeof(t_list));
+	new_node = (t_list *)my_malloc(sizeof(t_list), 0);
 	if (!new_node)
 	{
 		perror("Failed to allocate memory");

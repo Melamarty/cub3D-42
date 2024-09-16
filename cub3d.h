@@ -206,6 +206,9 @@ void	up(t_map *map);
 void	down(t_map *map);
 void	left(t_map *map);
 void	right(t_map *map);
+void	destroy_textures(t_map *map);
+void	clean_all(t_map *map);
+void	re_render(t_map *map);
 // raycasting ***********************
 
 
