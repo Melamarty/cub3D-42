@@ -1,6 +1,35 @@
-check occurence of player
-detect player direction
-return error if the map contains a new line
+<--------------->
+5,5,5,
+C ,5,5,
+C 	, 1, 1         93893883787387 837837838737873  378738738783
 
 
-d
+
+EA       ./textures/txt1.png
+
+
+
+
+
+ WE ./textures/txt3.png
+
+
+
+SO ./textures/txt3.png
+
+
+
+NO ./textures/txt4.png
+
+
+
+
+F   1,1,9
+C 	, 1, 1 
+
+
+11111111
+10000001
+100N0001
+10000001
+11111111

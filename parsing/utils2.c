@@ -6,7 +6,7 @@
 /*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 13:33:57 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/15 13:36:04 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/16 11:04:30 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	is_digits(char *str)
 	if (empty_line(str))
 		return (0);
 	while (str[++i])
-		if ((str[i] > '9' || str[i] < '0') && (str[i] != ' '))
+		if ((str[i] > '9' || str[i] < '0'))
 			return (0);
 	return (1);
 }

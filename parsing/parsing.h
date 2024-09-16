@@ -211,6 +211,7 @@ int spl_len(char **spl);
 char *get_texture(char *line);
 int set_checked(t_list *list);
 void clear_map(t_map *map);
+int check_player(char **map, int height);
 
 t_map *parse_map(t_list *list);
 int check_arr(t_map *map);
