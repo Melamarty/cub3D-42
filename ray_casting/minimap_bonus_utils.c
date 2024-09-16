@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:36 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/15 19:37:59 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:44:13 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	draw_rays(t_map *map)
 {
 	t_mmap	mmap;
 
-	42 && (map->m_rays = malloc(sizeof(t_ray)), map->m_rays->y1 = 3 * m_cube);
+	42 && (map->m_rays = my_malloc(sizeof(t_ray), 0), map->m_rays->y1 = 3 * m_cube);
 	42 && (mmap.i = -1, mmap.j = 0, map->m_rays->x1 = 5 * m_cube);
 	map->m_rays->ray_angle = normangle(map->player->rotAngle
 			- map->player->fov / 2);

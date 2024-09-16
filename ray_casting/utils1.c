@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:16 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/15 19:37:59 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:47:11 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	init_player(t_map *map)
 	map->player->pos.y = map->player->pos.y * TILE_SIZE + 150;
 	map->player->xDir = 0;
 	map->player->yDir = 0;
-	map->player->moveSpeed = 20;
+	map->player->moveSpeed = 25;
 	if (map->player->dir == 'E')
 		map->player->rotAngle = 0;
 	else if (map->player->dir == 'S')

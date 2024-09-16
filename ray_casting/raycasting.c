@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:10 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 12:50:59 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:46:26 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,29 +74,26 @@ void	door_check(t_map *map, int z)
 
 void	cast_rays(t_map *map)
 {
-	t_ray	*new_ray;
 	int		z;
 	double	ray_angle;
 
 	42 && (map->can_close = 0, map->can_open = 0,
-		map->rays = NULL, map->door_ray = NULL, z = -1);
+		map->door_ray = NULL, z = -1);
 	ray_angle = normangle(map->player->rotAngle - map->player->fov / 2);
 	while (++z < WIDTH)
 	{
-		new_ray = malloc(sizeof(t_ray));
 		if (z == WIDTH / 2)
-			map->door_ray = new_ray;
-		init_ray(new_ray, ray_angle);
-		check_horz(new_ray, map);
-		check_vert(new_ray, map);
-		new_ray->h_dis = calc_h_dis(*map, *new_ray);
-		new_ray->v_dis = calc_v_dis(*map, *new_ray);
-		if (new_ray->h_dis <= new_ray->v_dis)
-			its_horz(new_ray, map);
+			map->door_ray = &map->rays[z];
+		init_ray(&(map->rays[z]), ray_angle);
+		check_horz(&map->rays[z], map);
+		check_vert(&map->rays[z], map);
+		map->rays[z].h_dis = calc_h_dis(*map, map->rays[z]);
+		map->rays[z].v_dis = calc_v_dis(*map, map->rays[z]);
+		if (map->rays[z].h_dis <= map->rays[z].v_dis)
+			its_horz(&map->rays[z], map);
 		else
-			its_vert(new_ray, map);
+			its_vert(&map->rays[z], map);
 		door_check(map, z);
-		add_back_ray(&map->rays, new_ray);
 		ray_angle = normangle(map->player->fov / (WIDTH) + ray_angle);
 	}
 }

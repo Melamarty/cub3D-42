@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:20 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/15 19:37:59 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:43:59 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("0"));
 	i = int_len(n);
 	j = i;
-	str = malloc((i + 1) * sizeof(char));
+	str = my_malloc((i + 1) * sizeof(char), 0);
 	if (!str)
 		return (0);
 	if (n < 0)
