@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:01 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/15 19:37:59 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:12:36 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	key_listenter(t_map *map)
 
 	if (!key_pressed(map))
 		return (0);
+	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
+		clear_all(map);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_K)
 		&& !map->is_shot && !map->is_reload)
 		return (map->is_shot = 1, map->frame = 0, 0);
@@ -108,7 +110,8 @@ int	key_pressed(t_map *map)
 		|| mlx_is_key_down(map->mlx, MLX_KEY_K)
 		|| mlx_is_key_down(map->mlx, MLX_KEY_R)
 		|| mlx_is_key_down(map->mlx, MLX_KEY_O)
-		|| mlx_is_key_down(map->mlx, MLX_KEY_C))
+		|| mlx_is_key_down(map->mlx, MLX_KEY_C)
+		|| mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		return (1);
 	return (0);
 }

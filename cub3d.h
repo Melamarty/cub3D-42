@@ -206,6 +206,7 @@ void	up(t_map *map);
 void	down(t_map *map);
 void	left(t_map *map);
 void	right(t_map *map);
+void	clear_all(t_map *map);
 // raycasting ***********************
 
 
