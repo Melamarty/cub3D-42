@@ -8,11 +8,11 @@
 #define HIT_HORZ 1
 #define HIT_VIRT 2
 
-#include "../MLX42/MLX42.h"
+#include "MLX42/MLX42.h"
 #include <math.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include "./gnl/get_next_line.h"
+#include "parsing/gnl/get_next_line.h"
 #include <stdio.h>
 #include <limits.h>
 
@@ -71,6 +71,18 @@ typedef struct s_color {
     int g;
     int b;
 } t_color;
+
+typedef struct s_mmpam
+{
+    double          x;
+    double          y;
+    int				x_start;
+	int				y_start;
+	int				y_start_save;
+	unsigned int	color;
+    int             i;
+    int             j;
+} t_mmap;
 
 typedef struct s_pos
 {
@@ -162,14 +174,14 @@ void    init_player(t_map *map);
 void	mini_map(t_map *map);
 void    cast_rays(t_map *map);
 void	mouse_handler(double x, double y, void *p);
-double  normAngle(double angle);
+double  normangle(double angle);
 void	mouse_rot(void *p);
 void	add_back_ray(t_ray **rays, t_ray *new_ray);
 unsigned int create_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 void	mini_map(t_map *map);
 void mouse_handler(double x, double y, void *p);
 void	mouse_rot(void *p);
-double normAngle(double angle);
+double normangle(double angle);
 void	up(t_map *map);
 void	down(t_map *map);
 void	left(t_map *map);
@@ -188,6 +200,12 @@ void	open_door(t_map *map);
 void	close_door(t_map *map);
 void	check_horz(t_ray *new_ray, t_map *map);
 void	check_vert(t_ray *new_ray, t_map *map);
+void	get_color(t_mmap *mmap, t_map *map);
+void	draw_rays(t_map *map);
+void	up(t_map *map);
+void	down(t_map *map);
+void	left(t_map *map);
+void	right(t_map *map);
 // raycasting ***********************
 
 

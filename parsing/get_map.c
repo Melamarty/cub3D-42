@@ -5,12 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/15 13:36:10 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/16 11:39:30 by mel-amar         ###   ########.fr       */
+/*   Created: 2024/09/16 11:53:03 by mel-amar          #+#    #+#             */
+/*   Updated: 2024/09/16 11:53:23 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./parsing.h"
+
+
+#include "../cub3d.h"
 
 char	*rm_spaces(char *line)
 {
@@ -58,7 +60,7 @@ void	get_map(t_list *list, t_map *map)
 	clear_map(map);
 }
 
-int check_player(char **map, int height)
+int	check_player(char **map, int height)
 {
 	int	i;
 	int	j;

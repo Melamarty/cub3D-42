@@ -1,7 +1,0 @@
-{
-	"files.associations": {
-		"mlx42_int.h": "c",
-		"algorithm": "c",
-		"parsing.h": "c"
-	}
-}

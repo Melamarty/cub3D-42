@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../cub3d.h"
 
 t_color	*parse_color(char *line)
 {

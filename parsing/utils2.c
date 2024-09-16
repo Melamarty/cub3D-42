@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/15 13:33:57 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/16 11:04:30 by mel-amar         ###   ########.fr       */
+/*   Created: 2024/09/16 11:53:10 by mel-amar          #+#    #+#             */
+/*   Updated: 2024/09/16 11:53:13 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+
+#include "../cub3d.h"
 
 int	set_checked(t_list *list)
 {
