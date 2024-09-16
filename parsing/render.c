@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 13:48:20 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/16 16:46:11 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:18:12 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	render(t_map *map)
 	while (i < 1200)
 	{
 		raydis = (int)(map->rays[i].ray_dis
-				* cos(map->rays[i].ray_angle - map->player->rotAngle));
+				* cos(map->rays[i].ray_angle - map->player->rotangle));
 		top = (HEIGHT / 2) - (((float)TILE_SIZE / raydis) * distoplan / 2);
 		bottom = (HEIGHT / 2) + (((float)TILE_SIZE / raydis) * distoplan / 2);
 		draw_ceill(map, top, i);

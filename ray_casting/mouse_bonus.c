@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:48 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/15 19:37:59 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:18:39 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ void	mouse_handler(double x, double y, void *p)
 	half_width = WIDTH / 2;
 	if (x > half_width)
 	{
-		map->player->rotAngle = normangle(map->player->rotAngle
-				+ map->player->rotSpeed);
+		map->player->rotangle = normangle(map->player->rotangle
+				+ map->player->rotspeed);
 		map->is_rot = 1;
 	}
 	else
 	{
-		map->player->rotAngle = normangle(map->player->rotAngle
-				- map->player->rotSpeed);
+		map->player->rotangle = normangle(map->player->rotangle
+				- map->player->rotspeed);
 		map->is_rot = 1;
 	}
 	mlx_set_mouse_pos(map->mlx, half_width, HEIGHT / 2);

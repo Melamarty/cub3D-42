@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:16 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 15:52:17 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:19:06 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ void	init_player(t_map *map)
 {
 	map->player->pos.x = map->player->pos.x * TILE_SIZE + 150;
 	map->player->pos.y = map->player->pos.y * TILE_SIZE + 150;
-	map->player->xDir = 0;
-	map->player->yDir = 0;
-	map->player->moveSpeed = 40;
+	map->player->xdir = 0;
+	map->player->ydir = 0;
+	map->player->movespeed = 40;
 	if (map->player->dir == 'E')
-		map->player->rotAngle = 0;
+		map->player->rotangle = 0;
 	else if (map->player->dir == 'S')
-		map->player->rotAngle = M_PI / 2;
+		map->player->rotangle = M_PI / 2;
 	else if (map->player->dir == 'W')
-		map->player->rotAngle = M_PI;
+		map->player->rotangle = M_PI;
 	else if (map->player->dir == 'N')
-		map->player->rotAngle = 3 * M_PI / 2;
-	map->player->rotSpeed = 8 * (M_PI / 180);
+		map->player->rotangle = 3 * M_PI / 2;
+	map->player->rotspeed = 8 * (M_PI / 180);
 	map->player->fov = 60 * M_PI / 180;
 }

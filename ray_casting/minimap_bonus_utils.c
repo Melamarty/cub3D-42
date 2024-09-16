@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:36 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 15:44:13 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:31:09 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	dda_x(t_map *map, double *x, double *y)
 {
 	*x += map->m_rays->xinc;
 	map->m_rays->rx = (map->player->pos.x + (*x - map->m_rays->x1)
-			* TILE_SIZE / m_cube);
+			* TILE_SIZE / M_CUBE);
 	map->m_rays->ry = (map->player->pos.y + (*y - map->m_rays->y1)
-			* TILE_SIZE / m_cube);
+			* TILE_SIZE / M_CUBE);
 	map->m_rays->map_x = (int)round(map->m_rays->rx) / TILE_SIZE;
 	map->m_rays->map_y = (int)round(map->m_rays->ry) / TILE_SIZE;
 	if (map->m_rays->map_x < 0 || map->m_rays->map_y < 0
@@ -49,9 +49,9 @@ int	dda_y(t_map *map, double *x, double *y)
 {
 	*y += map->m_rays->yinc;
 	map->m_rays->rx = (map->player->pos.x + (*x - map->m_rays->x1)
-			* TILE_SIZE / m_cube);
+			* TILE_SIZE / M_CUBE);
 	map->m_rays->ry = (map->player->pos.y + (*y - map->m_rays->y1)
-			* TILE_SIZE / m_cube);
+			* TILE_SIZE / M_CUBE);
 	map->m_rays->map_x = (int)round(map->m_rays->rx) / TILE_SIZE;
 	map->m_rays->map_y = (int)round(map->m_rays->ry) / TILE_SIZE;
 	if (map->m_rays->map_x < 0 || map->m_rays->map_y < 0
@@ -68,11 +68,11 @@ void	draw_rays(t_map *map)
 {
 	t_mmap	mmap;
 
-	42 && (map->m_rays = my_malloc(sizeof(t_ray), 0), map->m_rays->y1 = 3 * m_cube);
-	42 && (mmap.i = -1, mmap.j = 0, map->m_rays->x1 = 5 * m_cube);
-	map->m_rays->ray_angle = normangle(map->player->rotAngle
+	1 && (map->m_rays = my_malloc(sizeof(t_ray), 0), mmap.j = 0, mmap.i = -1);
+	1 && (map->m_rays->x1 = 5 * M_CUBE, map->m_rays->y1 = 3 * M_CUBE);
+	map->m_rays->ray_angle = normangle(map->player->rotangle
 			- map->player->fov / 2);
-	while (++mmap.i < m_cube * 30)
+	while (++mmap.i < M_CUBE * 30)
 	{
 		42 && (mmap.x = map->m_rays->x1, mmap.y = map->m_rays->y1, mmap.j = 0);
 		dda_calc(map);
@@ -89,21 +89,21 @@ void	draw_rays(t_map *map)
 			mmap.j++;
 		}
 		map->m_rays->ray_angle = normangle(map->player->fov
-				/ (30 * m_cube) + map->m_rays->ray_angle);
+				/ (30 * M_CUBE) + map->m_rays->ray_angle);
 	}
 }
 
 void	get_color(t_mmap *mmap, t_map *map)
 {
 	if (mmap->y_start < 0 || mmap->x_start < 0
-		|| mmap->y_start / m_cube >= map->height
-		|| mmap->x_start / m_cube >= map->width)
+		|| mmap->y_start / M_CUBE >= map->height
+		|| mmap->x_start / M_CUBE >= map->width)
 		mmap->color = create_color(0, 0, 0, 255);
 	else if (map->arr[mmap->y_start
-			/ m_cube][mmap->x_start / m_cube] == '1')
+			/ M_CUBE][mmap->x_start / M_CUBE] == '1')
 		mmap->color = create_color(50, 50, 50, 255);
 	else if (map->arr[mmap->y_start
-			/ m_cube][mmap->x_start / m_cube] == 'D')
+			/ M_CUBE][mmap->x_start / M_CUBE] == 'D')
 		mmap->color = create_color(0, 255, 0, 255);
 	else
 		mmap->color = create_color(211, 211, 211, 255);

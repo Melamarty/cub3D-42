@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:01 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 16:12:36 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:35:31 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_wall(int new_x, int new_y, t_map map)
 	int		i;
 
 	i = 0;
-	ang = map.player->rotAngle;
+	ang = map.player->rotangle;
 	while (i < 360)
 	{
 		px = (new_x) + 100 * cos(ang);
@@ -39,11 +39,11 @@ int	is_wall(int new_x, int new_y, t_map map)
 void	key_move(t_map *map)
 {
 	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
-		map->player->rotAngle = normangle(map->player->rotSpeed
-				+ map->player->rotAngle);
+		map->player->rotangle = normangle(map->player->rotspeed
+				+ map->player->rotangle);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
-		map->player->rotAngle = normangle(map->player->rotAngle
-				- map->player->rotSpeed);
+		map->player->rotangle = normangle(map->player->rotangle
+				- map->player->rotspeed);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_W)
 		|| mlx_is_key_down(map->mlx, MLX_KEY_UP))
 		up(map);
@@ -81,9 +81,7 @@ int	key_listenter(t_map *map)
 	if (mlx_is_key_down(map->mlx, MLX_KEY_C))
 		close_door(map);
 	key_move(map);
-	cast_rays(map);
-	render(map);
-	mini_map(map);
+	rerender(map);
 	return (0);
 }
 
