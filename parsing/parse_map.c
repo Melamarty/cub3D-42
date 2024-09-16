@@ -42,10 +42,10 @@ char	*full_line(char *line, int len)
 	i = -1;
 	while (++i < len)
 	{
-		if (!line[i] || line[i] == ' ' || line[i] == '\n')
-			res[i] = '*';
-		else
+		if (i < ft_strlen(line) && line[i] != ' ')
 			res[i] = line[i];
+		else
+			res[i] = '*';
 	}
 	res [i + 1] = '\0';
 	return (res);
