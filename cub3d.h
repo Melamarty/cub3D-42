@@ -115,7 +115,7 @@ typedef struct s_map {
     void *mlx;
 	mlx_image_t *img;
     t_player *player;
-    t_ray    *rays;
+    t_ray    rays[1200];
     t_ray    *m_rays;
     int line_width;
     int width;

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 13:48:20 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/15 19:39:59 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:42:38 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,17 @@ void	render(t_map *map)
 
 	distoplan = (WIDTH / 2) / tan((float)(map->player->fov / 2));
 	i = 0;
-	while (map->rays)
+	while (i < 1200)
 	{
-		raydis = (int)(map->rays->ray_dis
-				* cos(map->rays->ray_angle - map->player->rotAngle));
+		raydis = (int)(map->rays[i].ray_dis
+				* cos(map->rays[i].ray_angle - map->player->rotAngle));
 		top = (HEIGHT / 2) - (((float)TILE_SIZE / raydis) * distoplan / 2);
 		bottom = (HEIGHT / 2) + (((float)TILE_SIZE / raydis) * distoplan / 2);
 		draw_ceill(map, top, i);
-		set_texture(map, map->rays);
-		put_img(map, get_wall_info(top, bottom, i), map->rays);
+		set_texture(map, &map->rays[i]);
+		put_img(map, get_wall_info(top, bottom, i), &map->rays[i]);
 		draw_floor(map, bottom, i);
-		map->rays = map->rays->next;
+		// map->rays[i] = map->rays->next;
 		i++;
 	}
 }
