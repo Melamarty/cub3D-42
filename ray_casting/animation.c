@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:28:59 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 17:31:54 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:27:04 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	create_textures(t_map *map)
 		map->sprite[i] = mlx_load_png(
 				ft_strjoin(ft_strjoin("./textures/bonus/frame",
 						ft_itoa(i + 1)), ".png"));
+		if (!map->sprite[i])
+			clear_all(map);
 		i++;
 	}
 	i = 0;
@@ -33,6 +35,8 @@ void	create_textures(t_map *map)
 		map->bullet[i] = mlx_load_png(
 				ft_strjoin(ft_strjoin("./textures/bonus/bullet",
 						ft_itoa(i + 1)), ".png"));
+		if (!map->bullet[i])
+			clear_all(map);
 		i++;
 	}
 }
@@ -41,8 +45,9 @@ void	put_frame(t_map *map)
 {
 	mlx_delete_image(map->mlx, map->sprite_img);
 	map->sprite_img = mlx_texture_to_image(map->mlx, map->sprite[map->frame]);
-	mlx_image_to_window(map->mlx, map->sprite_img,
-		WIDTH - 666 - ((WIDTH - 666) / 2), HEIGHT - 375);
+	if (mlx_image_to_window(map->mlx, map->sprite_img,
+			WIDTH - 666 - ((WIDTH - 666) / 2), HEIGHT - 375) == -1)
+		clear_all(map);
 }
 
 void	shot(t_map *map)
@@ -61,20 +66,18 @@ void	shot(t_map *map)
 		mlx_delete_image(map->mlx, map->bullet_img);
 		map->bullet_img = mlx_texture_to_image(map->mlx,
 				map->bullet[map->bullet_nb]);
-		mlx_image_to_window(map->mlx, map->bullet_img,
-			WIDTH - 100, HEIGHT - 100);
+		if (mlx_image_to_window(map->mlx, map->bullet_img,
+				WIDTH - 100, HEIGHT - 100) == -1)
+			clear_all(map);
 	}
 	else
 		map->frame += 1;
 }
 
-void	reload(t_map *map)
+int	reload(t_map *map)
 {
 	if (map->bullet_nb)
-	{
-		map->is_reload = 0;
-		return ;
-	}
+		return (map->is_reload = 0, 1);
 	if (map->timing == 4)
 	{
 		put_frame(map);
@@ -87,14 +90,16 @@ void	reload(t_map *map)
 			mlx_delete_image(map->mlx, map->bullet_img);
 			map->bullet_img = mlx_texture_to_image(map->mlx,
 					map->bullet[map->bullet_nb]);
-			mlx_image_to_window(map->mlx,
-				map->bullet_img, WIDTH - 100, HEIGHT - 100);
+			if (mlx_image_to_window(map->mlx,
+					map->bullet_img, WIDTH - 100, HEIGHT - 100) == -1)
+				clear_all(map);
 		}
 		else
 			map->frame += 1;
 		map->timing = 0;
 	}
 	map->timing += 1;
+	return (0);
 }
 
 void	animation(void *p)
