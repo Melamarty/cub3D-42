@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/15 13:36:10 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/15 19:41:37 by houamrha         ###   ########.fr       */
+/*   Created: 2024/09/16 11:53:03 by mel-amar          #+#    #+#             */
+/*   Updated: 2024/09/16 11:53:23 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../cub3d.h"
 
@@ -52,9 +54,34 @@ void	get_map(t_list *list, t_map *map)
 		}
 		list->checked = 1;
 		line = list->line;
-		if (!empty_line(list->line))
-			map->arr[i++] = ft_strdup(line);
+		map->arr[i++] = ft_strdup(line);
 		list = list->next;
 	}
 	clear_map(map);
+}
+
+int	check_player(char **map, int height)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < height)
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+					|| map[i][j] == 'W' || map[i][j] == 'E')
+			{
+				if (i <= 0 || i >= height - 1 || j <= 0
+					|| j >= ft_strlen(map[i]) - 1)
+					return (1);
+				if (map[i - 1][j] == '*' || map[i + 1][j] == '*'
+					|| map[i][j - 1] == '*' || map[i][j + 1] == '*')
+					return (1);
+			}
+		}
+	}
+	return (0);
 }

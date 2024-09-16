@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/15 13:33:57 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/15 19:39:59 by houamrha         ###   ########.fr       */
+/*   Created: 2024/09/16 11:53:10 by mel-amar          #+#    #+#             */
+/*   Updated: 2024/09/16 11:53:13 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../cub3d.h"
 
@@ -49,7 +50,7 @@ int	is_digits(char *str)
 	if (empty_line(str))
 		return (0);
 	while (str[++i])
-		if ((str[i] > '9' || str[i] < '0') && (str[i] != ' '))
+		if ((str[i] > '9' || str[i] < '0'))
 			return (0);
 	return (1);
 }

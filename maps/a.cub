@@ -1,10 +1,16 @@
+EA       ./textures/txt1.png
+ WE ./textures/txt3.png
 
-EA ./textures/txt1.png
-WE ./textures/txt2.png
+
+
 SO ./textures/txt3.png
+
+
+
 NO ./textures/txt4.png
-F 211, 211, 211
-C 0, 0, 139
+
+F 211,211,211
+C 0,0,139
 
 11111111111111111111111111111
 10110000011100001000000000001

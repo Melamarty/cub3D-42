@@ -16,9 +16,13 @@ t_color	*parse_color(char *line)
 {
 	char	**colors;
 	t_color	*color;
+	char	**spl;
 
+	spl = ft_split(line, ' ');
+	if (!spl || spl_len(spl) > 1)
+		return (NULL);
 	color = my_malloc(sizeof (t_color), 0);
-	colors = ft_split(line, ',');
+	colors = ft_split(spl[0], ',');
 	if (spl_len(colors) != 3)
 		return (NULL);
 	if (!is_digits(colors[0]) || !is_digits(colors[1]) || !is_digits(colors[2]))
