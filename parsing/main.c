@@ -41,8 +41,14 @@ char *remove_chars(char *line)
     return (res);
 }
 
+
+void f(void)
+{
+    system("leaks cub3D");
+}
 int check_map(char *file, t_list **list)
 {
+    atexit(f);
     int fd;
     char *line;
     int l;

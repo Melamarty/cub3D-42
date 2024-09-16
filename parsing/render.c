@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 13:48:20 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/16 15:42:38 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:46:11 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,36 @@ void	put_img(t_map *map, t_wall *wall, t_ray *ray)
 	}
 }
 
-mlx_texture_t	*load_txt(char	*path)
+mlx_texture_t	*load_txt(char	*path, t_map *map)
 {
 	mlx_texture_t	*texture;
+	static int		i;
 
 	texture = mlx_load_png(path);
 	if (!texture)
 	{
 		ft_putstr("texture error\n", 2);
-		exit (1);
+		clear_all(map);
 	}
+	map->txts[i] = texture;
+	i++;
 	return (texture);
 }
 
 void	load_textures(t_map *map)
 {
 	if (!map->texture->no)
-		map->texture->no = mlx_texture_to_image(map->mlx, load_txt(map->no));
+		map->texture->no = mlx_texture_to_image(map->mlx,
+				load_txt(map->no, map));
 	if (!map->texture->so)
-		map->texture->so = mlx_texture_to_image(map->mlx, load_txt(map->so));
+		map->texture->so = mlx_texture_to_image(map->mlx, load_txt(map->so, map));
 	if (!map->texture->we)
-		map->texture->we = mlx_texture_to_image(map->mlx, load_txt(map->we));
+		map->texture->we = mlx_texture_to_image(map->mlx, load_txt(map->we, map));
 	if (!map->texture->ea)
-		map->texture->ea = mlx_texture_to_image(map->mlx, load_txt(map->ea));
+		map->texture->ea = mlx_texture_to_image(map->mlx, load_txt(map->ea, map));
 	if (!map->texture->door)
 		map->texture->door = mlx_texture_to_image(map->mlx,
-				load_txt("./textures/door.png"));
+				load_txt("./textures/door.png", map));
 }
 
 void	set_texture(t_map *map, t_ray *ray)
