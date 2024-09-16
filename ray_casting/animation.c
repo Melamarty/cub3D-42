@@ -6,11 +6,12 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:28:59 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/15 19:38:03 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:52:15 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
 
 void	create_textures(t_map *map)
 {
