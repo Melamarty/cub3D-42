@@ -40,6 +40,7 @@ void	setup_map(t_map *map)
 	mlx_cursor_hook(map->mlx, &mouse_handler, map);
 	mlx_loop_hook(map->mlx, &mouse_rot, map);
 	mlx_loop(map->mlx);
+	clear_all(map);
 	mlx_terminate(map->mlx);
 }
 
