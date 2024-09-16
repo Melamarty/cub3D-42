@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:22 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 11:24:21 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:32:33 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	calc_vert(t_ray *new_ray, t_map *map)
 int	vert_hit(t_ray *new_ray, t_map *map)
 {
 	if (map->arr[(int)(new_ray->f_y_inter)
-			/ TILE_SIZE][(int)(new_ray->f_x_inter
+		/ TILE_SIZE][(int)(new_ray->f_x_inter
 			+ new_ray->is_right - 1) / TILE_SIZE] == 'O')
 	{
 		new_ray->is_close_door = 1;
@@ -42,7 +42,7 @@ int	vert_hit(t_ray *new_ray, t_map *map)
 		new_ray->y_door = (new_ray->f_y_inter) / TILE_SIZE;
 	}
 	if (map->arr[(int)(new_ray->f_y_inter)
-			/ TILE_SIZE][(int)(new_ray->f_x_inter
+		/ TILE_SIZE][(int)(new_ray->f_x_inter
 			+ new_ray->is_right - 1)
 		/ TILE_SIZE] == '1'
 	|| map->arr[(int)(new_ray->f_y_inter)
@@ -65,7 +65,7 @@ void	check_vert(t_ray *new_ray, t_map *map)
 		new_ray->v_x_inter = (int)(new_ray->f_x_inter);
 		new_ray->v_y_inter = (int)(new_ray->f_y_inter);
 		if (map->arr[(int)(new_ray->f_y_inter)
-				/ TILE_SIZE][(int)(new_ray->f_x_inter
+			/ TILE_SIZE][(int)(new_ray->f_x_inter
 				+ new_ray->is_right - 1)
 			/ TILE_SIZE] == '1'
 			|| map->arr[(int)(new_ray->f_y_inter)

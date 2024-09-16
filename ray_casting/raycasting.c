@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:10 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 15:46:26 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:18:12 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	cast_rays(t_map *map)
 
 	42 && (map->can_close = 0, map->can_open = 0,
 		map->door_ray = NULL, z = -1);
-	ray_angle = normangle(map->player->rotAngle - map->player->fov / 2);
+	ray_angle = normangle(map->player->rotangle - map->player->fov / 2);
 	while (++z < WIDTH)
 	{
 		if (z == WIDTH / 2)

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:28:59 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 15:52:33 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:31:54 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	reload(t_map *map)
 		map->is_reload = 0;
 		return ;
 	}
-	if (map->timing == 2)
+	if (map->timing == 4)
 	{
 		put_frame(map);
 		if (map->frame == 30)

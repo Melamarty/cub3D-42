@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:12:57 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 16:48:19 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:34:34 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,17 @@ void	destroy_hamza(t_map *map)
 	}
 }
 
-
 void	clear_all(t_map *map)
 {
 	destroy_textures(map);
 	destroy_hamza(map);
 	my_malloc(0, 1);
 	exit(0);
+}
+
+void	rerender(t_map *map)
+{
+	cast_rays(map);
+	render(map);
+	mini_map(map);
 }

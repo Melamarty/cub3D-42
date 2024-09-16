@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horz_cast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:30 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 12:51:41 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:32:07 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	calc_horz(t_ray *new_ray, t_map *map)
 int	horz_hit(t_ray *new_ray, t_map *map)
 {
 	if (map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
-			/ TILE_SIZE][(int)(new_ray->f_x_inter)
+		/ TILE_SIZE][(int)(new_ray->f_x_inter)
 		/ TILE_SIZE] == 'O')
 	{
 		new_ray->is_close_door = 1;
@@ -42,7 +42,7 @@ int	horz_hit(t_ray *new_ray, t_map *map)
 			/ TILE_SIZE;
 	}
 	if (map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
-			/ TILE_SIZE][(int)(new_ray->f_x_inter)
+		/ TILE_SIZE][(int)(new_ray->f_x_inter)
 		/ TILE_SIZE] == '1'
 	|| map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
 		/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == 'D')
@@ -63,7 +63,7 @@ void	check_horz(t_ray *new_ray, t_map *map)
 		new_ray->h_x_inter = (int)(new_ray->f_x_inter);
 		new_ray->h_y_inter = (int)(new_ray->f_y_inter);
 		if (map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
-				/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == '1'
+			/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == '1'
 		|| map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
 				/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == 'D'
 		|| map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
