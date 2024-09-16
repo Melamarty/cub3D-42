@@ -212,7 +212,7 @@ void	clear_all(t_map *map);
 
 
 //utils
-void ft_putstr(char *str, int fd);
+int ft_putstr(char *str, int fd);
 void print_list(t_list *list);
 void add_line(t_list **list, const char *line);
 void free_list(t_list *head);
@@ -234,6 +234,10 @@ void clear_map(t_map *map);
 int check_player(char **map, int height);
 void optimize_map(t_map *map);
 int	get_player_pos(t_map *map);
+int	check_map(char *file, t_list **list);
+char	*remove_chars(char *line);
+void	print_info(t_map *map);
+void	print_map(char **map, int height);
 
 t_map *parse_map(t_list *list);
 int check_arr(t_map *map);

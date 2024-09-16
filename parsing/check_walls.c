@@ -90,19 +90,6 @@ int	check_walls(char **map, int height, int width)
 		if (check_row(map[i]))
 			return (1);
 	j = -1;
-	//while (++j < width)
-	//{
-	//	i = 0;
-	//	while (i < height && map[i][j] == '*')
-	//		i++;
-	//	if (i >= height || map[i][j] != '1')
-	//		return (1);
-	//	i = height - 1;
-	//	while (i >= 0 && map[i][j] == '*')
-	//		i--;
-	//	if (i < 0 || map[i][j] != '1')
-	//		return (1);
-	//}
 	if (check_inside(map, height) || check_player(map, height))
 		return (1);
 	return (0);

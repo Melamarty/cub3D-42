@@ -6,10 +6,9 @@
 /*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:53:10 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/16 13:05:19 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:09:27 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../cub3d.h"
 
@@ -70,7 +69,6 @@ void	optimize_map(t_map *map)
 			break ;
 		i++;
 	}
-	printf ("j = %d\n", j);
 	if (j > 0)
 	{
 		i = -1;
@@ -84,5 +82,3 @@ void	optimize_map(t_map *map)
 	}
 	map->width -= j;
 }
-
-

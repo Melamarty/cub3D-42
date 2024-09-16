@@ -6,7 +6,7 @@
 /*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 13:48:20 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/16 16:46:11 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:08:40 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,14 @@ void	load_textures(t_map *map)
 		map->texture->no = mlx_texture_to_image(map->mlx,
 				load_txt(map->no, map));
 	if (!map->texture->so)
-		map->texture->so = mlx_texture_to_image(map->mlx, load_txt(map->so, map));
+		map->texture->so = mlx_texture_to_image(map->mlx,
+				load_txt(map->so, map));
 	if (!map->texture->we)
-		map->texture->we = mlx_texture_to_image(map->mlx, load_txt(map->we, map));
+		map->texture->we = mlx_texture_to_image(map->mlx,
+				load_txt(map->we, map));
 	if (!map->texture->ea)
-		map->texture->ea = mlx_texture_to_image(map->mlx, load_txt(map->ea, map));
+		map->texture->ea = mlx_texture_to_image(map->mlx,
+				load_txt(map->ea, map));
 	if (!map->texture->door)
 		map->texture->door = mlx_texture_to_image(map->mlx,
 				load_txt("./textures/door.png", map));
@@ -121,7 +124,6 @@ void	render(t_map *map)
 		set_texture(map, &map->rays[i]);
 		put_img(map, get_wall_info(top, bottom, i), &map->rays[i]);
 		draw_floor(map, bottom, i);
-		// map->rays[i] = map->rays->next;
 		i++;
 	}
 }

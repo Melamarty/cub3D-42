@@ -12,9 +12,10 @@
 
 #include "../../cub3d.h"
 
-void	ft_putstr(char *str, int fd)
+int	ft_putstr(char *str, int fd)
 {
 	write(fd, str, ft_strlen (str));
+	return (0);
 }
 
 int	ft_strncmp(char *str1, char *str2, int n)

@@ -29,6 +29,7 @@ int	check_arr(t_map *map)
 	static int		count;
 
 	i = -1;
+	map->player = my_malloc(sizeof(t_player), 0);
 	while (++i < map->height)
 	{
 		j = -1;
