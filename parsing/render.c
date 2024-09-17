@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 13:48:20 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/16 17:38:42 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:34:28 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ mlx_texture_t	*load_txt(char	*path, t_map *map)
 	texture = mlx_load_png(path);
 	if (!texture)
 	{
-		ft_putstr("texture error\n", 2);
+		ft_putstr("Error\nTexttue\n", 2);
 		clear_all(map);
 	}
 	map->txts[i] = texture;
