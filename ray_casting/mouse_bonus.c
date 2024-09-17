@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:48 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 17:18:39 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:27:38 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	mouse_handler(double x, double y, void *p)
 {
 	t_map	*map;
 	int		half_width;
+	(void)y;
 
 	map = (t_map *)p;
 	if (map->is_rot == 2)

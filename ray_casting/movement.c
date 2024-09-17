@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:01 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 17:35:31 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:28:00 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,6 @@ void	key_move(t_map *map)
 
 int	key_listenter(t_map *map)
 {
-	int		move_step;
-	double	new_x;
-	double	new_y;
-
 	if (!key_pressed(map))
 		return (0);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
