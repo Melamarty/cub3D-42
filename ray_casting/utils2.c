@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:12:57 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 19:34:33 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:35:33 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	clear_all(t_map *map)
 {
 	destroy_textures(map);
 	my_malloc(0, 1);
-	exit(0);
+	exit(1);
 }
 
 void	rerender(t_map *map)

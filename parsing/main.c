@@ -16,11 +16,18 @@ void	open_win(t_map *map)
 {
 	map->bullet_nb = 9;
 	map->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", 0);
+	if (!map->mlx)
+		clear_all(map);
 	map->img = mlx_new_image(map->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(map->mlx, map->img, 0, 0);
+	if (!map->img)
+		clear_all(map);
+	if (mlx_image_to_window(map->mlx, map->img, 0, 0) == -1)
+		clear_all(map);
 	map->bullet_img = mlx_texture_to_image(map->mlx,
 			map->bullet[map->bullet_nb]);
-	mlx_image_to_window(map->mlx, map->bullet_img, WIDTH - 100, HEIGHT - 100);
+	if (mlx_image_to_window(map->mlx, map->bullet_img,
+			WIDTH - 100, HEIGHT - 100) == -1)
+		clear_all(map);
 }
 
 void	setup_map(t_map *map)
