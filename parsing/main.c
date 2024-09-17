@@ -43,6 +43,13 @@ void	setup_map(t_map *map)
 	mlx_terminate(map->mlx);
 }
 
+//void test(void)
+//{
+//	system("leaks cub3D");
+//	//system("lsof -c cub3D");
+//}
+	//atexit(test);
+
 int	main(int ac, char **av)
 {
 	t_map	*map;

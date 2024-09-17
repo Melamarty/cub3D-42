@@ -47,3 +47,11 @@ C 	, 1, 1
 	//	if (i < 0 || map[i][j] != '1')
 	//		return (1);
 	//}
+
+F 220,100,123,
+
++ ra9m kbir
+
+F 220,100,-123
+
+close the file descriptor 

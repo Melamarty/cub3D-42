@@ -12,6 +12,21 @@
 
 #include "../cub3d.h"
 
+int	check_comma(char *line)
+{
+	int	i;
+	int	comma;
+
+	i = -1;
+	comma = 0;
+	while (line[++i])
+	{
+		if (line[i] == ',')
+			comma++;
+	}
+	return (comma);
+}
+
 t_color	*parse_color(char *line)
 {
 	char	**colors;
@@ -21,15 +36,23 @@ t_color	*parse_color(char *line)
 	spl = ft_split(line, ' ');
 	if (!spl || spl_len(spl) > 1)
 		return (NULL);
+	if (check_comma(spl[0]) != 2)
+		return (NULL);
 	color = my_malloc(sizeof (t_color), 0);
 	colors = ft_split(spl[0], ',');
 	if (spl_len(colors) != 3)
 		return (NULL);
 	if (!is_digits(colors[0]) || !is_digits(colors[1]) || !is_digits(colors[2]))
 		return (NULL);
+	if (ft_strlen(colors[0]) > 3 || ft_strlen(colors[1]) > 3
+		|| ft_strlen(colors[2]) > 3)
+		return (NULL);
 	color->r = ft_atoi(colors[0]);
 	color->g = ft_atoi(colors[1]);
 	color->b = ft_atoi(colors[2]);
+	if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255
+		|| color->b < 0 || color->b > 255)
+		return (NULL);
 	return (color);
 }
 
