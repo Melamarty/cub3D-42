@@ -6,11 +6,11 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 14:49:02 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/15 19:59:06 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 21:12:23 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub3d_bonus.h"
 
 void	draw_ceill(t_map *map, int topPixel, int i)
 {

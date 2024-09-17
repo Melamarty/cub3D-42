@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 13:48:20 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/17 14:35:44 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/17 21:28:51 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub3d_bonus.h"
 
 /// @brief
 //(int)(ratio * img->height) % img->height is the img_y
@@ -73,7 +73,7 @@ void	load_textures(t_map *map)
 				load_txt(map->ea, map));
 	if (!map->texture->door)
 		map->texture->door = mlx_texture_to_image(map->mlx,
-				load_txt("./textures/door.png", map));
+				load_txt("./textures/bonus/door_bonus.png", map));
 }
 
 void	set_texture(t_map *map, t_ray *ray)

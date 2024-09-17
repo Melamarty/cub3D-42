@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,7 +20,7 @@
 # define HIT_HORZ 1
 # define HIT_VIRT 2
 
-# include "MLX42/MLX42.h"
+# include "../MLX42/MLX42.h"
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h>

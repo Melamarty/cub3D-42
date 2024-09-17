@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animation.c                                        :+:      :+:    :+:   */
+/*   animation_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:28:59 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/17 17:21:16 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 21:48:26 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	create_textures(t_map *map)
 	while (i < 31)
 	{
 		map->sprite[i] = mlx_load_png(
-				ft_strjoin(ft_strjoin("./textures/bonus/frame",
-						ft_itoa(i + 1)), ".png"));
+				ft_strjoin(ft_strjoin("textures/bonus/frame",
+						ft_itoa(i + 1)), "_bonus.png"));
 		if (!map->sprite[i])
 			clear_all(map);
 		i++;
@@ -33,8 +33,8 @@ void	create_textures(t_map *map)
 	while (i < 10)
 	{
 		map->bullet[i] = mlx_load_png(
-				ft_strjoin(ft_strjoin("./textures/bonus/bullet",
-						ft_itoa(i + 1)), ".png"));
+				ft_strjoin(ft_strjoin("textures/bonus/bullet",
+						ft_itoa(i + 1)), "_bonus.png"));
 		if (!map->bullet[i])
 			clear_all(map);
 		i++;
