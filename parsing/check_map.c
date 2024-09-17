@@ -42,7 +42,7 @@ int	check_arr(t_map *map)
 				++count;
 		}
 	}
-	if (check_walls(map->arr, map->height, map->width) || count != 1)
+	if (check_walls(map->arr, map->height) || count != 1)
 		return (1);
 	return (0);
 }
