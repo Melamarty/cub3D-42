@@ -20,7 +20,7 @@
 # define HIT_HORZ 1
 # define HIT_VIRT 2
 
-# include "MLX42/MLX42.h"
+# include "../MLX42/MLX42.h"
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -194,14 +194,12 @@ void			left(t_map *map);
 void			right(t_map *map);
 int				is_wall(int new_x, int new_y, t_map map);
 char			*ft_itoa(int n);
-void			create_textures(t_map *map);
 void			shot(t_map *map);
 int				reload(t_map *map);
 int				key_pressed(t_map *map);
 double			calc_h_dis(t_map map, t_ray ray);
 double			calc_v_dis(t_map map, t_ray ray);
 double			calc_d_dis(t_map map, t_ray ray, int i);
-void			animation(void *p);
 void			open_door(t_map *map);
 void			close_door(t_map *map);
 void			check_horz(t_ray *new_ray, t_map *map);

@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:01 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/17 17:08:20 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 20:45:27 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	is_wall(int new_x, int new_y, t_map map)
 		ang += 180 / M_PI;
 		if (px < 0 || px / TILE_SIZE >= map.width || py < 0
 			|| py / TILE_SIZE >= map.height
-			|| map.arr[py / TILE_SIZE][px / TILE_SIZE] == '1'
-			|| map.arr[py / TILE_SIZE][px / TILE_SIZE] == 'D')
+			|| map.arr[py / TILE_SIZE][px / TILE_SIZE] == '1')
 			return (1);
 		i++;
 	}
@@ -62,20 +61,6 @@ int	key_listenter(t_map *map)
 		return (0);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		clear_all(map);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_K)
-		&& !map->is_shot && !map->is_reload)
-		return (map->is_shot = 1, map->frame = 0, 0);
-	else if (mlx_is_key_down(map->mlx, MLX_KEY_R)
-		&& !map->is_reload && !map->is_shot)
-		return (map->is_reload = 1, map->frame = 7, 0);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_Q))
-		return (map->is_rot = 2, 0);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_B))
-		return (map->is_rot = 0, 0);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_O))
-		open_door(map);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_C))
-		close_door(map);
 	key_move(map);
 	rerender(map);
 	return (0);
@@ -99,12 +84,6 @@ int	key_pressed(t_map *map)
 		|| mlx_is_key_down(map->mlx, MLX_KEY_LEFT)
 		|| mlx_is_key_down(map->mlx, MLX_KEY_UP)
 		|| mlx_is_key_down(map->mlx, MLX_KEY_DOWN)
-		|| mlx_is_key_down(map->mlx, MLX_KEY_Q)
-		|| mlx_is_key_down(map->mlx, MLX_KEY_B)
-		|| mlx_is_key_down(map->mlx, MLX_KEY_K)
-		|| mlx_is_key_down(map->mlx, MLX_KEY_R)
-		|| mlx_is_key_down(map->mlx, MLX_KEY_O)
-		|| mlx_is_key_down(map->mlx, MLX_KEY_C)
 		|| mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		return (1);
 	return (0);

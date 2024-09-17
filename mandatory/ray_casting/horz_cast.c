@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:30 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/17 13:07:45 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 20:43:54 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,7 @@ int	horz_hit(t_ray *new_ray, t_map *map)
 {
 	if (map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
 		/ TILE_SIZE][(int)(new_ray->f_x_inter)
-		/ TILE_SIZE] == 'O')
-	{
-		new_ray->is_close_door = 1;
-		new_ray->c_door_dis = calc_d_dis(*map, *new_ray, 1);
-		new_ray->x_door = (new_ray->f_x_inter) / TILE_SIZE;
-		new_ray->y_door = (new_ray->f_y_inter - new_ray->is_up)
-			/ TILE_SIZE;
-	}
-	if (map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
-		/ TILE_SIZE][(int)(new_ray->f_x_inter)
-		/ TILE_SIZE] == '1'
-	|| map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
-		/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == 'D')
+		/ TILE_SIZE] == '1')
 	{
 		new_ray->found_x_inter = 1;
 		return (1);
@@ -64,11 +52,7 @@ void	check_horz(t_ray *new_ray, t_map *map)
 		new_ray->h_x_inter = (int)(new_ray->f_x_inter);
 		new_ray->h_y_inter = (int)(new_ray->f_y_inter);
 		if (map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
-			/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == '1'
-		|| map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
-				/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == 'D'
-		|| map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
-				/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == 'O')
+			/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == '1')
 		{
 			if (horz_hit(new_ray, map))
 				break ;
