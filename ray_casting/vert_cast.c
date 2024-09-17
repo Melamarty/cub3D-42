@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:22 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 17:32:33 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 13:07:32 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	check_vert(t_ray *new_ray, t_map *map)
 	calc_vert(new_ray, map);
 	while (1 && new_ray->f_y_inter < map->height * TILE_SIZE
 		&& new_ray->f_x_inter < map->width * TILE_SIZE
-		&& new_ray->f_y_inter >= 0)
+		&& new_ray->f_y_inter >= 0
+		&& new_ray->f_x_inter >= 0)
 	{
 		new_ray->v_x_inter = (int)(new_ray->f_x_inter);
 		new_ray->v_y_inter = (int)(new_ray->f_y_inter);
