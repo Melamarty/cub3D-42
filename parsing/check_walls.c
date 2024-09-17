@@ -80,7 +80,7 @@ int	check_inside(char **map, int height)
 	return (0);
 }
 
-int	check_walls(char **map, int height, int width)
+int	check_walls(char **map, int height)
 {
 	int	i;
 	int	j;

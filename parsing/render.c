@@ -6,7 +6,7 @@
 /*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 13:48:20 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/17 10:34:28 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:35:44 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	load_textures(t_map *map)
 
 void	set_texture(t_map *map, t_ray *ray)
 {
-	mlx_texture_t	*texture;
 	char			*txt;
 
 	if (ray->ray_dir == 2)
