@@ -6,7 +6,7 @@
 /*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:57:11 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/16 18:34:43 by mel-amar         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:06:24 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ int	check_map(char *file, t_list **list)
 		add_line(list, remove_chars(line));
 		line = get_next_line(fd);
 	}
+	close(fd);
 	return (0);
 }

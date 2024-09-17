@@ -44,6 +44,13 @@ void	setup_map(t_map *map)
 	mlx_terminate(map->mlx);
 }
 
+//void test(void)
+//{
+//	system("leaks cub3D");
+//	//system("lsof -c cub3D");
+//}
+	//atexit(test);
+
 int	main(int ac, char **av)
 {
 	t_map	*map;
@@ -52,12 +59,12 @@ int	main(int ac, char **av)
 	list = NULL;
 	map = my_malloc(sizeof(t_map), 0);
 	if (ac != 2)
-		return (ft_putstr("arguments errror\n", 2), 0);
+		return (ft_putstr("Error\nargs\n", 2), 0);
 	if (check_map(av[1], &list))
-		return (ft_putstr("file error\n", 2), 0);
+		return (ft_putstr("Erorr\nfile\n", 2), 0);
 	map = parse_map(list);
 	if (check_arr(map) || check_textures(map, list))
-		return (ft_putstr("map  error\n", 2), 0);
+		return (ft_putstr("Error\nmap\n", 2), 0);
 	setup_map(map);
 	return (0);
 }
