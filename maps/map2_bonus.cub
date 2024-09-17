@@ -1,0 +1,17 @@
+EA       ./textures/txt1.png
+ WE ./textures/txt3.png
+
+
+
+SO ./textures/txt2.png
+
+
+
+NO ./textures/txt4.png
+F 220,100,5
+C 225,30,255
+
+
+1111111111111111111111
+1E0000000000DDD0000001
+1111111111111111111111

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_bonus_utils.c                              :+:      :+:    :+:   */
+/*   minimap_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:36 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/17 17:21:16 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 22:50:33 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ void	get_color(t_mmap *mmap, t_map *map)
 	else if (map->arr[mmap->y_start
 			/ M_CUBE][mmap->x_start / M_CUBE] == 'D')
 		mmap->color = create_color(0, 255, 0, 255);
+	else if (map->arr[mmap->y_start
+			/ M_CUBE][mmap->x_start / M_CUBE] == 'O')
+		mmap->color = create_color(139, 0, 0, 255);
 	else
 		mmap->color = create_color(211, 211, 211, 255);
 }

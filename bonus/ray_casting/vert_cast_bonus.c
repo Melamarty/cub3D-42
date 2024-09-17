@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vert_cast.c                                        :+:      :+:    :+:   */
+/*   vert_cast_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:22 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/17 17:21:16 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 22:44:38 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ int	vert_hit(t_ray *new_ray, t_map *map)
 			/ TILE_SIZE][(int)(new_ray->f_x_inter
 				+ new_ray->is_right - 1) / TILE_SIZE] == 'D')
 	{
+		if (map->arr[(int)(new_ray->f_y_inter)
+			/ TILE_SIZE][(int)(new_ray->f_x_inter
+				+ new_ray->is_right - 1) / TILE_SIZE] == 'D')
+			new_ray->c_door_dis = calc_d_dis(*map, *new_ray, 2);
 		new_ray->found_y_inter = 2;
 		return (1);
 	}
