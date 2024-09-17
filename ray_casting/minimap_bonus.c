@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:42 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/16 17:18:12 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:10:12 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	draw_cercle(t_map *map)
 	i = 0;
 	while (i < 360)
 	{
-		px = (5 * M_CUBE) + 10 * cos(ang);
-		py = (3 * M_CUBE) + 10 * sin(ang);
+		px = (5 * M_CUBE) + 7 * cos(ang);
+		py = (3 * M_CUBE) + 7 * sin(ang);
 		ang += 180 / M_PI;
 		mlx_put_pixel(map->img, px, py, create_color(255, 255, 255, 51));
 		i++;

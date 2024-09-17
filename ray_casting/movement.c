@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:01 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/17 14:28:00 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:08:20 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	is_wall(int new_x, int new_y, t_map map)
 	ang = map.player->rotangle;
 	while (i < 360)
 	{
-		px = (new_x) + 100 * cos(ang);
-		py = (new_y) + 100 * sin(ang);
+		px = (new_x) + 70 * cos(ang);
+		py = (new_y) + 70 * sin(ang);
 		ang += 180 / M_PI;
 		if (px < 0 || px / TILE_SIZE >= map.width || py < 0
 			|| py / TILE_SIZE >= map.height
