@@ -17,10 +17,10 @@ GNL = $(PR)/gnl/get_next_line.c $(PR)/gnl/get_next_line_utils.c
 SRC    = $(RSRC) $(PR)/check_map.c $(PR)/check_walls.c $(PR)/get_map.c $(PR)/main.c $(PR)/map_utils.c $(PR)/parse_map.c \
 		 $(PR)/render_utils.c $(PR)/render.c $(PR)/utils2.c $(UTILS) $(GNL)
 
-UTILSB = $(PRB)/utils/ft_atoi.c $(PRB)/utils/ft_split.c $(PRB)/utils/my_malloc.c $(PRB)/utils/utils1.c $(PRB)/utils/lst_utils.c
-GNLB = $(PRB)/gnl/get_next_line.c $(PRB)/gnl/get_next_line_utils.c
-SRCB   = $(RSRB) $(PRB)/check_map.c $(PRB)/check_walls.c $(PRB)/get_map.c $(PRB)/main.c $(PRB)/map_utils.c $(PRB)/parse_map.c \
-		 $(PRB)/render_utils.c $(PRB)/render.c $(PRB)/utils2.c $(UTILSB) $(GNLB)
+UTILSB = $(PRB)/utils/ft_atoi_bonus.c $(PRB)/utils/ft_split_bonus.c $(PRB)/utils/my_malloc_bonus.c $(PRB)/utils/utils1_bonus.c $(PRB)/utils/lst_utils_bonus.c
+GNLB = $(PRB)/gnl/get_next_line_bonus.c $(PRB)/gnl/get_next_line_utils_bonus.c
+SRCB   = $(RSRB) $(PRB)/check_map_bonus.c $(PRB)/check_walls_bonus.c $(PRB)/get_map_bonus.c $(PRB)/main_bonus.c $(PRB)/map_utils_bonus.c $(PRB)/parse_map_bonus.c \
+		 $(PRB)/render_utils_bonus.c $(PRB)/render_bonus.c $(PRB)/utils2_bonus.c $(UTILSB) $(GNLB)
 OBJ    = $(SRC:.c=.o)
 OBJB    = $(SRCB:.c=.o)
 

@@ -24,7 +24,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "parsing/gnl/get_next_line.h"
+# include "parsing/gnl/get_next_line_bonus.h"
 # include <stdio.h>
 # include <limits.h>
 
