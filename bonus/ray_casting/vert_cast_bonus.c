@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:30:22 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/18 14:25:43 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:00:50 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int	vert_hit(t_ray *new_ray, t_map *map)
 			/ TILE_SIZE][(int)(new_ray->f_x_inter
 				+ new_ray->is_right - 1) / TILE_SIZE] == 'D' && map->door_ray)
 			map->door_ray->c_door_dis = calc_d_dis(*map, *new_ray, 2);
-		new_ray->found_y_inter = 2;
-		return (1);
+		return (new_ray->found_y_inter = 2, 1);
 	}
 	return (0);
 }

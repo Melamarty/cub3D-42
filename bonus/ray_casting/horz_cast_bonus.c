@@ -6,7 +6,7 @@
 /*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:29:30 by houamrha          #+#    #+#             */
-/*   Updated: 2024/09/18 14:26:01 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:59:46 by houamrha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	horz_hit(t_ray *new_ray, t_map *map)
 		/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == 'D')
 	{
 		if (map->arr[(int)(new_ray->f_y_inter - new_ray->is_up)
-			/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == 'D' && map->door_ray)
+			/ TILE_SIZE][(int)(new_ray->f_x_inter) / TILE_SIZE] == 'D'
+				&& map->door_ray)
 			map->door_ray->c_door_dis = calc_d_dis(*map, *map->door_ray, 1);
 		new_ray->found_x_inter = 1;
 		return (1);
