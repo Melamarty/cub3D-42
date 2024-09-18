@@ -36,6 +36,12 @@ int	check_door(char **map, int i, int j, int height)
 
 	c1 = 0;
 	c2 = 0;
+	if ((i > 0 && map[i - 1][j] == 'D')
+		|| (i < height - 1 && map[i + 1][j] == 'D'))
+		return (1);
+	if ((j > 0 && map[i][j - 1] == 'D')
+		|| (j < ft_strlen(map[i]) - 1 && map[i][j + 1] == 'D'))
+		return (1);
 	if (i > 0 && map[i - 1][j] == '1')
 		c1++;
 	if (i < height - 1 && map[i + 1][j] == '1')
