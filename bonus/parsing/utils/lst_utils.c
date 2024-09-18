@@ -26,7 +26,6 @@ t_list	*create_node(const char *line)
 	if (!new_node->line)
 	{
 		perror("Failed to allocate memory for line");
-		free(new_node);
 		exit(EXIT_FAILURE);
 	}
 	new_node->last = NULL;
@@ -72,14 +71,3 @@ int	lst_len(t_list **list)
 	}
 	return (len);
 }
-
-//void free_list(t_list *head)
-//{
-//	t_list *temp;
-//	while (head != NULL) {
-//		temp = head;
-//		head = head->next;
-//		free(temp->line);
-//		free(temp);
-//	}
-//}

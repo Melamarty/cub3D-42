@@ -23,7 +23,6 @@ char	*read_line(int fd, char *buffer, char *remainder)
 		r = read(fd, buffer, BUFFER_SIZE);
 		if (r == -1)
 		{
-			free(remainder);
 			return (NULL);
 		}
 		if (r == 0)
@@ -53,7 +52,6 @@ char	*update_remainder(char *line)
 	tmp = ft_substr(line, i + 1, ft_strlen(line) - i);
 	if (!tmp[0])
 	{
-		free(tmp);
 		tmp = NULL;
 	}
 	line[i + 1] = '\0';

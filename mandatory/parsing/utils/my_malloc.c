@@ -41,9 +41,6 @@ void	ft_addr_clear(t_adress **head)
 		*head = (*head)->next;
 		if (tmp->fd != -1)
 			close(tmp->fd);
-		if (tmp->addr)
-			free(tmp->addr);
-		free(tmp);
 	}
 }
 

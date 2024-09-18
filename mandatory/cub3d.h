@@ -214,7 +214,6 @@ void			clear_all(t_map *map);
 int				ft_putstr(char *str, int fd);
 void			print_list(t_list *list);
 void			add_line(t_list **list, const char *line);
-void			free_list(t_list *head);
 int				lst_len(t_list **list);
 int				ft_strncmp(char *str1, char *str2, int n);
 char			**ft_split(const char *s, char c);

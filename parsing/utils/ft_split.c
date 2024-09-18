@@ -53,7 +53,6 @@ static char	*get_word(const char *s, char c)
 	return (word);
 }
 
-
 char	**ft_split(const char *s, char c)
 {
 	char	**spl;

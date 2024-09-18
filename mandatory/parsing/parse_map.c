@@ -36,7 +36,7 @@ t_color	*parse_color(char *line)
 	spl = ft_split(line, ' ');
 	if (!spl || spl_len(spl) > 1)
 		return (NULL);
-	if (check_comma(spl[0]) != 2)
+	if (!spl[0] || check_comma(spl[0]) != 2)
 		return (NULL);
 	color = my_malloc(sizeof (t_color), 0);
 	colors = ft_split(spl[0], ',');

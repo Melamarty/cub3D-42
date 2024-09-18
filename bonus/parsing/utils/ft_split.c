@@ -53,17 +53,6 @@ static char	*get_word(const char *s, char c)
 	return (word);
 }
 
-static void	*ft_free(char **arr, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-		free(arr[i++]);
-	free(arr);
-	return (NULL);
-}
-
 char	**ft_split(const char *s, char c)
 {
 	char	**spl;
@@ -83,7 +72,7 @@ char	**ft_split(const char *s, char c)
 		{
 			spl[i++] = get_word(s, c);
 			if (!spl[i - 1])
-				return (ft_free(spl, i - 1));
+				return (NULL);
 			while (*s && *s != c)
 				s++;
 		}
