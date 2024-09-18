@@ -25,8 +25,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "parsing/gnl/get_next_line_bonus.h"
-# include <stdio.h>
 # include <limits.h>
+#include <stdio.h>
 
 typedef struct s_ray
 {

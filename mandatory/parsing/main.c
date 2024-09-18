@@ -37,8 +37,13 @@ void	setup_map(t_map *map)
 	mlx_terminate(map->mlx);
 }
 
+void ft_exit(void)
+{
+	system("leaks cub3D");
+}
 int	main(int ac, char **av)
 {
+	atexit(ft_exit);
 	t_map	*map;
 	t_list	*list;
 

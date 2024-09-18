@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d_bonus.h"
+#include "../../cub3d.h"
 
 void	ft_addr_back(t_adress **head, t_adress *new)
 {
@@ -39,15 +39,13 @@ void	ft_addr_clear(t_adress **head)
 	{
 		tmp = *head;
 		*head = (*head)->next;
-		if (tmp->fd != -1)
-			close(tmp->fd);
 		if (tmp->addr)
 			free(tmp->addr);
 		free(tmp);
 	}
 }
 
-t_adress	*ft_addrnew(void *addr, int fd)
+t_adress	*ft_addrnew(void *addr)
 {
 	t_adress	*new;
 
@@ -55,7 +53,6 @@ t_adress	*ft_addrnew(void *addr, int fd)
 	if (!new)
 		return (NULL);
 	new->addr = addr;
-	new->fd = fd;
 	new->next = NULL;
 	return (new);
 }
@@ -70,7 +67,7 @@ void	*my_malloc(size_t size, int mode)
 		ptr = malloc(size);
 		if (!ptr)
 			return (ft_addr_clear(&head), exit(1), NULL);
-		ft_addr_back(&head, ft_addrnew(ptr, -1));
+		ft_addr_back(&head, ft_addrnew(ptr));
 		return (ptr);
 	}
 	else
