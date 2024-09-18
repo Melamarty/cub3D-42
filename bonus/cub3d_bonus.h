@@ -149,6 +149,7 @@ typedef struct s_map
 	int				can_open;
 	int				can_close;
 	int				bullet_nb;
+	int				f_door;
 	mlx_texture_t	*txts[5];
 }	t_map;
 
