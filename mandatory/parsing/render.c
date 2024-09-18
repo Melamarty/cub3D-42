@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houamrha <houamrha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-amar <mel-amar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 13:48:20 by mel-amar          #+#    #+#             */
-/*   Updated: 2024/09/17 20:53:35 by houamrha         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:42:26 by mel-amar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	put_img(t_map *map, t_wall *wall, t_ray *ray)
 	float		ratio;
 
 	img = map->texture->curr;
+	if (!img || img->width != TILE_SIZE || img->height != TILE_SIZE)
+		return (ft_putstr("Error\nTexture size\n", 2), clear_all(map));
 	if (ray->ray_dir == HIT_VIRT)
 		img_x = ray->y_inter % img->width;
 	else
