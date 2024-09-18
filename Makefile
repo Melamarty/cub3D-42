@@ -5,13 +5,19 @@ CFLAGS = -Wall -Wextra -Werror
 RM     = rm -rf
 RF     = mandatory/ray_casting
 RFB    = bonus/ray_casting
+PR = mandatory/parsing
+PRB = bonus/parsing
 RSRC = $(RF)/raycasting.c  $(RF)/utils1.c $(RF)/movement.c  $(RF)/ft_itoa.c $(RF)/calc_dis.c  \
 		$(RF)/horz_cast.c $(RF)/vert_cast.c $(RF)/movement_utils.c $(RF)/utils2.c
 RSRB = $(RFB)/raycasting_bonus.c  $(RFB)/utils1_bonus.c $(RFB)/movement_bonus.c  $(RFB)/ft_itoa_bonus.c $(RFB)/calc_dis_bonus.c  \
 		$(RFB)/horz_cast_bonus.c $(RFB)/vert_cast_bonus.c $(RFB)/movement_utils_bonus.c $(RFB)/utils2_bonus.c \
 		$(RFB)/animation_bonus.c $(RFB)/door_bonus.c $(RFB)/minimap_bonus.c $(RFB)/minimap_utils_bonus.c $(RFB)/mouse_bonus.c
-SRC    = $(RSRC) $(shell find mandatory/parsing -name '*.c')
-SRCB   = $(RSRB) $(shell find bonus/parsing -name '*.c')
+UTILS = $(PR)/utils/ft_atoi.c $(PR)/utils/ft_split.c $(PR)/utils/my_malloc.c $(PR)/utils/utils1.c $(PR)/utils/lst_utils.c
+GNL = $(PR)/gnl/get_next_line.c $(PR)/gnl/get_next_line_utils.c
+SRC    = $(RSRC) $(PR)/check_map.c $(PR)/check_walls.c $(PR)/get_map.c $(PR)/main.c $(PR)/map_utils.c $(PR)/parse_map.c \
+		 $(PR)/render_utils.c $(PR)/render.c $(PR)/utils2.c $(UTILS) $(GNL)
+SRCB   = $(RSRB) $(PR)/check_map.c $(PR)/check_walls.c $(PR)/get_map.c $(PR)/main.c $(PR)/map_utils.c $(PR)/parse_map.c \
+		 $(PR)/render_utils.c $(PR)/render.c $(PR)/utils2.c $(UTILS) $(GNL)
 OBJ    = $(SRC:.c=.o)
 OBJB    = $(SRCB:.c=.o)
 
