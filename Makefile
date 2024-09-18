@@ -30,7 +30,7 @@ $(NAME): $(OBJ)
 $(NAMEB): $(OBJB)
 	$(CC) $(CFLAGS) $^ -o $@ ./MLX42/libmlx42.a -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
-mandatory/%.o: mandatory/%.c mandatory/cub3d_bonus.h
+mandatory/%.o: mandatory/%.c mandatory/cub3d.h
 	$(CC) $(CFLAGS) -c -Imlx $< -o $@
 
 bonus/%.o: bonus/%.c bonus/cub3d_bonus.h
