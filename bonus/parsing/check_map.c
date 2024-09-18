@@ -43,7 +43,7 @@ int	check_arr(t_map *map)
 		}
 	}
 	if (check_walls(map->arr, map->height) || count != 1)
-		return (1);
+		return (printf ("hhh"), 1);
 	return (0);
 }
 
